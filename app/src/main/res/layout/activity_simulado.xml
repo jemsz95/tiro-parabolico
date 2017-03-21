@@ -10,15 +10,15 @@
     <fragment
         android:id="@+id/fragment_Grafo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.46"
-        class="mx.itesm.tiroparabolico.GraphFragment"></fragment>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="mx.itesm.tiroparabolico.GraphFragment" />
 
     <fragment
         android:id="@+id/fragment_Datos"
-        class="mx.itesm.tiroparabolico.DatosFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.19"></fragment>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="mx.itesm.tiroparabolico.DatosFragment" />
 
 </LinearLayout>

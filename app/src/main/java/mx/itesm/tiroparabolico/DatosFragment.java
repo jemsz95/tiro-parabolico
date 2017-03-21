@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DatosFragment extends Fragment implements View.OnClickListener{
@@ -27,7 +28,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     EditText etVeloIni;
     EditText etAngulo;
     Button btnSimular;
-    ImageButton btnInfo;
+    ImageView btnInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -47,6 +48,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_datos, container, false);
+
         tvAltura = (TextView) view.findViewById(R.id.text_Altura);
         tvAlcance = (TextView) view.findViewById(R.id.text_Alcance);
         tvTiempo = (TextView) view.findViewById(R.id.text_Tiempo);
@@ -57,8 +59,12 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         etTiempo = (EditText) view.findViewById(R.id.edit_Tiempo);
         etVeloIni = (EditText) view.findViewById(R.id.edit_Velocidad);
         etAngulo = (EditText) view.findViewById(R.id.edit_Angulo);
+        btnSimular = (Button) view.findViewById(R.id.button_Simular);
+        btnInfo = (ImageView) view.findViewById(R.id.button_info);
+
         btnSimular.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
+
         return view;
     }
 
