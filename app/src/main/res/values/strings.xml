@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tiro Parabolico</string>
+    <string name="text_login">Simulador Tiro Parabolico</string>
+    <string name="buttonText_login">Sign in with Google</string>
+    <string name="buttonText_simulador">Simulador</string>
+    <string name="buttonText_instruciones">Instrucciones</string>
+    <string name="buttonText_creditos">Creditos</string>
+    <string name="buttonText_logout">Logout</string>
+
 </resources>
