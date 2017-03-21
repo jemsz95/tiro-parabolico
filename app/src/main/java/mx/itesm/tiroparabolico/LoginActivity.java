@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import static mx.itesm.tiroparabolico.R.styleable.View;
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnLogin;
     @Override
@@ -16,11 +16,20 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        btnLogin = (Button) findViewById(R.id.button_login);
 
-
+        btnLogin.setOnClickListener(this);
     }
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_login:
+                Intent i = new Intent(this, MenuActivity.class);
+                startActivity(i);
+                break;
+        }
+    }
 }
 
 
