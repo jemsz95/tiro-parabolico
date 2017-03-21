@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="mx.itesm.tiroparabolico.DatosFragment">
+
+
+    <TextView
+        android:id="@+id/text_Altura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:text="Altura Final:"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:id="@+id/text_Angulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Angulo de Disparo:"
+        android:layout_below="@+id/text_Velocidad"
+        android:layout_alignLeft="@+id/text_Velocidad"
+        android:layout_alignStart="@+id/text_Velocidad" />
+
+    <TextView
+        android:id="@+id/text_Velocidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="Velocidad Inicial:"
+        android:layout_below="@+id/text_Tiempo"
+        android:layout_alignLeft="@+id/text_Tiempo"
+        android:layout_alignStart="@+id/text_Tiempo" />
+
+    <TextView
+        android:id="@+id/text_Alcance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alcance:"
+        android:layout_below="@+id/text_Altura"
+        android:layout_alignLeft="@+id/text_Altura"
+        android:layout_alignStart="@+id/text_Altura"
+        android:layout_marginTop="13dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_Velocidad"
+        android:layout_alignLeft="@+id/edit_Tiempo"
+        android:layout_alignStart="@+id/edit_Tiempo"
+        android:layout_alignRight="@+id/button_Simular"
+        android:layout_alignEnd="@+id/button_Simular"
+        android:layout_alignBottom="@+id/text_Velocidad"
+        android:id="@+id/edit_Velocidad" />
+
+    <EditText
+        android:id="@+id/edit_Angulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_Angulo"
+        android:layout_alignEnd="@+id/button_Simular"
+        android:layout_alignLeft="@+id/edit_Velocidad"
+        android:layout_alignRight="@+id/button_Simular"
+        android:layout_alignStart="@+id/edit_Velocidad"
+        android:layout_alignTop="@+id/text_Angulo" />
+
+    <EditText
+        android:id="@+id/edit_Tiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_Tiempo"
+        android:layout_alignLeft="@+id/edit_Alcance"
+        android:layout_alignStart="@+id/edit_Alcance"
+        android:layout_alignRight="@+id/edit_Alcance"
+        android:layout_alignEnd="@+id/edit_Alcance"
+        android:layout_alignBottom="@+id/text_Tiempo" />
+
+    <EditText
+        android:id="@+id/edit_Alcance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_Tiempo"
+        android:layout_alignEnd="@+id/edit_Altura"
+        android:layout_alignLeft="@+id/edit_Altura"
+        android:layout_alignRight="@+id/edit_Altura"
+        android:layout_alignStart="@+id/edit_Altura"
+        android:layout_alignTop="@+id/text_Alcance" />
+
+    <EditText
+        android:id="@+id/edit_Altura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_Altura"
+        android:layout_alignEnd="@+id/button_Simular"
+        android:layout_alignLeft="@+id/button_Simular"
+        android:layout_alignRight="@+id/button_Simular"
+        android:layout_alignStart="@+id/button_Simular"
+        android:layout_alignTop="@+id/text_Altura" />
+
+    <TextView
+        android:id="@+id/text_Tiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Tiempo:"
+        android:layout_below="@+id/text_Alcance"
+        android:layout_alignLeft="@+id/text_Alcance"
+        android:layout_alignStart="@+id/text_Alcance" />
+
+    <Button
+        android:id="@+id/button_Simular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simular"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/text_Angulo"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/image_Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_Simular"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/info" />
+</RelativeLayout>
