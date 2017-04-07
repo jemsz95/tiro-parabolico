@@ -14,7 +14,7 @@ public class SimulatorActivity extends AppCompatActivity {
                 .findFragmentById(R.id.fragment_graph);
 
         graphFragment.setY0(0);
-        graphFragment.setTheta(90);
+        graphFragment.setTheta(45);
         graphFragment.setV0(12);
 
         graphFragment.graph();
