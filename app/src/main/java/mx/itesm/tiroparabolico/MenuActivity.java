@@ -35,7 +35,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.button_simulador:
-                i = new Intent(this, SimuladoActivity.class);
+                i = new Intent(this, SimulatorActivity.class);
                 startActivity(i);
                 break;
 
