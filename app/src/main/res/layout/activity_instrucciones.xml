@@ -34,4 +34,13 @@
         android:text="@string/cuerpo_instrucciones"
         android:layout_below="@+id/text_InstruccionesTitulo"/>
 
+    <Button
+        android:text="Skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/button_skip" />
+
 </RelativeLayout>

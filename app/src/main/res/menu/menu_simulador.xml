@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/instrucciones_action"
+        android:title="Instrucciones"
+        android:orderInCategory="1"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/creditos_action"
+        android:title="Creditos"
+        android:orderInCategory="2"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/logout_action"
+        android:title="Logout"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
+</menu>
