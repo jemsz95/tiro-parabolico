@@ -49,15 +49,16 @@
         android:layout_marginTop="13dp" />
 
     <EditText
+        android:id="@+id/edit_Velocidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_Velocidad"
-        android:layout_alignLeft="@+id/edit_Tiempo"
-        android:layout_alignStart="@+id/edit_Tiempo"
-        android:layout_alignRight="@+id/button_Simular"
-        android:layout_alignEnd="@+id/button_Simular"
         android:layout_alignBottom="@+id/text_Velocidad"
-        android:id="@+id/edit_Velocidad" />
+        android:layout_alignEnd="@+id/button_Simular"
+        android:layout_alignLeft="@+id/edit_Tiempo"
+        android:layout_alignRight="@+id/button_Simular"
+        android:layout_alignStart="@+id/edit_Tiempo"
+        android:layout_alignTop="@+id/text_Velocidad"
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/edit_Angulo"
@@ -68,7 +69,8 @@
         android:layout_alignLeft="@+id/edit_Velocidad"
         android:layout_alignRight="@+id/button_Simular"
         android:layout_alignStart="@+id/edit_Velocidad"
-        android:layout_alignTop="@+id/text_Angulo" />
+        android:layout_alignTop="@+id/text_Angulo"
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/edit_Tiempo"

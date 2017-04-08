@@ -15,20 +15,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DatosFragment extends Fragment implements View.OnClickListener{
-
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
-    TextView tvAltura;
-    TextView tvAlcance;
-    TextView tvTiempo;
-    TextView tvVeloIni;
-    TextView tvAngulo;
-    EditText etAltura;
-    EditText etAlcance;
-    EditText etTiempo;
-    EditText etVeloIni;
-    EditText etAngulo;
-    Button btnSimular;
-    ImageView btnInfo;
+
+    private TextView tvAltura;
+    private TextView tvAlcance;
+    private TextView tvTiempo;
+    private TextView tvVeloIni;
+    private TextView tvAngulo;
+    private EditText etAltura;
+    private EditText etAlcance;
+    private EditText etTiempo;
+    private EditText etVeloIni;
+    private EditText etAngulo;
+    private Button btnSimular;
+    private ImageView btnInfo;
+
+    private OnGraphDataChangeListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -41,6 +43,16 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
+
+        if(getActivity() instanceof OnGraphDataChangeListener) {
+            listener = (OnGraphDataChangeListener) getActivity();
+        } else {
+            throw new RuntimeException("Parent class "
+                    + getActivity().toString()
+                    + "should implement OnGraphDataChangeListener"
+            );
+        }
+
         Log.d(DEBUG_TAG, "onActivityCreated() has been called.");
     }
 
@@ -113,5 +125,15 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v)
     {
 
+    }
+
+    public void setOnGraphDataChangeListener(OnGraphDataChangeListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnGraphDataChangeListener {
+        void onAngleChange(double theta);
+        void onSpeedChange(double speed);
+        void onHeightChange(double height);
     }
 }
