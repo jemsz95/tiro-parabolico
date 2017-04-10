@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_creditos"
     android:layout_width="match_parent"
@@ -16,22 +17,51 @@
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"/>
 
+    <ImageView
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageView_foto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/text_CreditosTitulo"
+        android:layout_toLeftOf="@+id/text_CreditosTitulo"
+        android:layout_toStartOf="@+id/text_CreditosTitulo"
+        android:layout_marginTop="76dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_nombre"
+        android:textSize="24sp"
+        android:layout_marginBottom="19dp"
+        android:layout_alignBottom="@+id/imageView_foto"
+        android:layout_toRightOf="@+id/imageView_foto"
+        android:layout_toEndOf="@+id/imageView_foto"
+        android:layout_marginLeft="66dp"
+        android:layout_marginStart="66dp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_matricula"
+        android:textSize="24sp"
+        android:layout_marginTop="18dp"
+        android:layout_alignTop="@+id/imageView_foto"
+        android:layout_alignLeft="@+id/textView_nombre"
+        android:layout_alignStart="@+id/textView_nombre"
+        android:textStyle="normal|bold" />
+
     <TextView
         android:id="@+id/text_CreditosTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/image_LogoPrepaNet"
         android:text="@string/titulo_creditos"
-        android:hint="Creditos"/>
-
-    <TextView
-        android:id="@+id/text_CreditosCuerpo"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/cuerpo_creditos"
-        android:layout_below="@+id/text_CreditosTitulo"/>
+        android:hint="Creditos"
+        android:textSize="36sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/image_LogoPrepaNet"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
