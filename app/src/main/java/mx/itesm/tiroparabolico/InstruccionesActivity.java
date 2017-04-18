@@ -41,7 +41,7 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_skip:
-                Intent i = new Intent(this, SimuladoActivity.class);
+                Intent i = new Intent(this, SimulatorActivity.class);
                 startActivity(i);
                 break;
 

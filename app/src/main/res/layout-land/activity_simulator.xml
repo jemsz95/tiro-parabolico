@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2.33"
-        android:id="@+id/fragment_GrafoL"
+        android:id="@+id/fragment_graph"
         class="mx.itesm.tiroparabolico.GraphFragment"/>
 
 </LinearLayout>
