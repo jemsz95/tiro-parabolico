@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class SimuladoActivity extends AppCompatActivity {
+public class SimulatorActivity extends AppCompatActivity implements DatosFragment.OnGraphDataChangeListener {
+
+    GraphFragment graphFragment;
+    DatosFragment datosFragment;
+
+    boolean isLandscape;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulado);
-
-
-
-        }
+    public void onGraphDataChange(double angle, double speed) {
+        graphFragment.setTheta(angle);
+        graphFragment.setV0(speed);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,5 +48,18 @@ public class SimuladoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_simulator);
+
+        graphFragment = (GraphFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_graph);
+        datosFragment = (DatosFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_data);
+
+        isLandscape = datosFragment == null;
     }
 }

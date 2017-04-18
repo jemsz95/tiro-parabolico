@@ -18,7 +18,7 @@
         <activity android:name=".CreditosActivity" />
         <activity android:name=".InstruccionesActivity" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".SimuladoActivity" />
+        <activity android:name=".SimulatorActivity" />
         <activity android:name=".HistoryActivity"></activity>
     </application>
 
