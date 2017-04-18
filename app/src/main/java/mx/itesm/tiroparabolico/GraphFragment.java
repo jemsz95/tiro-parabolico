@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -38,8 +43,7 @@ public class GraphFragment extends Fragment {
     private double v0 = 0;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
@@ -58,8 +62,17 @@ public class GraphFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
         chart = (LineChart) view.findViewById(R.id.grafo);
 
-        chart.getXAxis().setAxisMinimum(0);
-        chart.getAxisLeft().setAxisMinimum(0);
+        AxisBase xAxis = chart.getXAxis();
+        AxisBase yAxis = chart.getAxisLeft();
+
+        xAxis.setAxisMinimum(0);
+        yAxis.setAxisMinimum(0);
+
+        xAxis.setGranularity(1);
+        yAxis.setGranularity(1);
+
+        xAxis.setGranularityEnabled(true);
+        yAxis.setGranularityEnabled(true);
 
         return view;
     }
@@ -151,13 +164,13 @@ public class GraphFragment extends Fragment {
     }
 
     public void graph() {
-        generateDataset();
+        generateDataSet();
         chart.invalidate();
     }
 
     // Generates the graph data set from initial launch params
     // TODO: Move this behavior to separate class
-    private void generateDataset() {
+    private void generateDataSet() {
         // Data entries
         List<Entry> entries = new ArrayList<>();
 
