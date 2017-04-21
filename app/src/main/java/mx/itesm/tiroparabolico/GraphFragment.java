@@ -24,23 +24,11 @@ import java.util.List;
 public class GraphFragment extends Fragment {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
-    // Gravity calculations
-    private static final double GRAVITY = 9.81;
-    private static final double TWICE_GRAVITY = 2 * GRAVITY;
-    private static final double HALF_GRAVITY = 0.5 * GRAVITY;
-
     // UI elements
     private LineChart chart;
 
     // Graph parameters
-    private String name;
-    private int resolution = 100;
-    private double flightTime = 0;
-    private double maxHeight = 0;
-    private double distance = 0;
-    private double y0 = 0;
-    private double theta = 0;
-    private double v0 = 0;
+    Launch launches[];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +49,8 @@ public class GraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
         chart = (LineChart) view.findViewById(R.id.grafo);
+
+        chart.setPinchZoom(true);
 
         AxisBase xAxis = chart.getXAxis();
         AxisBase yAxis = chart.getAxisLeft();
@@ -166,42 +156,5 @@ public class GraphFragment extends Fragment {
     public void graph() {
         generateDataSet();
         chart.invalidate();
-    }
-
-    // Generates the graph data set from initial launch params
-    // TODO: Move this behavior to separate class
-    private void generateDataSet() {
-        // Data entries
-        List<Entry> entries = new ArrayList<>();
-
-        // Intermediate values
-        double thetaRads = Math.toRadians(theta);
-        double vX = v0 * Math.cos(thetaRads);
-        double vY = v0 * Math.sin(thetaRads);
-        double twiceGY0 = TWICE_GRAVITY * y0;
-        double t = 0;
-
-        // Other useful calculations
-        flightTime = (vY + Math.sqrt((vY * vY) + twiceGY0)) / GRAVITY;
-        maxHeight = ((vY * vY) / TWICE_GRAVITY) + y0;
-        distance = vX * flightTime;
-
-        // Calculate step of graph
-        double step = flightTime / resolution;
-
-        // Generate data set
-        for(int i = 0; i < resolution; i++) {
-            float x = (float) (vX * t);
-            float y = (float) ((vY * t) + y0 - (HALF_GRAVITY * t * t));
-
-            Entry entry = new Entry(x, y);
-
-            t += step;
-            entries.add(entry);
-        }
-
-        LineData data = new LineData(new LineDataSet(entries, name));
-
-        chart.setData(data);
     }
 }
