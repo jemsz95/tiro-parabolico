@@ -15,8 +15,8 @@ public class Launch implements Serializable {
     private static final double HALF_GRAVITY = 0.5 * GRAVITY;
 
     //Stored
-    private double id;
-    private double userId;
+    private long id;
+    private long userId;
     private String name;
     private double y0 = 0;
     private double theta = 0;
@@ -27,15 +27,25 @@ public class Launch implements Serializable {
     private int resolution = 100;
 
     //Calculated
-    private double flightTime = 0;
-    private double maxHeight = 0;
-    private double distance = 0;
+    private double flightTime;
+    private double maxHeight;
+    private double distance;
     private LineData lineData;
 
     private boolean calculated = false;
 
+    public Launch() {}
+
+    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite) {
+        this.id = id;
+        this.userId = userId;
+        this.y0 = y0;
+        this.theta = theta;
+        this.v0 = v0;
+        this.favorite = favorite;
+    }
+
     // Generates the graph data set from initial launch params
-    // TODO: Move this behavior to separate class
     private void generateDataSet() {
         //Don't recalculate without need
         if(calculated) {
@@ -76,11 +86,11 @@ public class Launch implements Serializable {
         calculated = true;
     }
 
-    public double getId() {
+    public long getId() {
         return id;
     }
 
-    public double getUserId() {
+    public long getUserId() {
         return userId;
     }
 
@@ -128,11 +138,11 @@ public class Launch implements Serializable {
         return calculated;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void setUserId(double userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
