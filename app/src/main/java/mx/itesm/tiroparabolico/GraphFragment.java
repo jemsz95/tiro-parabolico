@@ -29,11 +29,14 @@ public class GraphFragment extends Fragment {
     private LineChart chart;
 
     // Graph parameters
-    Launch launches[];
+    List<Launch> launches;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        launches = new ArrayList<>();
+
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
 
@@ -105,6 +108,18 @@ public class GraphFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Log.d(DEBUG_TAG, "onDetach() has been called.");
+    }
+
+    public void addLaunch(Launch launch) {
+        launches.add(launch);
+    }
+
+    public void clearLaunches() {
+        launches.clear();
+    }
+
+    public List<Launch> getLaunches() {
+        return launches;
     }
 
     public void graph() {
