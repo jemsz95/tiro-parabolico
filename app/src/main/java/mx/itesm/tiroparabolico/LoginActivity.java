@@ -32,20 +32,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_login:
+            case R.id.button_login: {
                 Intent i = new Intent(this, InstruccionesActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(i);
                 break;
+            }
 
-            case R.id.button_info:
+            case R.id.button_info: {
                 //TODO: Show app info
                 break;
+            }
 
-            case R.id.button_login2:
-                Intent x = new Intent(this, InstruccionesActivity.class);
-                startActivity(x);
+            case R.id.button_login2: {
+                Intent i = new Intent(this, InstruccionesActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(i);
                 break;
-
+            }
         }
     }
 }
