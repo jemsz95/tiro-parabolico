@@ -17,6 +17,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +40,6 @@ public class GraphFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        name = getResources().getString(R.string.trajectory);
-
         Log.d(DEBUG_TAG, "onActivityCreated() has been called.");
     }
 
@@ -109,52 +107,15 @@ public class GraphFragment extends Fragment {
         Log.d(DEBUG_TAG, "onDetach() has been called.");
     }
 
-    public void setResolution(int resolution) {
-        this.resolution = resolution;
-    }
-
-    public void setY0(double y0) {
-        this.y0 = y0;
-    }
-
-    public void setTheta(double theta) {
-        this.theta = theta;
-    }
-
-    public void setV0(double v0) {
-        this.v0 = v0;
-    }
-
-    public int getResolution() {
-        return resolution;
-    }
-
-    public double getFlightTime() {
-        return flightTime;
-    }
-
-    public double getMaxHeight() {
-        return maxHeight;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public double getY0() {
-        return y0;
-    }
-
-    public double getTheta() {
-        return theta;
-    }
-
-    public double getV0() {
-        return v0;
-    }
-
     public void graph() {
-        generateDataSet();
+        List<ILineDataSet> dataSetList = new ArrayList<>();
+
+        for(Launch l : launches) {
+            l.calculate();
+            dataSetList.add(l.getLineDataSet());
+        }
+
+        chart.setData(new LineData(dataSetList));
         chart.invalidate();
     }
 }
