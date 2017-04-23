@@ -3,49 +3,63 @@ package mx.itesm.tiroparabolico;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class InstruccionesActivity extends AppCompatActivity implements View.OnClickListener {
+public class InstruccionesActivity extends AppCompatActivity  {
 
     private ImageView ivLogo;
     private TextView tvTitulo;
-    private TextView tvCuerpo;
-    private Button btnSkip;
-    int idImagen;
+    private TextView tvTextInstruct;
+    private ImageView ivInstruct;
+    private int index = 0;
+    private GestureDetectorCompat detector;
+    private Instruccion[] instruccion = new Instruccion[] {
+            new Instruccion("Coloca la altura inicial", R.drawable.Instrucciones),
+            new Instruccion("Ingresa los valores iniciales", R.drawable.Instrucciones2),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrucciones);
 
-
         tvTitulo = (TextView) findViewById(R.id.text_InstruccionesTitulo);
-        tvCuerpo = (TextView) findViewById(R.id.text_InstruccionesCuerpo);
         ivLogo = (ImageView) findViewById(R.id.image_LogoPrepaNet);
-        btnSkip = (Button) findViewById(R.id.button_skip);
-        idImagen = R.drawable.logoprepanetsolo;
+        tvTextInstruct = (TextView) findViewById(R.id.text_TextInstruct);
+        ivInstruct = (ImageView)findViewById(R.id.imageView_foto);
 
-        Bitmap imagen = BitmapFactory.decodeResource(getResources(), idImagen);
-        ivLogo.setImageBitmap(imagen);
+        ivLogo.setImageResource(R.drawable.logoprepanetsolo);
 
-        btnSkip.setOnClickListener(this);
+        tvTextInstruct.setText(instruccion[index].getTexto());
+        ivInstruct.setImageResource(instruccion[index].getFotoRes());
 
+        GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                index += (e1.getX() < e2.getX() ? 1 : -1) + instruccion.length;
+                index %= instruccion.length;
+                tvTextInstruct.setText(instruccion[index].getTexto());
+                ivInstruct.setImageResource(instruccion[index].getFotoRes());
+
+                return true;
+            }
+        };
+
+        detector = new GestureDetectorCompat(this,gestureListener);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_skip:
-                Intent i = new Intent(this, SimulatorActivity.class);
-                startActivity(i);
-                break;
-
-
-        }
+    public boolean onTouchEvent(MotionEvent event){
+        this.detector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
+
 }
