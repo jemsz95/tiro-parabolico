@@ -30,23 +30,33 @@ public class Launch implements Serializable {
     private double flightTime;
     private double maxHeight;
     private double distance;
-    private LineData lineData;
+    private LineDataSet lineDataSet;
 
+    //Control
     private boolean calculated = false;
 
     public Launch() {}
 
+    public Launch(int resolution) {
+        this.resolution = resolution;
+    }
+
     public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite) {
+        this(id, userId, y0, theta, v0, favorite, 100);
+    }
+
+    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite, int resolution) {
         this.id = id;
         this.userId = userId;
         this.y0 = y0;
         this.theta = theta;
         this.v0 = v0;
         this.favorite = favorite;
+        this.resolution = resolution;
     }
 
     // Generates the graph data set from initial launch params
-    private void generateDataSet() {
+    public void calculate() {
         //Don't recalculate without need
         if(calculated) {
             return;
@@ -81,11 +91,12 @@ public class Launch implements Serializable {
             entries.add(entry);
         }
 
-        lineData = new LineData(new LineDataSet(entries, name));
+        lineDataSet = new LineDataSet(entries, name);
 
         calculated = true;
     }
 
+    // Getters //
     public long getId() {
         return id;
     }
@@ -130,14 +141,15 @@ public class Launch implements Serializable {
         return distance;
     }
 
-    public LineData getLineData() {
-        return lineData;
+    public LineDataSet getLineDataSet() {
+        return lineDataSet;
     }
 
     public boolean isCalculated() {
         return calculated;
     }
 
+    // Setters //
     public void setId(long id) {
         this.id = id;
     }
