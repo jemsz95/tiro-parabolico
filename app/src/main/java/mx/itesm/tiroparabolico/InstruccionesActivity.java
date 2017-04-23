@@ -13,12 +13,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class InstruccionesActivity extends AppCompatActivity  {
+public class InstruccionesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView ivLogo;
     private TextView tvTitulo;
     private TextView tvTextInstruct;
     private ImageView ivInstruct;
+    private Button btnSkip;
     private int index = 0;
     private GestureDetectorCompat detector;
     private Instruccion[] instruccion = new Instruccion[] {
@@ -31,15 +32,18 @@ public class InstruccionesActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrucciones);
 
-        tvTitulo = (TextView) findViewById(R.id.text_InstruccionesTitulo);
+        tvTitulo = (TextView) findViewById(R.id.text_title_instructions);
         ivLogo = (ImageView) findViewById(R.id.image_LogoPrepaNet);
         tvTextInstruct = (TextView) findViewById(R.id.text_TextInstruct);
-        ivInstruct = (ImageView)findViewById(R.id.imageView_foto);
+        ivInstruct = (ImageView) findViewById(R.id.imageView_foto);
+        btnSkip = (Button) findViewById(R.id.button_skip);
 
         ivLogo.setImageResource(R.drawable.logoprepanetsolo);
 
         tvTextInstruct.setText(instruccion[index].getTexto());
         ivInstruct.setImageResource(instruccion[index].getFotoRes());
+
+        btnSkip.setOnClickListener(this);
 
         GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -62,4 +66,9 @@ public class InstruccionesActivity extends AppCompatActivity  {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(this, SimulatorActivity.class);
+        startActivity(i);
+    }
 }

@@ -19,7 +19,7 @@
 
 
     <TextView
-        android:id="@+id/text_TitleInstruct"
+        android:id="@+id/text_title_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/titulo_instrucciones"
@@ -46,10 +46,20 @@
         android:textSize="24sp"
         android:layout_marginTop="22dp"
         android:textStyle="normal"
-        android:layout_below="@+id/text_TitleInstruct"
+        android:layout_below="@+id/text_title_instructions"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="47dp"
         android:layout_marginEnd="47dp" />
+
+    <Button
+        android:id="@+id/button_skip"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/text_title_instructions"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/text_title_instructions"
+        android:text="Skip" />
 
 </RelativeLayout>
