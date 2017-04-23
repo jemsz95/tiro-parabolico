@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DatosFragment extends Fragment implements View.OnClickListener{
+public class DatosFragment extends Fragment implements View.OnClickListener {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
     private TextView tvAltura;
@@ -36,7 +36,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
 
         // Set OnGraphDataChangeListener using parent activity
-        if(getActivity() instanceof OnGraphDataChangeListener) {
+        if (getActivity() instanceof OnGraphDataChangeListener) {
             listener = (OnGraphDataChangeListener) getActivity();
         } else {
             throw new RuntimeException("Parent class "
@@ -109,29 +109,24 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     }
 
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.button_info:
                 // TODO: Replace with instructions
                 Toast.makeText(getContext(), "Info button press", Toast.LENGTH_SHORT)
                         .show();
                 break;
 
-            case R.id.button_Simular :
-                if(etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0)
-                {
-                    if(Double.parseDouble(etAngulo.getText().toString()) >= -90 &&
+            case R.id.button_Simular:
+                if (etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0) {
+                    if (Double.parseDouble(etAngulo.getText().toString()) >= -90 &&
                             Double.parseDouble(etAngulo.getText().toString()) <= 90 &&
                             Double.parseDouble(etVelocidad.getText().toString()) >= 0) {
                         onSimulateClick();
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getActivity(), "Los datos son invalidos",
                                 Toast.LENGTH_SHORT).show();
                     }
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getActivity(), "No se han llenado los datos completos",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -159,8 +154,13 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
 
         l.setV0(speed);
         l.setTheta(angle);
+        l.calculate();
 
         listener.onGraphDataChange(l);
+
+        tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
+        tvAltura.setText("0");
+        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
     }
 
     public interface OnGraphDataChangeListener {
