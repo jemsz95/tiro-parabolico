@@ -117,7 +117,24 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.button_Simular :
-                onSimulateClick();
+                if(etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0)
+                {
+                    if(Double.parseDouble(etAngulo.getText().toString()) >= -90 &&
+                            Double.parseDouble(etAngulo.getText().toString()) <= 90 &&
+                            Double.parseDouble(etVelocidad.getText().toString()) >= 0) {
+                        onSimulateClick();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), "Los datos son invalidos",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "No se han llenado los datos completos",
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
