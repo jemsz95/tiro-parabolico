@@ -22,8 +22,6 @@ public class Instruccion {
         this.texto = texto;
     }
 
-
-
     @DrawableRes
     public int getFotoRes() {
         return fotoRes;
