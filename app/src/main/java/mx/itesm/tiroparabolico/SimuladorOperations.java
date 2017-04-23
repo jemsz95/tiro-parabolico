@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -35,13 +38,13 @@ public class SimuladorOperations {
         db = dbHelper.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
-            values.put(COLUMN_TIRO, launch.getTiro());
-            values.put(COLUMN_ID_USUARIO, launch.getIdUsuario());
-            values.put(COLUMN_NOMBRE, launch.getNombre());
+            values.put(COLUMN_TIRO, launch.getId());
+            values.put(COLUMN_ID_USUARIO, launch.getUserId());
+            values.put(COLUMN_NOMBRE, launch.getName());
             values.put(COLUMN_THETA, launch.getTheta());
-            values.put(COLUMN_ALTURA, launch.getAltura());
-            values.put(COLUMN_VELOCIDAD, launch.getVelocidad());
-            values.put(COLUMN_FAVORITO, launch.getFavorito());
+            values.put(COLUMN_ALTURA, launch.getY0());
+            values.put(COLUMN_VELOCIDAD, launch.getV0());
+            values.put(COLUMN_FAVORITO, launch.isFavorite());
             db.insert(TABLE_SIMULADOR, null, values);
         } catch (SQLiteException e){
             // Error, db can't be opened
