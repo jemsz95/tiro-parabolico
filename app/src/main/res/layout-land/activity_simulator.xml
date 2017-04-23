@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:orientation="horizontal">
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2.33"
+        android:id="@+id/fragment_history"
+        android:name="mx.itesm.tiroparabolico.HistoryListFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@android:layout/list_content" />
+
+    <fragment
         android:id="@+id/fragment_graph"
-        class="mx.itesm.tiroparabolico.GraphFragment"/>
+        android:name="mx.itesm.tiroparabolico.GraphFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        tools:layout="@layout/fragment_graph" />
 
 </LinearLayout>

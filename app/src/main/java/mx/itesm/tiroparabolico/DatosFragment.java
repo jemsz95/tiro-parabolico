@@ -138,10 +138,15 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         double angle = Double.parseDouble(etAngulo.getText().toString());
         double speed = Double.parseDouble(etVelocidad.getText().toString());
 
-        listener.onGraphDataChange(angle, speed);
+        Launch l = new Launch();
+
+        l.setV0(speed);
+        l.setTheta(angle);
+
+        listener.onGraphDataChange(l);
     }
 
     public interface OnGraphDataChangeListener {
-        void onGraphDataChange(double angle, double speed);
+        void onGraphDataChange(Launch launch);
     }
 }

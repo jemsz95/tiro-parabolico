@@ -6,16 +6,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class SimulatorActivity extends AppCompatActivity implements DatosFragment.OnGraphDataChangeListener {
+public class SimulatorActivity extends AppCompatActivity
+        implements DatosFragment.OnGraphDataChangeListener,
+        HistoryListFragment.OnHistoryListItemClickListener {
 
     GraphFragment graphFragment;
     DatosFragment datosFragment;
+    HistoryListFragment historyListFragment;
 
-    boolean isLandscape;
+    boolean landscape;
 
     @Override
-    public void onGraphDataChange(double angle, double speed) {
+    public void onGraphDataChange(Launch launch) {
+        graphFragment.clearLaunches();
+
+        graphFragment.addLaunch(launch);
         graphFragment.graph();
+    }
+
+    @Override
+    public void onHistoryListItemClick() {
+
     }
 
     @Override
@@ -59,6 +70,11 @@ public class SimulatorActivity extends AppCompatActivity implements DatosFragmen
         datosFragment = (DatosFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_data);
 
-        isLandscape = datosFragment == null;
+        landscape = datosFragment == null;
+
+        if(landscape) {
+            historyListFragment = (HistoryListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_history);
+        }
     }
 }
