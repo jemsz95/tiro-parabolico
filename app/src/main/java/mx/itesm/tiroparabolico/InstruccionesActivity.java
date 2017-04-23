@@ -22,8 +22,8 @@ public class InstruccionesActivity extends AppCompatActivity  {
     private int index = 0;
     private GestureDetectorCompat detector;
     private Instruccion[] instruccion = new Instruccion[] {
-            new Instruccion("Coloca la altura inicial", R.drawable.Instrucciones),
-            new Instruccion("Ingresa los valores iniciales", R.drawable.Instrucciones2),
+            new Instruccion("Coloca la altura inicial", R.drawable.instrucciones),
+            new Instruccion("Ingresa los valores iniciales", R.drawable.instrucciones2),
     };
 
     @Override
