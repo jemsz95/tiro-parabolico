@@ -22,9 +22,9 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     TextView tvTiempo;
     TextView tvVeloIni;
     TextView tvAngulo;
-    EditText etAltura;
-    EditText etAlcance;
-    EditText etTiempo;
+    TextView etAltura;
+    TextView etAlcance;
+    TextView etTiempo;
     EditText etVeloIni;
     EditText etAngulo;
     Button btnSimular;
@@ -54,9 +54,9 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         tvTiempo = (TextView) view.findViewById(R.id.text_Tiempo);
         tvVeloIni = (TextView) view.findViewById(R.id.text_Velocidad);
         tvAngulo = (TextView) view.findViewById(R.id.text_Angulo);
-        etAltura = (EditText) view.findViewById(R.id.edit_Altura);
-        etAlcance = (EditText) view.findViewById(R.id.edit_Alcance);
-        etTiempo = (EditText) view.findViewById(R.id.edit_Tiempo);
+        etAltura = (TextView) view.findViewById(R.id.edit_Altura);
+        etAlcance = (TextView) view.findViewById(R.id.edit_Alcance);
+        etTiempo = (TextView) view.findViewById(R.id.edit_Tiempo);
         etVeloIni = (EditText) view.findViewById(R.id.edit_Velocidad);
         etAngulo = (EditText) view.findViewById(R.id.edit_Angulo);
         btnSimular = (Button) view.findViewById(R.id.button_Simular);
