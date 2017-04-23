@@ -15,11 +15,7 @@ public class SimulatorActivity extends AppCompatActivity implements DatosFragmen
 
     @Override
     public void onGraphDataChange(double angle, double speed) {
-        graphFragment.setTheta(angle);
-        graphFragment.setV0(speed);
         graphFragment.graph();
-
-
     }
 
     @Override

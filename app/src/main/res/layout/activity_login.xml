@@ -92,13 +92,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:ems="10"
+        android:layout_below="@+id/text_mail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:id="@+id/editText_password"
-        android:layout_alignBaseline="@+id/text_password"
-        android:layout_alignBottom="@+id/text_password"
-        android:layout_toRightOf="@+id/text_password"
-        android:layout_toEndOf="@+id/text_password"
-        android:hint="Ingresa tu password" />
+        android:hint="Password" />
 
 </RelativeLayout>
