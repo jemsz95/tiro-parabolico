@@ -69,7 +69,8 @@
             android:id="@+id/edit_velocidad"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Velocidad" />
+            android:hint="Velocidad"
+            android:inputType="numberDecimal" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +86,8 @@
             android:id="@+id/edit_angulo"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Angulo" />
+            android:hint="Angulo"
+            android:inputType="numberDecimal" />
 
     </android.support.design.widget.TextInputLayout>
 
