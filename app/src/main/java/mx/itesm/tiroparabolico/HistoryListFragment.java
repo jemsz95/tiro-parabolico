@@ -2,28 +2,68 @@ package mx.itesm.tiroparabolico;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class HistoryListFragment extends ListFragment {
-    private static final String DEBUG_TAG = "HistoryListFragment";
 
-    private OnHistoryListItemClickListener listener;
+    String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
+    ArrayList<Launch> listaLaunch;
+    ArrayAdapter<String> adapterLaunch;
+    OnLaunchSelectedListener launchListener;
 
-    public HistoryListFragment() { }
+    public HistoryListFragment() {
 
-    @Override
-    public void onAttach(Context context) {
-        if(context instanceof OnHistoryListItemClickListener) {
-            listener = (OnHistoryListItemClickListener) context;
-        } else {
-            throw new RuntimeException("Parent activity of HistoryListFragment must implement OnHistoryListItemClickListener");
-        }
-
-        super.onAttach(context);
     }
 
-    public interface OnHistoryListItemClickListener {
-        void onHistoryListItemClick();
+    public static HistoryListFragment newInstance() {
+        HistoryListFragment historyListFragment = new HistoryListFragment();
+        return historyListFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapterLaunch = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1,
+                listaNombreLaunch);
+        setListAdapter(adapterLaunch);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof OnLaunchSelectedListener){
+            launchListener = (OnLaunchSelectedListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + "must implement HistoryListFragment.OnItemSelectedListener");
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        double angle = 20;
+        double speed = 15;
+        double height = 2;
+
+        Launch launch = new Launch();
+
+        launch.setV0(speed);
+        launch.setTheta(angle);
+        launch.setY0(height);
+        launch.calculate();
+
+        launchListener.onLaunchSelected(launch);
+    }
+
+    public interface OnLaunchSelectedListener {
+        public void onLaunchSelected(Launch l);
     }
 }

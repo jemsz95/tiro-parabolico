@@ -29,14 +29,11 @@ public class GraphFragment extends Fragment {
     private LineChart chart;
 
     // Graph parameters
-    List<Launch> launches;
+    List<Launch> launches = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        launches = new ArrayList<>();
-
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
 

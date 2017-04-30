@@ -20,8 +20,8 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     private TextView tvTiempo;
     private EditText etVelocidad;
     private EditText etAngulo;
+    private EditText etAltura;
     private Button btnSimular;
-    private ImageButton btnInfo;
 
     private OnGraphDataChangeListener listener;
 
@@ -57,11 +57,10 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         tvTiempo = (TextView) view.findViewById(R.id.text_tiempo);
         etAngulo = (EditText) view.findViewById(R.id.edit_angulo);
         etVelocidad = (EditText) view.findViewById(R.id.edit_velocidad);
+        etAltura = (EditText) view.findViewById(R.id.edit_altura);
         btnSimular = (Button) view.findViewById(R.id.button_Simular);
-        btnInfo = (ImageButton) view.findViewById(R.id.button_info);
 
         btnSimular.setOnClickListener(this);
-        btnInfo.setOnClickListener(this);
 
         return view;
     }
@@ -149,17 +148,19 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     protected void onSimulateClick() {
         double angle = Double.parseDouble(etAngulo.getText().toString());
         double speed = Double.parseDouble(etVelocidad.getText().toString());
+        double height = Double.parseDouble(etAltura.getText().toString());
 
         Launch l = new Launch();
 
         l.setV0(speed);
         l.setTheta(angle);
+        l.setY0(height);
         l.calculate();
 
         listener.onGraphDataChange(l);
 
         tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
-        tvAltura.setText("0");
+        tvAltura.setText("-" + height);
         tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
     }
 
