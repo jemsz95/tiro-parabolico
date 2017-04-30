@@ -75,7 +75,7 @@ public class SimulatorActivity extends AppCompatActivity
 
         if(landscape) {
             historyListFragment = (HistoryListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.history_fragment);
+                    .findFragmentById(R.id.fragment_history);
         }
     }
 }
