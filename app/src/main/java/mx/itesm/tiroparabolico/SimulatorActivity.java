@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 public class SimulatorActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
-        HistoryListFragment.OnHistoryListItemClickListener {
+        HistoryListFragment.OnLaunchSelectedListener {
 
     GraphFragment graphFragment;
     DatosFragment datosFragment;
@@ -25,8 +25,9 @@ public class SimulatorActivity extends AppCompatActivity
     }
 
     @Override
-    public void onHistoryListItemClick() {
-
+    public void onLaunchSelected(Launch l) {
+        graphFragment.addLaunch(l);
+        graphFragment.graph();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class SimulatorActivity extends AppCompatActivity
 
         if(landscape) {
             historyListFragment = (HistoryListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.fragment_history);
+                    .findFragmentById(R.id.history_fragment);
         }
     }
 }
