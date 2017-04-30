@@ -16,11 +16,11 @@ public class ProductHelper extends SQLiteOpenHelper {
     public static final String TABLE_SIMULADOR = "simulaciones";
     public static final String COLUMN_TIRO = "_id";
     public static final String COLUMN_ID_USUARIO = "usario_id";
-    public static final String COLUMN_NOMBRE = "nombre";
     public static final String COLUMN_THETA = "theta";
     public static final String COLUMN_ALTURA = "altura";
     public static final String COLUMN_VELOCIDAD = "velocidad";
     public static final String COLUMN_FAVORITO = "favorito";
+    public static final String COLUMN_FECHA = "fecha";
 
 
     private static ProductHelper productHelperInstance;
@@ -43,10 +43,10 @@ public class ProductHelper extends SQLiteOpenHelper {
                 "(" +
                 COLUMN_TIRO + " INTEGER PRIMARY KEY," +
                 COLUMN_ID_USUARIO + " INTEGER," +
-                COLUMN_FAVORITO + " INTEGER," +
-                COLUMN_NOMBRE + " STRING," +
+                COLUMN_FAVORITO + " STRING," +
                 COLUMN_THETA + " REAL," +
                 COLUMN_ALTURA + " REAL," +
+                COLUMN_FECHA + " TEXT," +
                 COLUMN_VELOCIDAD + " REAL," + ");";
         Log.i("Producthelper onCreate", CREATE_SIMULADOR_TABLE);
         arg0.execSQL(CREATE_SIMULADOR_TABLE);

@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+                android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,9 +17,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CreditosActivity" />
+        <activity android:name=".CreditosActivity"
+    android:screenOrientation="portrait" />
 
-        <activity android:name=".InstruccionesActivity" />
+        <activity android:name=".InstruccionesActivity"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".SimulatorActivity" />
     </application>
