@@ -47,10 +47,12 @@ public class SimulatorActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.creditos_action) {
             Intent i = new Intent(this, CreditosActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
         }
         if (id == R.id.instrucciones_action){
             Intent i = new Intent(this, InstruccionesActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
         }
         if(id == R.id.logout_action){
