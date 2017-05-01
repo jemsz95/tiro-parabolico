@@ -110,12 +110,12 @@
         android:id="@+id/text_Class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_Password"
+        android:layout_alignStart="@+id/text_Password"
+        android:layout_below="@+id/text_Password"
         android:hint="Contraseña"
         android:text="Codigo Salon:"
-        android:textSize="24sp"
-        android:layout_below="@+id/text_Password"
-        android:layout_alignLeft="@+id/text_Password"
-        android:layout_alignStart="@+id/text_Password" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/text_Password"
