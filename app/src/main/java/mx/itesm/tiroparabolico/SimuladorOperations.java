@@ -1,0 +1,55 @@
+package mx.itesm.tiroparabolico;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
+
+/**
+ * Created by jisus on 23/04/2017.
+ */
+
+public class SimuladorOperations {
+
+    private SQLiteDatabase db;
+    private ProductHelper dbHelper;
+    List<Launch> listaLaunch = new ArrayList<Launch>();
+    public static final String TABLE_SIMULADOR = "simulaciones";
+    public static final String COLUMN_TIRO = "_id";
+    public static final String COLUMN_ID_USUARIO = "user_id";
+    public static final String COLUMN_NOMBRE = "nombre";
+    public static final String COLUMN_THETA = "theta";
+    public static final String COLUMN_ALTURA = "altura";
+    public static final String COLUMN_VELOCIDAD = "velocidad";
+    public static final String COLUMN_FAVORITO = "favorito";
+
+
+    public SimuladorOperations(Context context){
+        dbHelper = ProductHelper.getInstance(context);
+    }
+
+    public void addSimulacion(Launch launch) {
+        db = dbHelper.getWritableDatabase();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_TIRO, launch.getId());
+            values.put(COLUMN_ID_USUARIO, launch.getUserId());
+            values.put(COLUMN_NOMBRE, launch.getName());
+            values.put(COLUMN_THETA, launch.getTheta());
+            values.put(COLUMN_ALTURA, launch.getY0());
+            values.put(COLUMN_VELOCIDAD, launch.getV0());
+            values.put(COLUMN_FAVORITO, launch.isFavorite());
+            db.insert(TABLE_SIMULADOR, null, values);
+        } catch (SQLiteException e){
+            // Error, db can't be opened
+            Log.d(TAG, "Error while trying to add product to database");
+        }
+    }
+
+}

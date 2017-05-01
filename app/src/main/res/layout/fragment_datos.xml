@@ -1,137 +1,112 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="mx.itesm.tiroparabolico.DatosFragment">
 
 
     <TextView
-        android:id="@+id/text_Altura"
+        android:id="@+id/text_altura_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp"
-        android:text="Altura Final:"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="27dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Altura Final:" />
 
     <TextView
-        android:id="@+id/text_Angulo"
+        android:id="@+id/text_alcance_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_altura_label"
+        android:layout_below="@+id/text_altura_label"
         android:layout_marginTop="16dp"
-        android:text="Angulo de Disparo:"
-        android:layout_below="@+id/text_Velocidad"
-        android:layout_alignLeft="@+id/text_Velocidad"
-        android:layout_alignStart="@+id/text_Velocidad" />
+        android:text="Alcance:" />
 
     <TextView
-        android:id="@+id/text_Velocidad"
+        android:id="@+id/text_tiempo_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:text="Velocidad Inicial:"
-        android:layout_below="@+id/text_Tiempo"
-        android:layout_alignLeft="@+id/text_Tiempo"
-        android:layout_alignStart="@+id/text_Tiempo" />
+        android:layout_alignLeft="@+id/text_alcance_label"
+        android:layout_below="@+id/text_alcance_label"
+        android:layout_marginTop="16dp"
+        android:text="Tiempo:" />
 
     <TextView
-        android:id="@+id/text_Alcance"
+        android:id="@+id/text_altura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alcance:"
-        android:layout_below="@+id/text_Altura"
-        android:layout_alignLeft="@+id/text_Altura"
-        android:layout_alignStart="@+id/text_Altura"
-        android:layout_marginTop="13dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_Velocidad"
-        android:layout_alignLeft="@+id/edit_Tiempo"
-        android:layout_alignStart="@+id/edit_Tiempo"
-        android:layout_alignRight="@+id/button_Simular"
-        android:layout_alignEnd="@+id/button_Simular"
-        android:layout_alignBottom="@+id/text_Velocidad"
-        android:id="@+id/edit_Velocidad"
-        android:textSize="10sp"/>
-
-    <EditText
-        android:id="@+id/edit_Angulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_Angulo"
-        android:layout_alignEnd="@+id/button_Simular"
-        android:layout_alignLeft="@+id/edit_Velocidad"
-        android:layout_alignRight="@+id/button_Simular"
-        android:layout_alignStart="@+id/edit_Velocidad"
-        android:layout_alignTop="@+id/text_Angulo"
-        android:textSize="10sp"/>
+        android:layout_toRightOf="@id/text_altura_label"
+        android:layout_alignBottom="@id/text_altura_label"
+        android:layout_marginLeft="16dp" />
 
     <TextView
-        android:id="@+id/edit_Tiempo"
+        android:id="@+id/text_alcance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_Tiempo"
-        android:layout_alignLeft="@+id/edit_Alcance"
-        android:layout_alignStart="@+id/edit_Alcance"
-        android:layout_alignRight="@+id/edit_Alcance"
-        android:layout_alignEnd="@+id/edit_Alcance"
-        android:layout_alignBottom="@+id/text_Tiempo" />
+        android:layout_alignLeft="@id/text_altura"
+        android:layout_alignBottom="@id/text_alcance_label" />
 
     <TextView
-        android:id="@+id/edit_Alcance"
+        android:id="@+id/text_tiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/text_Tiempo"
-        android:layout_alignEnd="@+id/edit_Altura"
-        android:layout_alignLeft="@+id/edit_Altura"
-        android:layout_alignRight="@+id/edit_Altura"
-        android:layout_alignStart="@+id/edit_Altura"
-        android:layout_alignTop="@+id/text_Alcance" />
+        android:layout_alignBottom="@+id/text_tiempo_label"
+        android:layout_alignLeft="@+id/text_alcance" />
 
-    <TextView
-        android:id="@+id/edit_Altura"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_Altura"
-        android:layout_alignEnd="@+id/button_Simular"
-        android:layout_alignLeft="@+id/button_Simular"
-        android:layout_alignRight="@+id/button_Simular"
-        android:layout_alignStart="@+id/button_Simular"
-        android:layout_alignTop="@+id/text_Altura" />
+        android:id="@+id/layout_velocidad"
+        android:layout_below="@id/text_tiempo_label"
+        android:layout_alignLeft="@id/text_altura_label"
+        android:layout_marginTop="16dp">
 
-    <TextView
-        android:id="@+id/text_Tiempo"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_velocidad"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Velocidad"
+            android:inputType="numberDecimal" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Tiempo:"
-        android:layout_below="@+id/text_Alcance"
-        android:layout_alignLeft="@+id/text_Alcance"
-        android:layout_alignStart="@+id/text_Alcance" />
+        android:id="@+id/layout_anglulo"
+        android:layout_below="@id/layout_velocidad"
+        android:layout_alignLeft="@id/text_altura_label"
+        android:layout_marginTop="16dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_angulo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Angulo"
+            android:inputType="numberDecimal" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/button_Simular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simular"
-        android:layout_marginTop="25dp"
-        android:layout_below="@+id/text_Angulo"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/button_info"
+        android:layout_centerHorizontal="true"
+        android:text="@string/simulate" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/button_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_Simular"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@null"
         android:src="@drawable/ic_info_grey_24dp" />
 </RelativeLayout>
