@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        tvTitle = (TextView) findViewById(R.id.text_InstruccionesTitulo);
+        tvTitle = (TextView) findViewById(R.id.text_RegisterTitle);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
         tvPasswordRegister = (TextView) findViewById(R.id.text_PasswordRegist);
