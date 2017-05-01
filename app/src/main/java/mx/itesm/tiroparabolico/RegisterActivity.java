@@ -20,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etName;
     private EditText etSecondName;
     private EditText etPassword;
+    private EditText etCodigo;
     private Button btnRegister;
 
     @Override
@@ -31,10 +32,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
-        tvPasswordRegister = (TextView) findViewById(R.id.text_Class);
+        tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
+
         etName = (EditText) findViewById(R.id.edit_FirstName);
         etSecondName =(EditText) findViewById(R.id.edit_LastName);
         etPassword = (EditText) findViewById(R.id.edit_PasswordRegister);
+        etCodigo = (EditText) findViewById(R.id.edit_Class);
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         btnRegister.setOnClickListener(this);
     }
