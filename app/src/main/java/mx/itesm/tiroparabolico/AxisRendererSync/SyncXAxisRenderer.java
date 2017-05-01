@@ -1,4 +1,4 @@
-package mx.itesm.tiroparabolico.AxisRendererSyncronizer;
+package mx.itesm.tiroparabolico.AxisRendererSync;
 
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
