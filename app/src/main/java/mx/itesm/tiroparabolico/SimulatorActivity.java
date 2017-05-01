@@ -70,7 +70,9 @@ public class SimulatorActivity extends AppCompatActivity
             //closing activity
             finish();
 
+
             startActivity(new Intent(this, LoginActivity.class));
+
 
         }
 

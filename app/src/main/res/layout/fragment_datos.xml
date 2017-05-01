@@ -105,7 +105,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Angulo"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal|numberSigned" />
 
     </android.support.design.widget.TextInputLayout>
 

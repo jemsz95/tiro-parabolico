@@ -1,7 +1,9 @@
 package mx.itesm.tiroparabolico;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +11,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +34,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by jorgeemiliorubiobarboza on 23/04/17.
  */
@@ -44,7 +47,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etName;
     private EditText etSecondName;
     private EditText etPassword;
+
     private EditText etMail;
+
+    private EditText etCodigo;
+
     private Button btnRegister;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -57,11 +64,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
-        tvPasswordRegister = (TextView) findViewById(R.id.text_PasswordRegist);
+        tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
         etName = (EditText) findViewById(R.id.edit_FirstName);
         etSecondName =(EditText) findViewById(R.id.edit_LastName);
         etMail=(EditText) findViewById(R.id.edit_EMail);
         etPassword = (EditText) findViewById(R.id.edit_PasswordRegister);
+        etCodigo = (EditText) findViewById(R.id.edit_Class);
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
