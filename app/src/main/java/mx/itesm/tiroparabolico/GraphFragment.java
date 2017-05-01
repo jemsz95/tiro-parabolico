@@ -51,19 +51,11 @@ public class GraphFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
         chart = (LineChart) view.findViewById(R.id.grafo);
 
+        // Scale 1:1
         chart.setPinchZoom(true);
 
-        AxisBase xAxis = chart.getXAxis();
-        AxisBase yAxis = chart.getAxisLeft();
-
-        xAxis.setAxisMinimum(0);
-        yAxis.setAxisMinimum(0);
-
-        xAxis.setGranularity(1);
-        yAxis.setGranularity(1);
-
-        xAxis.setGranularityEnabled(true);
-        yAxis.setGranularityEnabled(true);
+        //Disable right axis
+        chart.getAxisRight().setEnabled(false);
 
         return view;
     }
