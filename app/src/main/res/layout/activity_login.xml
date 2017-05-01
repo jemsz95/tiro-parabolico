@@ -82,8 +82,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="Ingresa tu contraseña"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/editText_mail"
@@ -96,6 +97,6 @@
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="Ingresar tu correo"
-        android:inputType="textPassword" />
+        android:inputType="textPersonName"/>
 
 </RelativeLayout>
