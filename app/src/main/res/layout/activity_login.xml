@@ -38,7 +38,7 @@
         android:id="@+id/button_registro"
         android:layout_width="100dp"
         android:layout_marginTop="52dp"
-        android:layout_below="@+id/editText_mail"
+        android:layout_below="@+id/editText_password"
         android:layout_alignRight="@+id/text_login"
         android:layout_alignEnd="@+id/text_login" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Correo:"
-        android:layout_alignBottom="@+id/editText_password"
+        android:layout_alignBottom="@+id/editText_mail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -74,28 +74,28 @@
         android:layout_marginStart="24dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText_mail"
-        android:hint="Ingresa tu mail"
-        android:layout_alignBaseline="@+id/text_password"
-        android:layout_alignBottom="@+id/text_password"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
         android:id="@+id/editText_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_password"
+        android:layout_alignBottom="@+id/text_password"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="Ingresa tu contraseña"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/text_login"
+        android:layout_marginTop="18dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="Ingresar Contraseña"
-        android:inputType="textPassword"
-        android:layout_below="@+id/text_login"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="18dp" />
+        android:hint="Ingresar tu correo"
+        android:inputType="textPassword" />
 
 </RelativeLayout>
