@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ProfessorViewListActivity extends ListActivity {
-
+    /*
     ListView studentView;
 
     @Override
@@ -53,4 +53,5 @@ public class ProfessorViewListActivity extends ListActivity {
         getMenuInflater().inflate(R.menu.menu_simulador, menu);
         return true;
     }
+    */
 }

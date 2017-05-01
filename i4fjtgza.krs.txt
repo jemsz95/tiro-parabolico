@@ -1,0 +1,30 @@
+﻿Merge branch 'fernando' of https://github.com/jemsz95/tiro-parabolico into jesus
+
+# Conflicts:
+#	app/src/main/java/mx/itesm/tiroparabolico/RegisterActivity.java
+#	app/src/main/java/mx/itesm/tiroparabolico/SimulatorActivity.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch jesus
+# Your branch is up-to-date with 'origin/jesus'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   app/src/main/java/mx/itesm/tiroparabolico/InstruccionesActivity.java
+#	modified:   app/src/main/java/mx/itesm/tiroparabolico/LoginActivity.java
+#	modified:   app/src/main/java/mx/itesm/tiroparabolico/RegisterActivity.java
+#	modified:   app/src/main/java/mx/itesm/tiroparabolico/SimulatorActivity.java
+#	modified:   app/src/main/res/layout/activity_instrucciones.xml
+#	modified:   app/src/main/res/layout/activity_login.xml
+#	modified:   app/src/main/res/layout/fragment_datos.xml
+#	modified:   app/src/main/res/layout/register_activity.xml
+#
+
