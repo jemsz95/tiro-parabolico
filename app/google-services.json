@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "180424326964",
+    "firebase_url": "https://app-tiroparabolico.firebaseio.com",
+    "project_id": "app-tiroparabolico",
+    "storage_bucket": "app-tiroparabolico.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180424326964:android:3c1b2cb573876c9a",
+        "android_client_info": {
+          "package_name": "mx.itesm.tiroparabolico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180424326964-rgon0ki20fbpvfjl8tvil46rm1tu0g25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2o82MixEHh2KSeFSN2_7h8vj114ViVHc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
