@@ -6,15 +6,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class SimulatorActivity extends AppCompatActivity implements DatosFragment.OnGraphDataChangeListener {
+public class SimulatorActivity extends AppCompatActivity
+        implements DatosFragment.OnGraphDataChangeListener,
+        HistoryListFragment.OnLaunchSelectedListener {
 
     GraphFragment graphFragment;
     DatosFragment datosFragment;
+    HistoryListFragment historyListFragment;
 
-    boolean isLandscape;
+    boolean landscape;
 
     @Override
-    public void onGraphDataChange(double angle, double speed) {
+    public void onGraphDataChange(Launch launch) {
+        graphFragment.clearLaunches();
+
+        graphFragment.addLaunch(launch);
+        graphFragment.graph();
+    }
+
+    @Override
+    public void onLaunchSelected(Launch l) {
+        graphFragment.addLaunch(l);
         graphFragment.graph();
     }
 
@@ -35,10 +47,12 @@ public class SimulatorActivity extends AppCompatActivity implements DatosFragmen
         //noinspection SimplifiableIfStatement
         if (id == R.id.creditos_action) {
             Intent i = new Intent(this, CreditosActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
         }
         if (id == R.id.instrucciones_action){
             Intent i = new Intent(this, InstruccionesActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
         }
         if(id == R.id.logout_action){
@@ -59,6 +73,11 @@ public class SimulatorActivity extends AppCompatActivity implements DatosFragmen
         datosFragment = (DatosFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_data);
 
-        isLandscape = datosFragment == null;
+        landscape = datosFragment == null;
+
+        if(landscape) {
+            historyListFragment = (HistoryListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_history);
+        }
     }
 }

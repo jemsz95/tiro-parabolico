@@ -24,13 +24,18 @@
         \n-La opción de comparar sólo está disponible de forma "landscape" (horizontal).
     </string>
     <string name="text_login">Simulador Tiro Parabolico</string>
-    <string name="buttonText_login">Sign in with Google</string>
+    <string name="buttonText_login">Registrar</string>
     <string name="buttonText_simulador">Simulador</string>
     <string name="buttonText_instruciones">Instrucciones</string>
     <string name="buttonText_creditos">Creditos</string>
     <string name="buttonText_logout">Logout</string>
     <string name="trajectory">Trayectoria</string>
+<<<<<<< HEAD
     <string name="text_Register">Registro</string>
     <string name="simulate">Simular</string>
     <string name="action_settings">Settings</string>
+=======
+    <string name="simulate">Simular</string>
+    <string name="text_Register">Registro</string>
+>>>>>>> 13046c9c753f9f9ee6ecb552d1ce5250688b6cd3
 </resources>

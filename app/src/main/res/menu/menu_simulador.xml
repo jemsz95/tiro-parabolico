@@ -17,4 +17,9 @@
         android:orderInCategory="3"
         app:showAsAction="never" />
 
+    <item android:id="@+id/historial_action"
+        android:title="Historial"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
 </menu>

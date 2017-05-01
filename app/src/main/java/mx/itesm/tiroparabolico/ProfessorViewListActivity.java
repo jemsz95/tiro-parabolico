@@ -47,9 +47,10 @@ public class ProfessorViewListActivity extends ListActivity {
         });
     }
 
+    //revisar el menu que recibe getMenuInflater
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_simulador, menu);
         return true;
     }
 }
