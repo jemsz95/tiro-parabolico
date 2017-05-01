@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 public class InstruccionesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView ivLogo;
     private TextView tvTitulo;
     private TextView tvTextInstruct;
     private ImageView ivInstruct;
@@ -33,12 +32,9 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_instrucciones);
 
         tvTitulo = (TextView) findViewById(R.id.text_title_instructions);
-        ivLogo = (ImageView) findViewById(R.id.image_LogoPrepaNet);
         tvTextInstruct = (TextView) findViewById(R.id.text_TextInstruct);
         ivInstruct = (ImageView) findViewById(R.id.imageView_foto);
         btnSkip = (Button) findViewById(R.id.button_skip);
-
-        ivLogo.setImageResource(R.drawable.logoprepanetsolo);
 
         tvTextInstruct.setText(instruccion[index].getTexto());
         ivInstruct.setImageResource(instruccion[index].getFotoRes());
