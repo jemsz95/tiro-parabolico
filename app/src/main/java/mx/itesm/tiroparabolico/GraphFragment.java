@@ -18,9 +18,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Transformer;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mx.itesm.tiroparabolico.AxisRendererSync.SyncXAxisRenderer;
+import mx.itesm.tiroparabolico.AxisRendererSync.SyncYAxisRenderer;
 
 public class GraphFragment extends Fragment {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
@@ -49,7 +54,19 @@ public class GraphFragment extends Fragment {
         chart = (LineChart) view.findViewById(R.id.grafo);
 
         // Scale 1:1
+        ViewPortHandler viewPortHandler = chart.getViewPortHandler();
+        XAxis xAxis = chart.getXAxis();
+        YAxis yAxis = chart.getAxisLeft();
+        Transformer transformer = chart.getTransformer(YAxis.AxisDependency.LEFT);
+
+        SyncXAxisRenderer xAxisRenderer = new SyncXAxisRenderer(viewPortHandler, xAxis, transformer);
+        SyncYAxisRenderer yAxisRenderer = new SyncYAxisRenderer(viewPortHandler, yAxis, transformer);
+
+        chart.setXAxisRenderer(xAxisRenderer);
+        chart.setRendererLeftYAxis(yAxisRenderer);
         chart.setPinchZoom(true);
+
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         //Disable right axis
         chart.getAxisRight().setEnabled(false);
