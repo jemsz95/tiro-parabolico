@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DatosFragment extends Fragment implements View.OnClickListener{
+public class DatosFragment extends Fragment implements View.OnClickListener {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
     private TextView tvAltura;
@@ -20,8 +20,8 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     private TextView tvTiempo;
     private EditText etVelocidad;
     private EditText etAngulo;
+    private EditText etAltura;
     private Button btnSimular;
-    private ImageButton btnInfo;
 
     private OnGraphDataChangeListener listener;
 
@@ -36,7 +36,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
 
         // Set OnGraphDataChangeListener using parent activity
-        if(getActivity() instanceof OnGraphDataChangeListener) {
+        if (getActivity() instanceof OnGraphDataChangeListener) {
             listener = (OnGraphDataChangeListener) getActivity();
         } else {
             throw new RuntimeException("Parent class "
@@ -57,11 +57,10 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
         tvTiempo = (TextView) view.findViewById(R.id.text_tiempo);
         etAngulo = (EditText) view.findViewById(R.id.edit_angulo);
         etVelocidad = (EditText) view.findViewById(R.id.edit_velocidad);
+        etAltura = (EditText) view.findViewById(R.id.edit_altura);
         btnSimular = (Button) view.findViewById(R.id.button_Simular);
-        btnInfo = (ImageButton) view.findViewById(R.id.button_info);
 
         btnSimular.setOnClickListener(this);
-        btnInfo.setOnClickListener(this);
 
         return view;
     }
@@ -109,15 +108,22 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     }
 
     public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.button_info:
-                // TODO: Replace with instructions
-                Toast.makeText(getContext(), "Info button press", Toast.LENGTH_SHORT)
-                        .show();
-                break;
+        switch (v.getId()) {
 
-            case R.id.button_Simular :
-                onSimulateClick();
+            case R.id.button_Simular:
+                if (etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0) {
+                    if (Double.parseDouble(etAngulo.getText().toString()) >= -90 &&
+                            Double.parseDouble(etAngulo.getText().toString()) <= 90 &&
+                            Double.parseDouble(etVelocidad.getText().toString()) >= 0) {
+                        onSimulateClick();
+                    } else {
+                        Toast.makeText(getActivity(), "Los datos son invalidos",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "No se han llenado los datos completos",
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -137,11 +143,23 @@ public class DatosFragment extends Fragment implements View.OnClickListener{
     protected void onSimulateClick() {
         double angle = Double.parseDouble(etAngulo.getText().toString());
         double speed = Double.parseDouble(etVelocidad.getText().toString());
+        double height = Double.parseDouble(etAltura.getText().toString());
 
-        listener.onGraphDataChange(angle, speed);
+        Launch l = new Launch();
+
+        l.setV0(speed);
+        l.setTheta(angle);
+        l.setY0(height);
+        l.calculate();
+
+        listener.onGraphDataChange(l);
+
+        tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
+        tvAltura.setText("-" + height);
+        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
     }
 
     public interface OnGraphDataChangeListener {
-        void onGraphDataChange(double angle, double speed);
+        void onGraphDataChange(Launch launch);
     }
 }

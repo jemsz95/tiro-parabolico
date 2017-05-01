@@ -5,7 +5,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Launch implements Serializable {
@@ -23,6 +25,10 @@ public class Launch implements Serializable {
     private double v0 = 0;
     private boolean favorite = false;
 
+
+
+
+
     //Setted
     private int resolution = 100;
 
@@ -31,6 +37,11 @@ public class Launch implements Serializable {
     private double maxHeight;
     private double distance;
     private LineDataSet lineDataSet;
+
+    //*JESUS PARA OBTENER FECHA
+    private Calendar c;
+    SimpleDateFormat df;
+    String formattedDate;
 
     //Control
     private boolean calculated = false;
@@ -41,11 +52,12 @@ public class Launch implements Serializable {
         this.resolution = resolution;
     }
 
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite) {
-        this(id, userId, y0, theta, v0, favorite, 100);
+                                                                                             //*Fecha
+    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite,String formattedDate) {
+        this(id, userId, y0, theta, v0, favorite, 100,formattedDate);
     }
-
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite, int resolution) {
+                                                                                                             //*Fecha
+    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite, int resolution, String formattedDate) {
         this.id = id;
         this.userId = userId;
         this.y0 = y0;
@@ -53,6 +65,7 @@ public class Launch implements Serializable {
         this.v0 = v0;
         this.favorite = favorite;
         this.resolution = resolution;
+        this.formattedDate=formattedDate;
     }
 
     // Generates the graph data set from initial launch params
@@ -120,6 +133,18 @@ public class Launch implements Serializable {
     public double getV0() {
         return v0;
     }
+    //*Get de fecha
+    public String getFormattedDate(){
+        c = Calendar.getInstance();
+        df = new SimpleDateFormat("dd-MMM-yyyy");
+        formattedDate = df.format(c.getTime());
+
+        return formattedDate;
+    }
+    // getter de calendar
+    public Calendar getCalendar(){
+        return c;
+    }
 
     public boolean isFavorite() {
         return favorite;
@@ -157,6 +182,10 @@ public class Launch implements Serializable {
     public void setUserId(long userId) {
         this.userId = userId;
     }
+        //set de Fecha
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -183,5 +212,15 @@ public class Launch implements Serializable {
 
     public void setResolution(int resolution) {
         this.resolution = resolution;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Launch) {
+            Launch l = (Launch) obj;
+            return l.getId() == id;
+        }
+
+        return false;
     }
 }
