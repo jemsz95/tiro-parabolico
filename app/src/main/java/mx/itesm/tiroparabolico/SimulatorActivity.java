@@ -57,7 +57,6 @@ public class SimulatorActivity extends AppCompatActivity
         }
         if(id == R.id.logout_action){
             finish();
-            //TODO: LOGOUT USER
         }
 
         return super.onOptionsItemSelected(item);
