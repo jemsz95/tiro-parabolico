@@ -32,4 +32,5 @@
     <string name="trajectory">Trayectoria</string>
     <string name="text_Register">Registro</string>
     <string name="simulate">Simular</string>
+    <string name="action_settings">Settings</string>
 </resources>
