@@ -26,6 +26,8 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".SimulatorActivity" />
+
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>

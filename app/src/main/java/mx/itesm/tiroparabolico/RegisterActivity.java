@@ -46,9 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_RegisterReg:
-
-                Intent i = new Intent(this, InstruccionesActivity.class);
-                startActivity(i);
+                finish();
                 break;
 
         }
