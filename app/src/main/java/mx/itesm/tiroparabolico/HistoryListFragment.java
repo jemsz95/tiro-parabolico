@@ -49,9 +49,20 @@ public class HistoryListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        double angle = 20;
-        double speed = 15;
-        double height = 2;
+        double angle;
+        double speed;
+        double height;
+
+        if (position == 0) {
+            angle = 20;
+            speed = 15;
+            height = 2;
+        }
+        else {
+            angle = 10;
+            speed = 20;
+            height = 0;
+        }
 
         Launch launch = new Launch();
 
