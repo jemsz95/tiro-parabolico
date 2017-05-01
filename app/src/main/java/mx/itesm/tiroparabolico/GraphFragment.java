@@ -18,9 +18,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Transformer;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mx.itesm.tiroparabolico.AxisRendererSync.SyncXAxisRenderer;
+import mx.itesm.tiroparabolico.AxisRendererSync.SyncYAxisRenderer;
 
 public class GraphFragment extends Fragment {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
@@ -29,14 +34,11 @@ public class GraphFragment extends Fragment {
     private LineChart chart;
 
     // Graph parameters
-    List<Launch> launches;
+    List<Launch> launches = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        launches = new ArrayList<>();
-
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
 
@@ -51,19 +53,23 @@ public class GraphFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
         chart = (LineChart) view.findViewById(R.id.grafo);
 
+        // Scale 1:1
+        ViewPortHandler viewPortHandler = chart.getViewPortHandler();
+        XAxis xAxis = chart.getXAxis();
+        YAxis yAxis = chart.getAxisLeft();
+        Transformer transformer = chart.getTransformer(YAxis.AxisDependency.LEFT);
+
+        SyncXAxisRenderer xAxisRenderer = new SyncXAxisRenderer(viewPortHandler, xAxis, transformer);
+        SyncYAxisRenderer yAxisRenderer = new SyncYAxisRenderer(viewPortHandler, yAxis, transformer);
+
+        chart.setXAxisRenderer(xAxisRenderer);
+        chart.setRendererLeftYAxis(yAxisRenderer);
         chart.setPinchZoom(true);
 
-        AxisBase xAxis = chart.getXAxis();
-        AxisBase yAxis = chart.getAxisLeft();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        xAxis.setAxisMinimum(0);
-        yAxis.setAxisMinimum(0);
-
-        xAxis.setGranularity(1);
-        yAxis.setGranularity(1);
-
-        xAxis.setGranularityEnabled(true);
-        yAxis.setGranularityEnabled(true);
+        //Disable right axis
+        chart.getAxisRight().setEnabled(false);
 
         return view;
     }
