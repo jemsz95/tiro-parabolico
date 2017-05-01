@@ -12,11 +12,13 @@ import android.support.annotation.DrawableRes;
 public class Credito {
     private String nombre;
     private String matricula;
+    private String mail;
     private int fotoRes;
 
-    public Credito(String nombre,String matricula, @DrawableRes int fotoRes){
+    public Credito(String nombre,String matricula, String mail, @DrawableRes int fotoRes){
         this.nombre = nombre;
         this.matricula = matricula;
+        this.mail = mail;
         this.fotoRes = fotoRes;
     }
     public String getNombre() {
@@ -42,6 +44,14 @@ public class Credito {
 
     public void setFotoRes( @DrawableRes int fotoRes){
         this.fotoRes = fotoRes;
+    }
+
+    public String getMail(){
+        return mail;
+    }
+
+    public void setMail(String mail){
+        this.mail = mail;
     }
 
 }
