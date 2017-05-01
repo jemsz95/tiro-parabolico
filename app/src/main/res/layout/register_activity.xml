@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image_prepanet"
@@ -58,11 +62,9 @@
         android:layout_height="wrap_content"
         android:hint="Primer nombre"
         android:inputType="textPersonName"
-        android:textSize="24sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="150dp" />
+        android:layout_alignBottom="@+id/text_NameRegister"
+        android:layout_alignLeft="@+id/edit_LastName"
+        android:layout_alignStart="@+id/edit_LastName" />
 
     <EditText
         android:id="@+id/edit_LastName"
@@ -70,12 +72,12 @@
         android:layout_height="wrap_content"
         android:hint="Apellido"
         android:inputType="textPersonName"
-        android:textSize="24sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="185dp" />
+        android:layout_alignBottom="@+id/text_SecondNameRegister"
+        android:layout_alignRight="@+id/button_RegisterReg"
+        android:layout_alignEnd="@+id/button_RegisterReg" />
 
     <TextView
         android:id="@+id/text_EMail"
@@ -94,40 +96,48 @@
         android:id="@+id/edit_EMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Correo Electronico"
-        android:inputType="textEmailAddress"
-        android:textSize="24sp"
+        android:layout_alignBottom="@+id/text_EMail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="220dp" />
+        android:hint="Correo "
+        android:inputType="textEmailAddress"
+        android:textSize="18sp"
+        android:layout_alignRight="@+id/edit_LastName"
+        android:layout_alignEnd="@+id/edit_LastName" />
 
     <TextView
-        android:id="@+id/text_PasswordRegist"
+        android:id="@+id/text_Class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
-        android:text="Contraseña: "
+        android:text="Codigo Salon:"
         android:textSize="24sp"
+        android:layout_below="@+id/text_Password"
+        android:layout_alignLeft="@+id/text_Password"
+        android:layout_alignStart="@+id/text_Password" />
+
+    <TextView
+        android:id="@+id/text_Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="255dp" />
+        android:layout_marginTop="255dp"
+        android:hint="Contraseña"
+        android:text="Contraseña: "
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/edit_PasswordRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:textSize="24sp"
-        android:inputType="textVisiblePassword"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="255dp" />
+        android:layout_alignBottom="@+id/text_Password"
+        android:layout_toRightOf="@+id/text_Password"
+        android:hint="6 o mas caracteres"
+        android:inputType="textVisiblePassword" />
 
     <Button
         android:id="@+id/button_RegisterReg"
@@ -135,30 +145,52 @@
         android:layout_height="wrap_content"
         android:text="Registrarse"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/checkBox5"
-        android:layout_toRightOf="@+id/text_NameRegister"
-        android:layout_toEndOf="@+id/text_NameRegister" />
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true" />
 
-    <CheckBox
-        android:id="@+id/checkBox4"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="Alumno"
-        android:layout_alignTop="@+id/checkBox5"
-        android:layout_alignLeft="@+id/text_PasswordRegist"
-        android:layout_alignStart="@+id/text_PasswordRegist" />
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/edit_Class"
+        android:layout_centerHorizontal="true">
 
-    <CheckBox
-        android:id="@+id/checkBox5"
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_Class"
+            android:layout_alignRight="@+id/text_Class"
+            android:layout_below="@+id/edit_PasswordRegister"
+            android:layout_marginTop="24dp"
+            android:text="Alumno" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton2"
+            android:layout_alignBottom="@+id/radioButton2"
+            android:layout_alignEnd="@+id/text_RegisterTitle"
+            android:layout_alignRight="@+id/text_RegisterTitle"
+            android:text="Maestro" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edit_Class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:checked="false"
-        android:text="Maestro"
-        android:layout_below="@+id/edit_PasswordRegister"
-        android:layout_alignLeft="@+id/edit_PasswordRegister"
-        android:layout_alignStart="@+id/edit_PasswordRegister" />
+        android:layout_alignBaseline="@+id/text_Class"
+        android:layout_alignBottom="@+id/text_Class"
+        android:layout_alignEnd="@+id/edit_PasswordRegister"
+        android:layout_alignRight="@+id/edit_PasswordRegister"
+        android:layout_toEndOf="@+id/text_Class"
+        android:layout_toRightOf="@+id/text_Class"
+        android:layout_weight="1"
+        android:hint="Codigo"
+        android:inputType="textVisiblePassword" />
 
 </RelativeLayout>
+
+</ScrollView>
