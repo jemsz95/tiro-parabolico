@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,8 +22,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogin = (Button) findViewById(R.id.button_login);
         btnRegistro=(Button)findViewById(R.id.button_registro);
-        etUsuario = (EditText) findViewById(R.id.editText_mail);
-        etPassword = (EditText) findViewById(R.id.editText_password);
+        etUsuario = (EditText) findViewById(R.id.editText_password);
+        etPassword = (EditText) findViewById(R.id.editText_mail);
         etUsuario.setText("");
         etPassword.setText("");
         btnLogin.setOnClickListener(this);
