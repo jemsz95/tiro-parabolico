@@ -184,4 +184,14 @@ public class Launch implements Serializable {
     public void setResolution(int resolution) {
         this.resolution = resolution;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Launch) {
+            Launch l = (Launch) obj;
+            return l.getId() == id;
+        }
+
+        return false;
+    }
 }
