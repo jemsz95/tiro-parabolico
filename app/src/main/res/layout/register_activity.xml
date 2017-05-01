@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logoprepanetsolo"
+        android:layout_marginTop="34dp"
+        android:id="@+id/image_prepanet"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/text_RegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_Register"
+        android:hint="Registrar"
+        android:textSize="36sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/image_prepanet"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/text_NameRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:text="Nombre: "
+        android:textSize="24sp"
+        android:layout_below="@+id/text_RegisterTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/text_SecondNameRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        android:text="Apellido: "
+        android:textSize="24sp"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/text_NameRegister"
+        android:layout_alignRight="@+id/text_NameRegister"
+        android:layout_alignEnd="@+id/text_NameRegister" />
+
+    <EditText
+        android:id="@+id/edit_FirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Primer nombre"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/text_NameRegister"
+        android:layout_alignBottom="@+id/text_NameRegister"
+        android:layout_alignLeft="@+id/text_RegisterTitle"
+        android:layout_alignStart="@+id/text_RegisterTitle" />
+
+    <EditText
+        android:id="@+id/edit_LastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        android:layout_alignBottom="@+id/text_SecondNameRegister"
+        android:layout_alignLeft="@+id/edit_FirstName"
+        android:layout_alignStart="@+id/edit_FirstName"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_alignTop="@+id/text_SecondNameRegister" />
+
+    <TextView
+        android:id="@+id/text_EMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Correo"
+        android:text="Correo: "
+        android:textSize="24sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/edit_EMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Correo Electronico"
+        android:inputType="textEmailAddress"
+        android:textSize="24sp"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/edit_FirstName"
+        android:layout_alignStart="@+id/edit_FirstName" />
+
+    <TextView
+        android:id="@+id/text_PasswordRegist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:text="Contraseña: "
+        android:textSize="24sp"
+        android:layout_below="@+id/text_EMail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp" />
+
+    <EditText
+        android:id="@+id/edit_PasswordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:textSize="24sp"
+        android:inputType="textVisiblePassword"
+        android:layout_alignBaseline="@+id/text_PasswordRegist"
+        android:layout_alignBottom="@+id/text_PasswordRegist"
+        android:layout_toRightOf="@+id/text_PasswordRegist"
+        android:layout_toEndOf="@+id/text_PasswordRegist"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp" />
+
+    <Button
+        android:id="@+id/button_RegisterReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrarse"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="81dp" />
+
+</RelativeLayout>
