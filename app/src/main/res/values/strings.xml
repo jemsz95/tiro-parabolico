@@ -24,7 +24,7 @@
         \n-La opción de comparar sólo está disponible de forma "landscape" (horizontal).
     </string>
     <string name="text_login">Simulador Tiro Parabolico</string>
-    <string name="buttonText_login">Sign in with Google</string>
+    <string name="buttonText_login">Registrar</string>
     <string name="buttonText_simulador">Simulador</string>
     <string name="buttonText_instruciones">Instrucciones</string>
     <string name="buttonText_creditos">Creditos</string>

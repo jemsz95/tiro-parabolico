@@ -109,11 +109,6 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_info:
-                // TODO: Replace with instructions
-                Toast.makeText(getContext(), "Info button press", Toast.LENGTH_SHORT)
-                        .show();
-                break;
 
             case R.id.button_Simular:
                 if (etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0) {
