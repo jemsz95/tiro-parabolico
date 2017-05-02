@@ -33,6 +33,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by jorgeemiliorubiobarboza on 23/04/17.
@@ -55,12 +57,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btnRegister;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+        // Inicia Fierbase auth
         firebaseAuth= FirebaseAuth.getInstance();
+
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+
+
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
@@ -74,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
     }
+
 
     private void registerUser(){
         String email=etMail.getText().toString().trim();
@@ -126,9 +135,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button_RegisterReg:
                 registerUser();
 
+
                 break;
 
         }
+    }
+
+    private void writeNewUser(String userId, String name, String surname, String email, String clase){
+        UserInformation userInformation = new UserInformation(name, surname, clase, email);
+        databaseReference.child("users").child(userId).setValue(userInformation);
     }
 
 
