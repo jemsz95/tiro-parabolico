@@ -117,8 +117,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         //checking if success
                         if(task.isSuccessful()){
                             //display some message here
-                        Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
-                            finish();
+                            Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                         }else{
                             //display some message here
                             Toast.makeText(RegisterActivity.this, "No se pudo registrar intente denuevo porfavor",Toast.LENGTH_SHORT).show();
