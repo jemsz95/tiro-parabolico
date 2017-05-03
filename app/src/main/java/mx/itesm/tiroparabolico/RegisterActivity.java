@@ -4,10 +4,12 @@ package mx.itesm.tiroparabolico;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,14 +63,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+
         // Inicia Fierbase auth
         firebaseAuth= FirebaseAuth.getInstance();
-
-        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference = Database.getInstance().getReference();
 
 
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
@@ -81,6 +86,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
+    }
+
+
+
+    private void saveUserInformation(){
+        String email=etMail.getText().toString().trim();
+        String firstName=etName.getText().toString().trim();
+        String secondName=etSecondName.getText().toString().trim();
+        String clase =etCodigo.getText().toString().trim();
+
+        UserInformation userInformation= new UserInformation(firstName,secondName,clase,email);
+
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        databaseReference.child("students").child(user.getUid()).setValue(userInformation);
+
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(userInformation.name)
+                .build();
+
+        user.updateProfile(profileUpdates);
     }
 
 
@@ -107,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
         progressDialog.setMessage("Registrando Usuario....");
+        progressDialog.show();
 
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
@@ -117,10 +147,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         //checking if success
                         if(task.isSuccessful()){
                             //display some message here
+
                             Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
+
                         }else{
                             //display some message here
                             Toast.makeText(RegisterActivity.this, "No se pudo registrar intente denuevo porfavor",Toast.LENGTH_SHORT).show();
@@ -131,22 +160,43 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
+
+    private void userLogin(){
+        String email=etMail.getText().toString().trim();
+        String password=etPassword.getText().toString().trim();
+
+
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        //if the task is successfull
+                        if(task.isSuccessful()){
+                            saveUserInformation();
+
+                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                        }
+                    }
+                });
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_RegisterReg:
                 registerUser();
-
-
+                userLogin();
                 break;
 
         }
     }
 
-    private void writeNewUser(String userId, String name, String surname, String email, String clase){
-        UserInformation userInformation = new UserInformation(name, surname, clase, email);
-        databaseReference.child("users").child(userId).setValue(userInformation);
-    }
+
 
 
 
