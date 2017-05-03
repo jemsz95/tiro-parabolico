@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,7 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this,"Porfavor ingressa tu password",Toast.LENGTH_LONG).show();
             return;
 
-    } progressDialog.show();
+    }         progressDialog.setMessage("Iniciar sesión....");
+              progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
