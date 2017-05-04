@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etName;
     private EditText etSecondName;
     private EditText etPassword;
+    private RadioButton radioBtnAlumno;
+    private RadioButton radioBtnMaestro;
+    private RadioGroup radioGroup;
 
     private EditText etMail;
 
@@ -75,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
+        radioBtnAlumno=(RadioButton)findViewById(R.id.radioBtn_alumno);
+        radioBtnMaestro=(RadioButton)findViewById(R.id.radioBtn_maestro);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
         tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
@@ -86,6 +93,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
+       radioGroup=(RadioGroup) findViewById(R.id.radGrupo);
+        radioBtnAlumno.setOnClickListener(this);
+        radioBtnMaestro.setOnClickListener(this);
     }
 
 
@@ -96,13 +106,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String secondName=etSecondName.getText().toString().trim();
         String clase =etCodigo.getText().toString().trim();
 
+
         UserInformation userInformation= new UserInformation(firstName,secondName,clase,email);
 
 
+
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        clase klass=new clase(user.getUid(),clase);
 
 
-        databaseReference.child("students").child(user.getUid()).setValue(userInformation);
+
+        if(radioBtnAlumno.isChecked()){
+            databaseReference.child("students").child(user.getUid()).setValue(userInformation);
+        }
+        else if(radioBtnMaestro.isChecked()){
+            databaseReference.child("teachers").child(user.getUid()).setValue(userInformation);
+            databaseReference.child("classes").child(userInformation.classId).setValue(klass);
+        }
+
+
+
+
+
 
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()

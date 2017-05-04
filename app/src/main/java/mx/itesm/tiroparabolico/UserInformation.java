@@ -13,6 +13,7 @@ public class UserInformation {
     public String classId;
     public String email;
 
+
     public UserInformation(){
     }
 
