@@ -2,12 +2,14 @@ package mx.itesm.tiroparabolico;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ public class HistoryListFragmentProfessor extends ListFragment {
     String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
     ArrayList<Launch> listaLaunch;
     ArrayAdapter<DatabaseReference> adapterLaunch;
+    AdapterLaunch adapterLaunch2;
     HistoryListFragment.OnLaunchSelectedListener launchListener;
 
 
@@ -46,26 +49,26 @@ public class HistoryListFragmentProfessor extends ListFragment {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
+                // Get Launch object and use the values to update the UI
                 Launch launch = dataSnapshot.getValue(Launch.class);
                 // ...
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
+                // Getting Launch failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // ...
             }
         };
 
+        DatabaseReference classMemeberRef = FirebaseDatabase.getInstance().getReference("/class_member/1234" );
         DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
         launchesReference.addValueEventListener(postListener);
 
-        adapterLaunch = new ArrayAdapter<DatabaseReference>(getActivity(), android.R.layout.simple_list_item_activated_1,
+        adapterLaunch2 = new AdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
                 launchesReference);
-        setListAdapter(adapterLaunch);
-
+        setListAdapter(adapterLaunch2);
     }
 
     @Override
