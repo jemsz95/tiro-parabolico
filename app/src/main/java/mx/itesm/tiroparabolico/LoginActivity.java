@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ingressa tu password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ingresa tu password",Toast.LENGTH_LONG).show();
             return;
 
     } progressDialog.show();
@@ -80,6 +80,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(getApplicationContext(), InstruccionesActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), ":C", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
