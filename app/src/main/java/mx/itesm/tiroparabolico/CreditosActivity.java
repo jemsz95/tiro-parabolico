@@ -20,9 +20,9 @@ public class CreditosActivity extends AppCompatActivity  {
     private GestureDetectorCompat detector;
     private Credito[] creditos = new Credito[] {
             new Credito("Jesus Guadiana","A00814770", "jisus130@hotmail.com", R.drawable.jesus),
-            new Credito("Jorge Rubio","A00368770", "hola", R.drawable.jorge),
+            new Credito("Jorge Rubio","A00368770", "jorge.rubiobarboza96@gmail.com", R.drawable.jorge),
             new Credito("Juan Ulloa","A00817807", "juan.fernando.ulloa@gmail.com", R.drawable.juan),
-            new Credito("Javier Meza","A01244496", "adios", R.drawable.javier)
+            new Credito("Javier Meza","A01244496", "javenmeza@gmail.com", R.drawable.javier)
     };
 
     @Override

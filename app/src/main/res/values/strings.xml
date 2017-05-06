@@ -31,6 +31,8 @@
     <string name="buttonText_creditos">Creditos</string>
     <string name="buttonText_logout">Logout</string>
     <string name="trajectory">Trayectoria</string>
-    <string name="simulate">Simular</string>
     <string name="text_Register">Registro</string>
+    <string name="simulate">Simular</string>
+    <string name="action_settings">Settings</string>
+
 </resources>
