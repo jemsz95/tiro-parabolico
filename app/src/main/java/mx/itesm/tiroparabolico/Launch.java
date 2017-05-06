@@ -19,16 +19,12 @@ public class Launch implements Serializable {
     private static final double HALF_GRAVITY = 0.5 * GRAVITY;
 
     //Stored
-    private long id;
-    private long userId;
-    private double y0 = 0;
-    private double theta = 0;
-    private double v0 = 0;
-    private boolean favorite = false;
-
-
-
-
+    private String id;
+    private String userId;
+    private Double y0 = 0d;
+    private Double theta = 0d;
+    private Double v0 = 0d;
+    private Boolean favorite = false;
 
     //Setted
     private int resolution = 100;
@@ -41,8 +37,8 @@ public class Launch implements Serializable {
 
     //*JESUS PARA OBTENER FECHA
     private Calendar c;
-    SimpleDateFormat df;
-    String formattedDate;
+    private SimpleDateFormat df;
+    private String formattedDate;
 
     //Control
     private boolean calculated = false;
@@ -53,12 +49,11 @@ public class Launch implements Serializable {
         this.resolution = resolution;
     }
 
-                                                                                             //*Fecha
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite,String formattedDate) {
+    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite,String formattedDate) {
         this(id, userId, y0, theta, v0, favorite, 100,formattedDate);
     }
-                                                                                                             //*Fecha
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite, int resolution, String formattedDate) {
+
+    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite, int resolution, String formattedDate) {
         this.id = id;
         this.userId = userId;
         this.y0 = y0;
@@ -112,12 +107,12 @@ public class Launch implements Serializable {
 
     // Getters //
     @Exclude
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     @PropertyName("author")
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -190,12 +185,12 @@ public class Launch implements Serializable {
 
     // Setters //
     @Exclude
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @PropertyName("author")
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
         //set de Fecha
