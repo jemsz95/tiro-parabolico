@@ -69,10 +69,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         databaseReference= FirebaseDatabase.getInstance().getReference();
 
 
+
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
         tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
+
         etName = (EditText) findViewById(R.id.edit_FirstName);
         etSecondName =(EditText) findViewById(R.id.edit_LastName);
         etMail=(EditText) findViewById(R.id.edit_EMail);
