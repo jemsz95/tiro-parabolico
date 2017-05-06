@@ -150,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(userInformation.name)
+                .setDisplayName(userInformation.name + " " + userInformation.lastname)
                 .build();
 
         user.updateProfile(profileUpdates);
