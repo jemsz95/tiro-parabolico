@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Launch implements Serializable {
@@ -35,7 +36,7 @@ public class Launch implements Serializable {
     private LineDataSet lineDataSet;
 
     //*JESUS PARA OBTENER FECHA
-    private Calendar calendar;
+    private Calendar calendar = new GregorianCalendar();
     private SimpleDateFormat df;
     private String formattedDate;
 
