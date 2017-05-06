@@ -12,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
 public class DatosFragment extends Fragment implements View.OnClickListener {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
@@ -22,12 +25,17 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     private EditText etAngulo;
     private EditText etAltura;
     private Button btnSimular;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+
 
     private OnGraphDataChangeListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth= FirebaseAuth.getInstance();
+        databaseReference = Database.getInstance().getReference();
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
 

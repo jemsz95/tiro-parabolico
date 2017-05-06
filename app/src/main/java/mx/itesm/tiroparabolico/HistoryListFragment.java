@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,8 +57,8 @@ public class HistoryListFragment extends ListFragment {
                 // ...
             }
         };
-        DatabaseReference classMemeberRef = FirebaseDatabase.getInstance().getReference("/class_member/1234" );
-        DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
+        DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
+        DatabaseReference launchesReference = Database.getInstance().getReference("/launches");
         launchesReference.addValueEventListener(postListener);
         adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
                 launchesReference);
