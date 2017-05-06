@@ -9,9 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-    </style>
 
+<<<<<<< HEAD
     <!-- <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb_holo</item>
         <item name="android:fastScrollOverlayPosition">atThumb</item>
@@ -20,5 +19,7 @@
         <item name="android:fastScrollPreviewBackgroundRight">@drawable/bg_default_focused_holo_light</item>
     </style> -->
 
+=======
+>>>>>>> 352630fdf477de37cd44080af7b69aec51bfa6bd
 
 </resources>

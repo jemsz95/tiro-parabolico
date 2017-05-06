@@ -1,14 +1,15 @@
 package mx.itesm.tiroparabolico;
 
-
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,22 +20,26 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * Created by jorgeemiliorubiobarboza on 03/05/17.
+ */
 
-public class HistoryListFragment extends ListFragment {
+public class HistoryListFragmentProfessor extends ListFragment {
 
     String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
     ArrayList<Launch> listaLaunch;
-    ArrayAdapter<String> adapterLaunch;
-    StudentAdapterLaunch adapterLaunch2;
-    OnLaunchSelectedListener launchListener;
+    ArrayAdapter<DatabaseReference> adapterLaunch;
+    AdapterLaunch adapterLaunch2;
+    HistoryListFragment.OnLaunchSelectedListener launchListener;
 
-    public HistoryListFragment() {
+
+    public HistoryListFragmentProfessor() {
 
     }
 
-    public static HistoryListFragment newInstance() {
-        HistoryListFragment historyListFragment = new HistoryListFragment();
-        return historyListFragment;
+    public static HistoryListFragmentProfessor newInstance() {
+        HistoryListFragmentProfessor historyListFragmentProfessor = new HistoryListFragmentProfessor();
+        return historyListFragmentProfessor;
     }
 
     @Override
@@ -56,41 +61,34 @@ public class HistoryListFragment extends ListFragment {
                 // ...
             }
         };
+
         DatabaseReference classMemeberRef = FirebaseDatabase.getInstance().getReference("/class_member/1234" );
         DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
         launchesReference.addValueEventListener(postListener);
-        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
+
+        adapterLaunch2 = new AdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
                 launchesReference);
-        setListAdapter(adapterLaunch);
+        setListAdapter(adapterLaunch2);
     }
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        if(context instanceof OnLaunchSelectedListener){
-            launchListener = (OnLaunchSelectedListener) context;
+        if(context instanceof HistoryListFragment.OnLaunchSelectedListener){
+            launchListener = (HistoryListFragment.OnLaunchSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + "must implement HistoryListFragment.OnItemSelectedListener");
         }
     }
 
+
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        double angle;
-        double speed;
-        double height;
-
-        if (position == 0) {
-            angle = 20;
-            speed = 15;
-            height = 2;
-        }
-        else {
-            angle = 10;
-            speed = 20;
-            height = 0;
-        }
+        double angle = 20;
+        double speed = 15;
+        double height = 2;
 
         Launch launch = new Launch();
 
@@ -106,3 +104,4 @@ public class HistoryListFragment extends ListFragment {
         public void onLaunchSelected(Launch l);
     }
 }
+
