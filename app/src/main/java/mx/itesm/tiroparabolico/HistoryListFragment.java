@@ -9,10 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-<<<<<<< HEAD
-=======
 import com.google.firebase.auth.AuthCredential;
->>>>>>> 49f23005e27ae481ec4841ddd820b4716862fa14
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
