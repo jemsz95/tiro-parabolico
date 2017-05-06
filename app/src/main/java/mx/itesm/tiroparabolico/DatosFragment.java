@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 public class DatosFragment extends Fragment implements View.OnClickListener {
@@ -27,8 +28,6 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     private Button btnSimular;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-
-
     private OnGraphDataChangeListener listener;
 
     @Override
@@ -152,7 +151,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         double angle = Double.parseDouble(etAngulo.getText().toString());
         double speed = Double.parseDouble(etVelocidad.getText().toString());
         double height = Double.parseDouble(etAltura.getText().toString());
-
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Launch l = new Launch();
 
         l.setV0(speed);
@@ -165,6 +164,11 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
         tvAltura.setText("-" + height);
         tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
+        DatabaseReference newLaunchRef = databaseReference.child("launches").push();
+        l.setUserId(user.getUid());
+        newLaunchRef.setValue(l);
+        l.setId(newLaunchRef.getKey());
+
     }
 
     public interface OnGraphDataChangeListener {

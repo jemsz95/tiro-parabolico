@@ -79,9 +79,10 @@ public class SimuladorOperations {
                     }else{
                         FAVORITO2=false;
                     }
-
+/*
                     Launch simulacion = new Launch(TIRO,IDUSUARIO,ALTURA,THETA,VELOCIDAD,FAVORITO2,DATE);
                     listaDeSimulaciones.add(simulacion);
+                    */
                     cursor.moveToNext();
                 }
             }
