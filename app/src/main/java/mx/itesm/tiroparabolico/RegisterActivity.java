@@ -39,14 +39,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by jorgeemiliorubiobarboza on 23/04/17.
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String DEBUG_TAG = "RegisterActivity";
 
     private TextView tvTitle;
     private TextView tvName;
@@ -58,16 +62,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton radioBtnAlumno;
     private RadioButton radioBtnMaestro;
     private RadioGroup radioGroup;
-
     private EditText etMail;
-
     private EditText etCodigo;
-
     private Button btnRegister;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-
+    private boolean classExists = false;
+    private boolean classChecked = false;
+    private boolean classValid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         // Inicia Fierbase auth
         firebaseAuth= FirebaseAuth.getInstance();
         databaseReference = Database.getInstance().getReference();
-
 
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         radioBtnAlumno=(RadioButton)findViewById(R.id.radioBtn_alumno);
@@ -93,12 +95,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
-       radioGroup=(RadioGroup) findViewById(R.id.radGrupo);
-        radioBtnAlumno.setOnClickListener(this);
-        radioBtnMaestro.setOnClickListener(this);
+        radioGroup=(RadioGroup) findViewById(R.id.radGrupo);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                validateClassCode();
+            }
+        });
+
+        etCodigo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    final String classCode = etCodigo.getText().toString();
+                    DatabaseReference classRef = databaseReference.child("classes/" + classCode);
+                    classRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            classExists = dataSnapshot.exists();
+                            classChecked = true;
+
+                            validateClassCode();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.d(DEBUG_TAG, databaseError.toString());
+                        }
+                    });
+                }
+            }
+        });
     }
-
-
 
     private void saveUserInformation(){
         String email=etMail.getText().toString().trim();
@@ -106,29 +135,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String secondName=etSecondName.getText().toString().trim();
         String clase =etCodigo.getText().toString().trim();
 
-
         UserInformation userInformation= new UserInformation(firstName,secondName,clase,email);
-
-
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         clase klass=new clase(user.getUid(),clase);
 
-
-
         if(radioBtnAlumno.isChecked()){
             databaseReference.child("students").child(user.getUid()).setValue(userInformation);
+            databaseReference.child("class_member/" + clase + "/" + user.getUid()).setValue(new Boolean(true));
         }
         else if(radioBtnMaestro.isChecked()){
             databaseReference.child("teachers").child(user.getUid()).setValue(userInformation);
             databaseReference.child("classes").child(userInformation.classId).setValue(klass);
         }
-
-
-
-
-
-
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(userInformation.name)
@@ -136,7 +155,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         user.updateProfile(profileUpdates);
     }
-
 
     private void registerUser(){
         String email=etMail.getText().toString().trim();
@@ -152,45 +170,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this,"Ingrese su apellido",Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Ingrese su correo electronico ",Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Ingrese su contraseña ",Toast.LENGTH_SHORT).show();
             return;
         }
+
         progressDialog.setMessage("Registrando Usuario....");
         progressDialog.show();
-
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         //checking if success
-                        if(task.isSuccessful()){
+                        if(task.isSuccessful()) {
                             //display some message here
-
+                            userLogin();
                             Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
-
-                        }else{
+                        } else {
                             //display some message here
                             Toast.makeText(RegisterActivity.this, "No se pudo registrar intente denuevo porfavor",Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
-
-
     }
 
-    private void userLogin(){
-        String email=etMail.getText().toString().trim();
-        String password=etPassword.getText().toString().trim();
-
-
+    private void userLogin() {
+        String email = etMail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -207,22 +220,44 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
                 });
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_RegisterReg:
-                registerUser();
-                userLogin();
+                validateClassCode();
+                if(classValid) {
+                    registerUser();
+                } else {
+                    Toast.makeText(this, "Error de codigo de clase",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
     }
 
+    private void validateClassCode() {
+        if(classChecked) {
+            int checkedRadioBtn = radioGroup.getCheckedRadioButtonId();
 
-
-
-
+            if(checkedRadioBtn == R.id.radioBtn_maestro) {
+                if(classExists) {
+                    etCodigo.setError("Este salón ya existe, elige otro código");
+                    classValid = false;
+                } else {
+                    etCodigo.setError(null);
+                    classValid = true;
+                }
+            } else if(checkedRadioBtn == R.id.radioBtn_alumno) {
+                if(!classExists) {
+                    etCodigo.setError("Este salón no existe");
+                    classValid = false;
+                } else {
+                    etCodigo.setError(null);
+                    classValid = true;
+                }
+            }
+        }
+    }
 }
