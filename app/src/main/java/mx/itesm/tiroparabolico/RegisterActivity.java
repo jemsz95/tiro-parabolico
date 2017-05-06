@@ -138,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         UserInformation userInformation= new UserInformation(firstName,secondName,clase,email);
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        clase klass=new clase(user.getUid(),clase);
+        Clase klass=new Clase(user.getUid(), clase);
 
         if(radioBtnAlumno.isChecked()){
             databaseReference.child("students").child(user.getUid()).setValue(userInformation);
