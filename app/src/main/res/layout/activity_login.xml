@@ -89,8 +89,6 @@
         android:fontFamily="sans-serif"
         android:hint="Ingresar tu correo"
         android:inputType="textPersonName"/>
-<<<<<<< HEAD
-=======
 
     <ImageView
         android:id="@+id/image_prepanet"
@@ -100,6 +98,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
->>>>>>> 352630fdf477de37cd44080af7b69aec51bfa6bd
 
 </RelativeLayout>
