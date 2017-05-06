@@ -4,10 +4,12 @@ package mx.itesm.tiroparabolico;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,14 +37,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by jorgeemiliorubiobarboza on 23/04/17.
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String DEBUG_TAG = "RegisterActivity";
 
     private TextView tvTitle;
     private TextView tvName;
@@ -49,28 +59,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etName;
     private EditText etSecondName;
     private EditText etPassword;
-
+    private RadioButton radioBtnAlumno;
+    private RadioButton radioBtnMaestro;
+    private RadioGroup radioGroup;
     private EditText etMail;
-
     private EditText etCodigo;
-
     private Button btnRegister;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private boolean classExists = false;
+    private boolean classChecked = false;
+    private boolean classValid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+
         // Inicia Fierbase auth
         firebaseAuth= FirebaseAuth.getInstance();
-
-        databaseReference= FirebaseDatabase.getInstance().getReference();
-
+        databaseReference = Database.getInstance().getReference();
 
 
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
+        radioBtnAlumno=(RadioButton)findViewById(R.id.radioBtn_alumno);
+        radioBtnMaestro=(RadioButton)findViewById(R.id.radioBtn_maestro);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
         tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
@@ -83,8 +97,66 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister = (Button) findViewById(R.id.button_RegisterReg);
         progressDialog=new ProgressDialog(this);
         btnRegister.setOnClickListener(this);
+        radioGroup=(RadioGroup) findViewById(R.id.radGrupo);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                validateClassCode();
+            }
+        });
+
+        etCodigo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    final String classCode = etCodigo.getText().toString();
+                    DatabaseReference classRef = databaseReference.child("classes/" + classCode);
+                    classRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            classExists = dataSnapshot.exists();
+                            classChecked = true;
+
+                            validateClassCode();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.d(DEBUG_TAG, databaseError.toString());
+                        }
+                    });
+                }
+            }
+        });
     }
 
+    private void saveUserInformation(){
+        String email=etMail.getText().toString().trim();
+        String firstName=etName.getText().toString().trim();
+        String secondName=etSecondName.getText().toString().trim();
+        String clase =etCodigo.getText().toString().trim();
+
+        UserInformation userInformation= new UserInformation(firstName,secondName,clase,email);
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        clase klass=new clase(user.getUid(),clase);
+
+        if(radioBtnAlumno.isChecked()){
+            databaseReference.child("students").child(user.getUid()).setValue(userInformation);
+            databaseReference.child("class_member/" + clase + "/" + user.getUid()).setValue(new Boolean(true));
+        }
+        else if(radioBtnMaestro.isChecked()){
+            databaseReference.child("teachers").child(user.getUid()).setValue(userInformation);
+            databaseReference.child("classes").child(userInformation.classId).setValue(klass);
+        }
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(userInformation.name)
+                .build();
+
+        user.updateProfile(profileUpdates);
+    }
 
     private void registerUser(){
         String email=etMail.getText().toString().trim();
@@ -100,54 +172,94 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this,"Ingrese su apellido",Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Ingrese su correo electronico ",Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Ingrese su contraseña ",Toast.LENGTH_SHORT).show();
             return;
         }
-        progressDialog.setMessage("Registrando Usuario....");
 
+        progressDialog.setMessage("Registrando Usuario....");
+        progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         //checking if success
-                        if(task.isSuccessful()){
+                        if(task.isSuccessful()) {
                             //display some message here
-                        Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }else{
+                            userLogin();
+                            Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente",Toast.LENGTH_SHORT).show();
+                        } else {
                             //display some message here
                             Toast.makeText(RegisterActivity.this, "No se pudo registrar intente denuevo porfavor",Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
-
-
     }
+
+    private void userLogin() {
+        String email = etMail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        //if the task is successfull
+                        if(task.isSuccessful()){
+                            saveUserInformation();
+
+                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                        }
+                    }
+                });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_RegisterReg:
-                registerUser();
-
-
+                validateClassCode();
+                if(classValid) {
+                    registerUser();
+                } else {
+                    Toast.makeText(this, "Error de codigo de clase",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
     }
 
-    private void writeNewUser(String userId, String name, String surname, String email, String clase){
-        UserInformation userInformation = new UserInformation(name, surname, clase, email);
-        databaseReference.child("users").child(userId).setValue(userInformation);
+    private void validateClassCode() {
+        if(classChecked) {
+            int checkedRadioBtn = radioGroup.getCheckedRadioButtonId();
+
+            if(checkedRadioBtn == R.id.radioBtn_maestro) {
+                if(classExists) {
+                    etCodigo.setError("Este salón ya existe, elige otro código");
+                    classValid = false;
+                } else {
+                    etCodigo.setError(null);
+                    classValid = true;
+                }
+            } else if(checkedRadioBtn == R.id.radioBtn_alumno) {
+                if(!classExists) {
+                    etCodigo.setError("Este salón no existe");
+                    classValid = false;
+                } else {
+                    etCodigo.setError(null);
+                    classValid = true;
+                }
+            }
+        }
     }
-
-
-
 }

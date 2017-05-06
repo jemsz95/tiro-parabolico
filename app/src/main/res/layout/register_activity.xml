@@ -145,18 +145,18 @@
         android:layout_height="wrap_content"
         android:text="Registrarse"
         android:textSize="24sp"
-        android:layout_below="@+id/radioGroup"
+        android:layout_below="@+id/radGrupo"
         android:layout_centerHorizontal="true" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroup"
+        android:id="@+id/radGrupo"
         android:layout_below="@+id/edit_Class"
         android:layout_centerHorizontal="true">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioBtn_alumno"
             android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/text_Class"
@@ -166,7 +166,7 @@
             android:text="Alumno" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioBtn_maestro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/radioButton2"
