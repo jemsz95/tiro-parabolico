@@ -81,14 +81,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         firebaseAuth= FirebaseAuth.getInstance();
         databaseReference = Database.getInstance().getReference();
 
-
         tvTitle = (TextView) findViewById(R.id.text_title_instructions);
         radioBtnAlumno=(RadioButton)findViewById(R.id.radioBtn_alumno);
         radioBtnMaestro=(RadioButton)findViewById(R.id.radioBtn_maestro);
         tvName = (TextView) findViewById(R.id.text_NameRegister);
         tvSecondName = (TextView) findViewById(R.id.text_SecondNameRegister);
         tvPasswordRegister = (TextView) findViewById(R.id.text_Password);
-
         etName = (EditText) findViewById(R.id.edit_FirstName);
         etSecondName =(EditText) findViewById(R.id.edit_LastName);
         etMail=(EditText) findViewById(R.id.edit_EMail);

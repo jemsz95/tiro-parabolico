@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ingressa tu password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ingresa tu password",Toast.LENGTH_LONG).show();
             return;
 
     }         progressDialog.setMessage("Iniciar sesión....");
@@ -80,6 +80,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent i = new Intent(LoginActivity.this, SimulatorActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), ":C", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
