@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -57,13 +61,13 @@ public class HistoryListFragment extends ListFragment {
             }
         };
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
-        DatabaseReference launchesReference = Database.getInstance().getReference("/launches");
+        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid());
 
         launchesReference.addValueEventListener(postListener);
 
-        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
-                launchesReference);
+        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1, launchesReference);
         setListAdapter(adapterLaunch);
     }
 

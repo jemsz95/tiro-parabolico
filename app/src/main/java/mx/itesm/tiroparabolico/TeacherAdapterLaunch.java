@@ -1,29 +1,26 @@
 package mx.itesm.tiroparabolico;
 
 import android.app.Activity;
-import android.renderscript.Double2;
+import android.provider.ContactsContract;
 import android.support.annotation.LayoutRes;
+import android.text.Layout;
 import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseIndexListAdapter;
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
  */
-/*
-*
-*   clase que apoya para adquirir todos los launch's de un usuario de firebase
-*   mediante firebase  IndexListAdapter
-*   */
 
+public class TeacherAdapterLaunch extends FirebaseIndexListAdapter<Launch>  {
 
-public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
-
-    public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
-        super(activity, Launch.class, modelLayout, ref);
+    public TeacherAdapterLaunch(Activity actual, @LayoutRes int modelLayout, Query keyRef, Query dataRef){
+        super(actual, Launch.class, modelLayout, keyRef, dataRef );
     }
 
     @Override
@@ -39,4 +36,3 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         tvHeight.setText(Double.toString(l.getY0()));
     }
 }
-
