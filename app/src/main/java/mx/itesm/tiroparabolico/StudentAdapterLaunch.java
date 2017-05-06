@@ -15,7 +15,7 @@ import com.google.firebase.database.Query;
 /*
 *
 *   clase que apoya para adquirir todos los launch's de un usuario de firebase
-*   mediante firebase  IndexListAdapter
+*   mediante firebase
 *   */
 
 public class StudentAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
