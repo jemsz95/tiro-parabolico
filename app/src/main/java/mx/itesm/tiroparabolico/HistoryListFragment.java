@@ -56,9 +56,12 @@ public class HistoryListFragment extends ListFragment {
                 // ...
             }
         };
-        DatabaseReference classMemeberRef = FirebaseDatabase.getInstance().getReference("/class_member/1234" );
-        DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
+
+        DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
+        DatabaseReference launchesReference = Database.getInstance().getReference("/launches");
+
         launchesReference.addValueEventListener(postListener);
+
         adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
                 launchesReference);
         setListAdapter(adapterLaunch);
