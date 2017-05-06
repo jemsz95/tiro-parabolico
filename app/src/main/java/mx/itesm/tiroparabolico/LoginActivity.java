@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,10 +37,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //significa que el usuario ya esta loggeado
 
         if(firebaseAuth.getCurrentUser()!=null){
-            //cierra la actividad
-            finish();
-            //abre instricciones activity
-            startActivity(new Intent(getApplicationContext(),InstruccionesActivity.class));
+            Intent i = new Intent(LoginActivity.this, SimulatorActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
 
         btnLogin = (Button) findViewById(R.id.button_login);
@@ -66,7 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this,"Porfavor ingressa tu password",Toast.LENGTH_LONG).show();
             return;
 
-    } progressDialog.show();
+    }         progressDialog.setMessage("Iniciar sesión....");
+              progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -75,11 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         progressDialog.dismiss();
                         //if the task is successfull
                         if(task.isSuccessful()){
-                            //start the profile activity
-                            finish();
-                            Intent intent = new Intent(getApplicationContext(), InstruccionesActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                            startActivity(intent);
+
+                            Intent i = new Intent(LoginActivity.this, SimulatorActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                         }
                     }
                 });
