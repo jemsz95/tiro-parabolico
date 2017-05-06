@@ -13,22 +13,15 @@ public class SimulatorActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
         HistoryListFragment.OnLaunchSelectedListener {
 
-    GraphFragment graphFragment;
-    DatosFragment datosFragment;
-    HistoryListFragment historyListFragment;
+    private GraphFragment graphFragment;
+    private DatosFragment datosFragment;
+    private HistoryListFragment historyListFragment;
     private FirebaseAuth firebaseAuth;
-
-
-
-
-
-
-    boolean landscape;
+    private boolean landscape;
 
     @Override
     public void onGraphDataChange(Launch launch) {
         graphFragment.clearLaunches();
-
         graphFragment.addLaunch(launch);
         graphFragment.graph();
     }

@@ -1,7 +1,6 @@
 package mx.itesm.tiroparabolico;
 
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
@@ -36,7 +35,7 @@ public class Launch implements Serializable {
     private LineDataSet lineDataSet;
 
     //*JESUS PARA OBTENER FECHA
-    private Calendar c;
+    private Calendar calendar;
     private SimpleDateFormat df;
     private String formattedDate;
 
@@ -49,7 +48,7 @@ public class Launch implements Serializable {
         this.resolution = resolution;
     }
 
-    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite,String formattedDate) {
+    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite, String formattedDate) {
         this(id, userId, y0, theta, v0, favorite, 100,formattedDate);
     }
 
@@ -131,12 +130,22 @@ public class Launch implements Serializable {
         return v0;
     }
 
+    @PropertyName("timestamp")
+    public long getTimestamp() {
+        return calendar.getTimeInMillis();
+    }
+
+    @PropertyName("favorite")
+    public boolean isFavorite() {
+        return favorite;
+    }
+
     //*Get de fecha
     @Exclude
     public String getFormattedDate(){
-        c = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         df = new SimpleDateFormat("dd-MMM-yyyy");
-        formattedDate = df.format(c.getTime());
+        formattedDate = df.format(calendar.getTime());
 
         return formattedDate;
     }
@@ -144,13 +153,7 @@ public class Launch implements Serializable {
     // getter de calendar
     @Exclude
     public Calendar getCalendar(){
-        return c;
-    }
-
-
-    @PropertyName("favorite")
-    public boolean isFavorite() {
-        return favorite;
+        return calendar;
     }
 
     @Exclude
@@ -189,17 +192,15 @@ public class Launch implements Serializable {
         this.id = id;
     }
 
-    @PropertyName("author")
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-        //set de Fecha
-
     @Exclude
     public void setFormattedDate(String formattedDate) {
         this.formattedDate = formattedDate;
     }
 
+    @PropertyName("author")
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     @PropertyName("height")
     public void setY0(double y0) {
@@ -222,6 +223,11 @@ public class Launch implements Serializable {
     @PropertyName("favorite")
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    @PropertyName("timestamp")
+    public void setTimestamp(long timestamp) {
+        calendar.setTimeInMillis(timestamp);
     }
 
     @Exclude
