@@ -15,12 +15,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HistorialActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
-        HistoryListFragment.OnLaunchSelectedListener {
+        HistoryListFragmentProfessor.OnLaunchSelectedListener {
 
     private GraphFragment graphFragment;
     private HistoryListFragmentProfessor historyListFragment;
     private FirebaseAuth firebaseAuth;
-    private boolean landscape;
 
     @Override
     public void onGraphDataChange(Launch launch) {
@@ -63,7 +62,7 @@ public class HistorialActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulator);
+        setContentView(R.layout.activity_history);
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();

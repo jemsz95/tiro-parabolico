@@ -163,12 +163,6 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
         tvAltura.setText("-" + height);
         tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
-
-        DatabaseReference newLaunchRef = databaseReference.child("launches").push();
-        l.setUserId(user.getUid());
-        l.setUserName(user.getDisplayName());
-        newLaunchRef.setValue(l);
-        l.setId(newLaunchRef.getKey());
     }
 
     public interface OnGraphDataChangeListener {
