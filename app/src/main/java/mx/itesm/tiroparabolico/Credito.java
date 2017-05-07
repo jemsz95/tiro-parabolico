@@ -1,8 +1,5 @@
 package mx.itesm.tiroparabolico;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.annotation.DrawableRes;
 
 /**
