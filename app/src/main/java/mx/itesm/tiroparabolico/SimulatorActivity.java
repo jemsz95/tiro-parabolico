@@ -3,26 +3,30 @@ package mx.itesm.tiroparabolico;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class SimulatorActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
         HistoryListFragment.OnLaunchSelectedListener {
+    private static final String DEBUG_TAG = "SimulatorActivity";
 
+    private static final int STUDENT = 0;
+    private static final int TEACHER = 1;
+    private static final int UNKNOWN = 2;
+
+    int userRole = UNKNOWN;
     GraphFragment graphFragment;
     DatosFragment datosFragment;
     HistoryListFragment historyListFragment;
     private FirebaseAuth firebaseAuth;
-
-
-
-
-
-
     boolean landscape;
 
     @Override
@@ -42,7 +46,16 @@ public class SimulatorActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_simulador, menu);
+            switch (userRole) {
+                case STUDENT:
+                    getMenuInflater().inflate(R.menu.menu_alumno, menu);
+                    break;
+
+                case TEACHER:
+                    getMenuInflater().inflate(R.menu.menu_maestro, menu);
+                    break;
+            }
+
         return true;
     }
 
@@ -109,6 +122,23 @@ public class SimulatorActivity extends AppCompatActivity
         if(landscape) {
             historyListFragment = (HistoryListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_history);
+
+
         }
+
+        Database.getInstance()
+                .getReference("teachers/" + firebaseAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        userRole = dataSnapshot.exists() ? TEACHER : STUDENT;
+                        invalidateOptionsMenu();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d(DEBUG_TAG, "Could not get user role");
+                    }
+                });
     }
 }
