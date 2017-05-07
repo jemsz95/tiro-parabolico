@@ -3,12 +3,15 @@ package mx.itesm.tiroparabolico;
 import android.app.Activity;
 import android.renderscript.Double2;
 import android.support.annotation.LayoutRes;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.Query;
+
+import static mx.itesm.tiroparabolico.R.id.parent;
 
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
@@ -28,6 +31,8 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
 
     @Override
     protected void populateView(View v, Launch l, int position ){
+
+
         TextView tvStudent = (TextView) v.findViewById(R.id.text_studentHistory);
         TextView tvAngle = (TextView) v.findViewById(R.id.text_angleHistory);
         TextView tvVelocity = (TextView) v.findViewById(R.id.text_velocityHistory);

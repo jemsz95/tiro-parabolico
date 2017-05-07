@@ -68,7 +68,7 @@ public class HistoryListFragment extends ListFragment {
         launchesReference.addValueEventListener(postListener);
 
         adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1, launchesReference);
-        setListAdapter(adapterLaunch);
+        setListAdapter(adapterLaunch2);
     }
 
     @Override
