@@ -18,7 +18,6 @@ public class HistorialActivity extends AppCompatActivity
         HistoryListFragment.OnLaunchSelectedListener {
 
     private GraphFragment graphFragment;
-    private DatosFragment datosFragment;
     private HistoryListFragmentProfessor historyListFragment;
     private FirebaseAuth firebaseAuth;
     private boolean landscape;
@@ -39,7 +38,7 @@ public class HistorialActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_simulador, menu);
+        getMenuInflater().inflate(R.menu.menu_filtro, menu);
         return true;
     }
 
@@ -52,27 +51,12 @@ public class HistorialActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.creditos_action) {
-            Intent i = new Intent(this, CreditosActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(i);
+        if (id == R.id.FiltroAlumnos_action) {
+            historyListFragment.filter(2);
         }
-        if (id == R.id.instrucciones_action){
-            Intent i = new Intent(this, InstruccionesActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(i);
+        if (id == R.id.filtroFecha_action){
+            historyListFragment.filter(1);
         }
-        if(id == R.id.logout_action){
-            firebaseAuth.signOut();
-            //closing activity
-            finish();
-
-
-            startActivity(new Intent(this, LoginActivity.class));
-
-
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -98,15 +82,7 @@ public class HistorialActivity extends AppCompatActivity
 
         graphFragment = (GraphFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_graph);
-        datosFragment = (DatosFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_data);
-
-        landscape = datosFragment == null;
-
-        if(landscape) {
-            historyListFragment = (HistoryListFragmentProfessor) getSupportFragmentManager()
-                    .findFragmentById(R.id.fragment_history);
-        }
+        historyListFragment = (HistoryListFragmentProfessor) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_history);
     }
-
 }
