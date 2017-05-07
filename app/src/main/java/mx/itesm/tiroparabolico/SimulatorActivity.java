@@ -72,6 +72,11 @@ public class SimulatorActivity extends AppCompatActivity
             i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
         }
+        if (id == R.id.historal_action) {
+            Intent i = new Intent(this, HistorialActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(i);
+        }
         if (id == R.id.instrucciones_action){
             Intent i = new Intent(this, InstruccionesActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
