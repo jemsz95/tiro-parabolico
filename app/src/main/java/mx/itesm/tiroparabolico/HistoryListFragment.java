@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,9 +26,6 @@ import static android.content.ContentValues.TAG;
 
 public class HistoryListFragment extends ListFragment {
 
-    String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
-    ArrayList<Launch> listaLaunch;
-    ArrayAdapter<String> adapterLaunch;
     StudentAdapterLaunch adapterLaunch2;
     OnLaunchSelectedListener launchListener;
 
@@ -40,28 +41,11 @@ public class HistoryListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Launch object and use the values to update the UI
-                Launch launch = dataSnapshot.getValue(Launch.class);
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Launch failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        DatabaseReference classMemeberRef = FirebaseDatabase.getInstance().getReference("/class_member/1234" );
-        DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
-        launchesReference.addValueEventListener(postListener);
-        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
-                launchesReference);
-        setListAdapter(adapterLaunch);
+        DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid());
+        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), R.layout.row, launchesReference);
+        setListAdapter(adapterLaunch2);
     }
 
     @Override
@@ -70,35 +54,13 @@ public class HistoryListFragment extends ListFragment {
         if(context instanceof OnLaunchSelectedListener){
             launchListener = (OnLaunchSelectedListener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + "must implement HistoryListFragment.OnItemSelectedListener");
+            throw new ClassCastException(context.toString() + "must implement HistoryListFragment.OnItemSelectedListener");
         }
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        double angle;
-        double speed;
-        double height;
-
-        if (position == 0) {
-            angle = 20;
-            speed = 15;
-            height = 2;
-        }
-        else {
-            angle = 10;
-            speed = 20;
-            height = 0;
-        }
-
-        Launch launch = new Launch();
-
-        launch.setV0(speed);
-        launch.setTheta(angle);
-        launch.setY0(height);
-        launch.calculate();
-
+        Launch launch = adapterLaunch2.getItem(position);
         launchListener.onLaunchSelected(launch);
     }
 

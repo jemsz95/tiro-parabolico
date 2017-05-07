@@ -1,34 +1,37 @@
 package mx.itesm.tiroparabolico;
 
+import android.nfc.FormatException;
+import android.util.Log;
+
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Launch implements Serializable {
+    private static final String DEBUG_TAG = "Launch";
+
     // Gravity calculations
     private static final double GRAVITY = 9.81;
     private static final double TWICE_GRAVITY = 2 * GRAVITY;
     private static final double HALF_GRAVITY = 0.5 * GRAVITY;
 
     //Stored
-    private long id;
-    private long userId;
-    private double y0 = 0;
-    private double theta = 0;
-    private double v0 = 0;
-    private boolean favorite = false;
-
-
-
-
+    private String id;
+    private String userId;
+    private Double y0 = 0d;
+    private Double theta = 0d;
+    private Double v0 = 0d;
+    private Boolean favorite = false;
+    private String userName;
 
     //Setted
     private int resolution = 100;
@@ -39,10 +42,8 @@ public class Launch implements Serializable {
     private double distance;
     private LineDataSet lineDataSet;
 
-    //*JESUS PARA OBTENER FECHA
-    private Calendar c;
-    SimpleDateFormat df;
-    String formattedDate;
+    private Calendar calendar = new GregorianCalendar();
+    private SimpleDateFormat df;
 
     //Control
     private boolean calculated = false;
@@ -53,12 +54,11 @@ public class Launch implements Serializable {
         this.resolution = resolution;
     }
 
-                                                                                             //*Fecha
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite,String formattedDate) {
-        this(id, userId, y0, theta, v0, favorite, 100,formattedDate);
+    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite, Calendar calendar) {
+        this(id, userId, y0, theta, v0, favorite, 100,calendar);
     }
-                                                                                                             //*Fecha
-    public Launch(long id, long userId, double y0, double theta, double v0, boolean favorite, int resolution, String formattedDate) {
+
+    public Launch(String id, String userId, double y0, double theta, double v0, boolean favorite, int resolution, Calendar calendar) {
         this.id = id;
         this.userId = userId;
         this.y0 = y0;
@@ -66,7 +66,7 @@ public class Launch implements Serializable {
         this.v0 = v0;
         this.favorite = favorite;
         this.resolution = resolution;
-        this.formattedDate=formattedDate;
+        this.calendar = calendar;
     }
 
     // Generates the graph data set from initial launch params
@@ -112,12 +112,12 @@ public class Launch implements Serializable {
 
     // Getters //
     @Exclude
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     @PropertyName("author")
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -136,26 +136,34 @@ public class Launch implements Serializable {
         return v0;
     }
 
+    @PropertyName("timestamp")
+    public long getTimestamp() {
+        return calendar.getTimeInMillis();
+    }
+
+    @PropertyName("favorite")
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    @PropertyName("author_name")
+    public String getUserName() {
+        return userName;
+    }
+
     //*Get de fecha
     @Exclude
     public String getFormattedDate(){
-        c = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         df = new SimpleDateFormat("dd-MMM-yyyy");
-        formattedDate = df.format(c.getTime());
 
-        return formattedDate;
+        return df.format(calendar.getTime());
     }
 
     // getter de calendar
     @Exclude
     public Calendar getCalendar(){
-        return c;
-    }
-
-
-    @PropertyName("favorite")
-    public boolean isFavorite() {
-        return favorite;
+        return calendar;
     }
 
     @Exclude
@@ -190,21 +198,19 @@ public class Launch implements Serializable {
 
     // Setters //
     @Exclude
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
+    @Exclude
+    public void setFormattedDate(String formattedDate) throws ParseException {
+        calendar.setTime(df.parse(formattedDate));
+    }
+
     @PropertyName("author")
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
-        //set de Fecha
-
-    @Exclude
-    public void setFormattedDate(String formattedDate) {
-        this.formattedDate = formattedDate;
-    }
-
 
     @PropertyName("height")
     public void setY0(double y0) {
@@ -227,6 +233,20 @@ public class Launch implements Serializable {
     @PropertyName("favorite")
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    @PropertyName("timestamp")
+    public void setTimestamp(long timestamp) {
+        calendar.setTimeInMillis(timestamp);
+    }
+
+    @PropertyName("author_name")
+    public void setUserName(String userName) {
+        if(userName != null) {
+            this.userName = userName;
+        }
+
+        Log.d(DEBUG_TAG, "User name for " + id + " is null");
     }
 
     @Exclude
