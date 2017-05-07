@@ -13,12 +13,28 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by jorgeemiliorubiobarboza on 06/05/17.
  */
 
-public class HistorialActivity extends AppCompatActivity {
+public class HistorialActivity extends AppCompatActivity
+        implements DatosFragment.OnGraphDataChangeListener,
+        HistoryListFragment.OnLaunchSelectedListener {
 
+    private GraphFragment graphFragment;
+    private DatosFragment datosFragment;
     private HistoryListFragmentProfessor historyListFragment;
     private FirebaseAuth firebaseAuth;
     private boolean landscape;
 
+    @Override
+    public void onGraphDataChange(Launch launch) {
+        graphFragment.clearLaunches();
+        graphFragment.addLaunch(launch);
+        graphFragment.graph();
+    }
+
+    @Override
+    public void onLaunchSelected(Launch l) {
+        graphFragment.addLaunch(l);
+        graphFragment.graph();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,9 +96,12 @@ public class HistorialActivity extends AppCompatActivity {
         //getting current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        graphFragment = (GraphFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_graph);
+        datosFragment = (DatosFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_data);
 
-
-        landscape = true;
+        landscape = datosFragment == null;
 
         if(landscape) {
             historyListFragment = (HistoryListFragmentProfessor) getSupportFragmentManager()
