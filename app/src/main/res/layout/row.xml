@@ -39,5 +39,5 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:layout_marginRight="12dp"
-        android:src="@drawable/ic_star_border_24dp" />
+        android:src="@drawable/ic_star_grey_24dp" />
 </LinearLayout>

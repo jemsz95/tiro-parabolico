@@ -1,16 +1,12 @@
 package mx.itesm.tiroparabolico;
 
 import android.app.Activity;
-import android.renderscript.Double2;
 import android.support.annotation.LayoutRes;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.Query;
 
@@ -38,7 +34,7 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
 
-        ibFavorite.setImageResource(l.isFavorite() ? R.drawable.ic_star_24dp : R.drawable.ic_star_border_24dp);
+        ibFavorite.setImageResource(l.isFavorite() ? R.drawable.ic_star_gold_24dp : R.drawable.ic_star_grey_24dp);
 
         ibFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
