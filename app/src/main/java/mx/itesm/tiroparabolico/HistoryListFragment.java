@@ -43,7 +43,7 @@ public class HistoryListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid()).orderByChild("timestamp");
+        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid());
         adapterLaunch2 = new StudentAdapterLaunch(getActivity(), R.layout.row, launchesReference);
         setListAdapter(adapterLaunch2);
     }
