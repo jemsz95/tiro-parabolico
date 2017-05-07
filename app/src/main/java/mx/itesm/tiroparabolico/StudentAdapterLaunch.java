@@ -33,10 +33,12 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         TextView tvVelocity = (TextView) v.findViewById(R.id.text_velocityHistory);
         TextView tvHeight = (TextView) v.findViewById(R.id.text_heightHistory);
 
-        tvStudent.setText(l.getUserName());
-        tvAngle.setText(Double.toString(l.getTheta()));
-        tvVelocity.setText(Double.toString(l.getV0()));
-        tvHeight.setText(Double.toString(l.getY0()));
+        if (l != null) {
+            tvStudent.setText(l.getUserName());
+            tvAngle.setText(Double.toString(l.getTheta()));
+            tvVelocity.setText(Double.toString(l.getV0()));
+            tvHeight.setText(Double.toString(l.getY0()));
+        }
     }
 }
 
