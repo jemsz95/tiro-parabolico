@@ -25,14 +25,6 @@ public class TeacherAdapterLaunch extends FirebaseIndexListAdapter<Launch>  {
 
     @Override
     protected void populateView(View v, Launch l, int position ){
-        TextView tvStudent = (TextView) v.findViewById(R.id.text_studentHistory);
-        TextView tvAngle = (TextView) v.findViewById(R.id.text_angleHistory);
-        TextView tvVelocity = (TextView) v.findViewById(R.id.text_velocityHistory);
-        TextView tvHeight = (TextView) v.findViewById(R.id.text_heightHistory);
-
-        tvStudent.setText(l.getUserName());
-        tvAngle.setText(Double.toString(l.getTheta()));
-        tvVelocity.setText(Double.toString(l.getV0()));
-        tvHeight.setText(Double.toString(l.getY0()));
+        //TODO
     }
 }
