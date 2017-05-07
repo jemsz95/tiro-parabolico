@@ -54,8 +54,7 @@ public class HistoryListFragment extends ListFragment {
         if(context instanceof OnLaunchSelectedListener){
             launchListener = (OnLaunchSelectedListener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + "must implement HistoryListFragment.OnItemSelectedListener");
+            throw new ClassCastException(context.toString() + "must implement HistoryListFragment.OnItemSelectedListener");
         }
     }
 
