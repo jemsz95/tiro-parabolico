@@ -1,73 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+    android:layout_height="48dp"
+    android:orientation="row"
+    android:gravity="center_vertical">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/text_studentHistory"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:hint="Student"
+        android:textSize="12sp"
+        android:layout_marginLeft="12dp"
+        android:textStyle="normal" />
 
-        <TextView
+    <TextView
         android:id="@+id/text_angleHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:hint="Angle"
         android:textSize="12sp"
-        android:textStyle="normal"
-            android:layout_marginTop="57dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/text_studentHistory"
-        android:layout_toEndOf="@+id/text_studentHistory"
-            android:layout_weight="0.08" />
+        android:layout_marginLeft="12dp"
+        android:textStyle="normal" />
 
-
-        <TextView
-            android:id="@+id/text_heightHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/text_angleHistory"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="142dp"
-            android:layout_toEndOf="@+id/text_studentHistory"
-            android:layout_toRightOf="@+id/text_studentHistory"
-            android:layout_weight="0.55"
-            android:hint="Height"
-            android:textSize="12sp"
-            android:textStyle="normal" />
-
-        <TextView
-            android:id="@+id/text_studentHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Student"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:layout_alignBaseline="@+id/text_angleHistory"
-            android:layout_alignBottom="@+id/text_angleHistory"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp" />
-
-        <TextView
+    <TextView
         android:id="@+id/text_velocityHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Velocity"
+        android:layout_marginLeft="12dp"
         android:textSize="12sp"
-        android:textStyle="normal"
-            android:layout_marginLeft="32dp"
-        android:layout_marginStart="72dp"
-        android:layout_toRightOf="@+id/text_studentHistory"
-        android:layout_toEndOf="@+id/text_studentHistory"
-        android:layout_alignTop="@+id/text_angleHistory" />
+        android:textStyle="normal" />
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/text_heightHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Height"
+        android:textSize="12sp"
+        android:layout_marginLeft="12dp"
+        android:textStyle="normal" />
 
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/button_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/ic_star_border_24dp" />
+</LinearLayout>
