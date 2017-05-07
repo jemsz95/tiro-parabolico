@@ -157,6 +157,8 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
         tvAltura.setText("-" + height);
         tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
+
+
     }
 
     public interface OnGraphDataChangeListener {
