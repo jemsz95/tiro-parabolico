@@ -28,6 +28,9 @@
         <activity android:name=".SimulatorActivity" />
 
         <activity android:name=".RegisterActivity" />
+
+        <activity android:name=".HistorialActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

@@ -86,5 +86,18 @@ public class HistoryListFragmentProfessor extends ListFragment {
     public interface OnLaunchSelectedListener {
         public void onLaunchSelected(Launch l);
     }
+
+    public void filter(int value){
+        if(value == 1) {
+            Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("timestamp");
+            DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
+            adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
+        }
+        if(value==2){
+            Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author");
+            DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
+            adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
+        }
+    }
 }
 
