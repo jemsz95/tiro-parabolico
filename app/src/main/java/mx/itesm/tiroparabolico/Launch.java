@@ -1,6 +1,5 @@
 package mx.itesm.tiroparabolico;
 
-import android.nfc.FormatException;
 import android.util.Log;
 
 import com.github.mikephil.charting.data.Entry;

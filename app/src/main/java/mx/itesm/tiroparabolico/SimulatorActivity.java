@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 public class SimulatorActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
         HistoryListFragment.OnLaunchSelectedListener {
+
     private static final String DEBUG_TAG = "SimulatorActivity";
     private static final int STUDENT = 0;
     private static final int TEACHER = 1;
@@ -54,7 +55,7 @@ public class SimulatorActivity extends AppCompatActivity
                     break;
             }
 
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -78,13 +79,9 @@ public class SimulatorActivity extends AppCompatActivity
         }
         if(id == R.id.logout_action){
             firebaseAuth.signOut();
-            //closing activity
-            finish();
-
-
-            startActivity(new Intent(this, LoginActivity.class));
-
-
+            Intent i = new Intent(this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
@@ -97,18 +94,17 @@ public class SimulatorActivity extends AppCompatActivity
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
+        //getting current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //if the user is not logged in
         //that means current user will return null
-        if(firebaseAuth.getCurrentUser() == null){
-            //closing this activity
-            finish();
-            //starting login activity
-            startActivity(new Intent(this, LoginActivity.class));
+        if(user == null){
+            Intent i = new Intent(this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            return;
         }
-
-        //getting current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         graphFragment = (GraphFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_graph);
@@ -120,12 +116,10 @@ public class SimulatorActivity extends AppCompatActivity
         if(landscape) {
             historyListFragment = (HistoryListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_history);
-
-
         }
 
         Database.getInstance()
-                .getReference("teachers/" + firebaseAuth.getCurrentUser().getUid())
+                .getReference("teachers/" + user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

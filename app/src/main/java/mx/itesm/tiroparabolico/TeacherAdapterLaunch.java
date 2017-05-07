@@ -1,14 +1,10 @@
 package mx.itesm.tiroparabolico;
 
 import android.app.Activity;
-import android.provider.ContactsContract;
 import android.support.annotation.LayoutRes;
-import android.text.Layout;
 import android.view.View;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseIndexListAdapter;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
