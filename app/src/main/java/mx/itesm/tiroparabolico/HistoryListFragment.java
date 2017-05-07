@@ -26,9 +26,6 @@ import static android.content.ContentValues.TAG;
 
 public class HistoryListFragment extends ListFragment {
 
-    String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
-    ArrayList<Launch> listaLaunch;
-    ArrayAdapter<String> adapterLaunch;
     StudentAdapterLaunch adapterLaunch2;
     OnLaunchSelectedListener launchListener;
 
@@ -44,27 +41,11 @@ public class HistoryListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Launch object and use the values to update the UI
-                Launch launch = dataSnapshot.getValue(Launch.class);
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Launch failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
         DatabaseReference classMemeberRef = Database.getInstance().getReference("/class_member/1234" );
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid());
-        launchesReference.addValueEventListener(postListener);
-        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1, launchesReference);
-        setListAdapter(adapterLaunch);
+        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid()).orderByChild("timestamp");
+        adapterLaunch2 = new StudentAdapterLaunch(getActivity(), R.layout.row, launchesReference);
+        setListAdapter(adapterLaunch2);
     }
 
     @Override
@@ -80,28 +61,7 @@ public class HistoryListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        double angle;
-        double speed;
-        double height;
-
-        if (position == 0) {
-            angle = 20;
-            speed = 15;
-            height = 2;
-        }
-        else {
-            angle = 10;
-            speed = 20;
-            height = 0;
-        }
-
-        Launch launch = new Launch();
-
-        launch.setV0(speed);
-        launch.setTheta(angle);
-        launch.setY0(height);
-        launch.calculate();
-
+        Launch launch = adapterLaunch2.getItem(position);
         launchListener.onLaunchSelected(launch);
     }
 
