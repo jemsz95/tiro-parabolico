@@ -1,6 +1,7 @@
 package mx.itesm.tiroparabolico;
 
 import android.nfc.FormatException;
+import android.util.Log;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -16,6 +17,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Launch implements Serializable {
+    private static final String DEBUG_TAG = "Launch";
+
     // Gravity calculations
     private static final double GRAVITY = 9.81;
     private static final double TWICE_GRAVITY = 2 * GRAVITY;
@@ -239,7 +242,11 @@ public class Launch implements Serializable {
 
     @PropertyName("author_name")
     public void setUserName(String userName) {
-        this.userName = userName;
+        if(userName != null) {
+            this.userName = userName;
+        }
+
+        Log.d(DEBUG_TAG, "User name for " + id + " is null");
     }
 
     @Exclude
