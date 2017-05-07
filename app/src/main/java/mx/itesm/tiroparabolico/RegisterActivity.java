@@ -231,9 +231,8 @@ public class RegisterActivity extends AppCompatActivity
     public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
             String classCode = etCodigo.getText().toString();
-            classRef.removeEventListener(classEventListener);
             classRef = databaseReference.child("classes/" + classCode);
-            classRef.addValueEventListener(classEventListener);
+            classRef.addListenerForSingleValueEvent(classEventListener);
         }
     }
 

@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class HistoryListFragmentProfessor extends ListFragment {
 
-    TeacherAdapterLaunch adapterLaunch2;
+    TeacherAdapterLaunch adapterLaunch;
     HistoryListFragmentProfessor.OnLaunchSelectedListener launchListener;
     String classId;
 
@@ -40,16 +40,16 @@ public class HistoryListFragmentProfessor extends ListFragment {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Database.getInstance()
-                .getReference("teacher/" + user.getUid() + "/class")
+                .getReference("teachers/" + user.getUid() + "/class")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         classId = (String) dataSnapshot.getValue();
 
-                        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("timestamp");
-                        DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
-                        adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
-                        setListAdapter(adapterLaunch2);
+                        Query launchesReference = Database.getInstance().getReference("/launches");
+                        DatabaseReference classMembersRef = Database.getInstance().getReference("class_launch/" + classId);
+                        adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
+                        setListAdapter(adapterLaunch);
                     }
 
                     @Override
@@ -66,30 +66,30 @@ public class HistoryListFragmentProfessor extends ListFragment {
             launchListener = (HistoryListFragmentProfessor.OnLaunchSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + "must implement HistoryListFragment.OnItemSelectedListener");
+                    + "must implement HistoryListFragmentProfessor.OnItemSelectedListener");
         }
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Launch launch = adapterLaunch2.getItem(position);
+        Launch launch = adapterLaunch.getItem(position);
         launchListener.onLaunchSelected(launch);
     }
 
     public interface OnLaunchSelectedListener {
-        public void onLaunchSelected(Launch l);
+        void onLaunchSelected(Launch l);
     }
 
     public void filter(int value){
         if(value == 1) {
-            Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("timestamp");
+            Query launchesReference = Database.getInstance().getReference("/launches");
             DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
-            adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
+            adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
         }
         if(value==2){
-            Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author");
-            DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
-            adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
+            Query launchesReference = Database.getInstance().getReference("/launches");
+            DatabaseReference classMembersRef = Database.getInstance().getReference("class_member/" + classId);
+            adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
         }
     }
 }

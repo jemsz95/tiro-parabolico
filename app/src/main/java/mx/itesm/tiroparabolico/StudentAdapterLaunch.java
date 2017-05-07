@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
@@ -39,8 +40,27 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         ibFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getRef(position).child("favorite")
+                DatabaseReference launchRef = getRef(position);
+
+                launchRef.child("favorite")
                         .setValue(!l.isFavorite());
+
+                // This is an ugly hack to obtain the class code of the current user
+                // TODO: Move to application state
+                String classCode = ((SimulatorActivity) mActivity).userClassCode;
+
+                // Save to class_launch when students stars a launch
+                if(!l.isFavorite()) {
+                    // The user is starring the launch
+                    Database.getInstance()
+                            .getReference("class_launch/" + classCode + "/" + launchRef.getKey())
+                            .setValue(true);
+                } else {
+                    // The user is removing the star
+                    Database.getInstance()
+                            .getReference("class_launch/" + classCode + "/" + launchRef.getKey())
+                            .setValue(null);
+                }
             }
         });
     }
