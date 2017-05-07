@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HistorialActivity extends AppCompatActivity {
 
-    private HistoryListFragmentProfessor historyFragment;
     private HistoryListFragmentProfessor historyListFragment;
     private FirebaseAuth firebaseAuth;
     private boolean landscape;
