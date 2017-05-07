@@ -39,7 +39,7 @@ public class HistorialActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_simulador, menu);
+        getMenuInflater().inflate(R.menu.menu_filtro, menu);
         return true;
     }
 
