@@ -67,6 +67,6 @@ public class HistoryListFragment extends ListFragment {
     }
 
     public interface OnLaunchSelectedListener {
-        public void onLaunchSelected(Launch l);
+        void onLaunchSelected(Launch l);
     }
 }
