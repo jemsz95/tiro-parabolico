@@ -2,14 +2,12 @@ package mx.itesm.tiroparabolico;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +30,7 @@ public class HistoryListFragmentProfessor extends ListFragment {
     String [] listaNombreLaunch = {"Tiro1", "Tiro2"};
     ArrayList<Launch> listaLaunch;
     ArrayAdapter<DatabaseReference> adapterLaunch;
-    AdapterLaunch adapterLaunch2;
+    TeacherAdapterLaunch teacherAdapterLaunch2;
     HistoryListFragment.OnLaunchSelectedListener launchListener;
 
 
@@ -69,9 +67,9 @@ public class HistoryListFragmentProfessor extends ListFragment {
         DatabaseReference launchesReference = FirebaseDatabase.getInstance().getReference("/launches");
         launchesReference.addValueEventListener(postListener);
 
-        adapterLaunch2 = new AdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
+        teacherAdapterLaunch2 = new TeacherAdapterLaunch(getActivity(), android.R.layout.simple_list_item_activated_1,classMemeberRef,
                 launchesReference);
-        setListAdapter(adapterLaunch2);
+        setListAdapter(teacherAdapterLaunch2);
     }
 
     @Override

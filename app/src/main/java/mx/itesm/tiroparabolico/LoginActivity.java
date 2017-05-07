@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText etUsuario;
     EditText etPassword;
     private FirebaseAuth firebaseAuth;
-
     private ProgressDialog progressDialog;
 
     @Override
