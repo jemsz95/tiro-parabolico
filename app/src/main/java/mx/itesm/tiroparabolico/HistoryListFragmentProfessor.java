@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +23,9 @@ import static android.content.ContentValues.TAG;
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
  */
+
+//Clase para desplegar el historial de los estudiantes para
+    //el maestro
 
 public class HistoryListFragmentProfessor extends ListFragment {
 
