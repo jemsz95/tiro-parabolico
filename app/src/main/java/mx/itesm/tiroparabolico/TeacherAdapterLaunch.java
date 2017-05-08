@@ -31,8 +31,9 @@ public class TeacherAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
     protected void populateView(View v, Launch l, int position ) {
         TextView tvStudent = (TextView) v.findViewById(R.id.text_author);
         TextView tvDate = (TextView) v.findViewById(R.id.text_date);
-
+        TextView tvValues = (TextView) v.findViewById(R.id.text_valuesProf);
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+        tvValues.setText(l.getV0() + " m/s   " + l.getTheta() + "°   " + l.getY0() + " m");
     }
 }
