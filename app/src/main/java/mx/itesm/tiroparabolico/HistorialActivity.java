@@ -30,7 +30,12 @@ public class HistorialActivity extends AppCompatActivity
 
     @Override
     public void onLaunchSelected(Launch l) {
-        graphFragment.addLaunch(l);
+        // Remove launch from list
+        if(!graphFragment.removeLaunch(l)) {
+            // Launch was not in list. Add it!
+            graphFragment.addLaunch(l);
+        }
+
         graphFragment.graph();
     }
 
