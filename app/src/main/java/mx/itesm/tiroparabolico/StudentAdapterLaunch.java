@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
@@ -24,6 +25,13 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
 
     public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
         super(activity, Launch.class, modelLayout, ref);
+    }
+
+    @Override
+    protected Launch parseSnapshot(DataSnapshot snapshot) {
+        Launch l = super.parseSnapshot(snapshot);
+        l.setId(snapshot.getKey());
+        return l;
     }
 
     @Override
