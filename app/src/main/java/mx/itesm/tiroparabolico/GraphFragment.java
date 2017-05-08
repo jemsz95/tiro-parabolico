@@ -63,6 +63,9 @@ public class GraphFragment extends Fragment {
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
+        chart.setDescription(null);
+        chart.getLegend().setEnabled(false);
+
         //Disable right axis
         chart.getAxisRight().setEnabled(false);
 
@@ -113,6 +116,10 @@ public class GraphFragment extends Fragment {
 
     public void addLaunch(Launch launch) {
         launches.add(launch);
+    }
+
+    public boolean removeLaunch(Launch launch) {
+        return launches.remove(launch);
     }
 
     public void clearLaunches() {
