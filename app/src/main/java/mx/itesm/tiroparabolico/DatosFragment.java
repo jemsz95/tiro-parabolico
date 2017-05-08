@@ -160,9 +160,9 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
 
         listener.onGraphDataChange(l);
 
-        tvAlcance.setText(String.format("%1$.2f", l.getDistance()));
-        tvAltura.setText("-" + height);
-        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()));
+        tvAlcance.setText(String.format("%1$.2f", l.getDistance()) + "m");
+        tvAltura.setText("-" + height + "m");
+        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()) + "s");
     }
 
     public interface OnGraphDataChangeListener {
