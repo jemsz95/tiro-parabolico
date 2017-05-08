@@ -12,14 +12,13 @@
         android:orderInCategory="2"
         app:showAsAction="never" />
 
+    <item android:id="@+id/historal_action"
+        android:title="Historial de alumnos"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
     <item android:id="@+id/logout_action"
         android:title="Logout"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="never" />
-
-    <item android:id="@+id/historial_action"
-        android:title="Historial"
-        android:orderInCategory="3"
-        app:showAsAction="never" />
-
 </menu>

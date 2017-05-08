@@ -15,14 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnLogin;
-    Button btnRegistro;
-    EditText etUsuario;
-    EditText etPassword;
+    private Button btnLogin;
+    private Button btnRegistro;
+    private EditText etUsuario;
+    private EditText etPassword;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -32,15 +31,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         firebaseAuth=FirebaseAuth.getInstance();
-        //si el objeto getcurrentuser no es null
-        //significa que el usuario ya esta loggeado
-
-        if(firebaseAuth.getCurrentUser()!=null){
-            Intent i = new Intent(LoginActivity.this, SimulatorActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-        }
-
         btnLogin = (Button) findViewById(R.id.button_login);
         btnRegistro=(Button)findViewById(R.id.button_registro);
         etUsuario = (EditText) findViewById(R.id.editText_mail);
@@ -64,15 +54,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Porfavor ingresa tu password",Toast.LENGTH_LONG).show();
             return;
+        }
 
-    }         progressDialog.setMessage("Iniciar sesión....");
-              progressDialog.show();
+        progressDialog.setMessage("Iniciar sesión....");
+        progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
+
                         //if the task is successfull
                         if(task.isSuccessful()){
 
@@ -85,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
-
     }
 
     @Override

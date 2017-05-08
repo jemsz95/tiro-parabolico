@@ -1,9 +1,7 @@
 package mx.itesm.tiroparabolico;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -121,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity
                 .build();
 
         user.updateProfile(profileUpdates);
+
+        Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
     }
 
     private void registerUser() {
@@ -232,9 +231,8 @@ public class RegisterActivity extends AppCompatActivity
     public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
             String classCode = etCodigo.getText().toString();
-            classRef.removeEventListener(classEventListener);
             classRef = databaseReference.child("classes/" + classCode);
-            classRef.addValueEventListener(classEventListener);
+            classRef.addListenerForSingleValueEvent(classEventListener);
         }
     }
 

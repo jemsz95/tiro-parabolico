@@ -10,24 +10,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".LoginActivity"
-                android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:screenOrientation="portrait" />
         <activity android:name=".CreditosActivity"
-    android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
 
         <activity android:name=".InstruccionesActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".SimulatorActivity" />
+        <activity android:name=".SimulatorActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".RegisterActivity" />
+
+        <activity android:name=".HistorialActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
