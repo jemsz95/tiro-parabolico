@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(i);
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), ":C", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"El usuario o contraseña es incorrecto", Toast.LENGTH_SHORT)
+                                    .show();
                         }
                     }
                 });

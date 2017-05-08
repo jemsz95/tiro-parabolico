@@ -51,7 +51,12 @@ public class SimulatorActivity extends AppCompatActivity
 
     @Override
     public void onLaunchSelected(Launch l) {
-        graphFragment.addLaunch(l);
+        //Remove launch if exists on graph
+        if(!graphFragment.removeLaunch(l)) {
+            //Launch did not exist. Add it!
+            graphFragment.addLaunch(l);
+        }
+
         graphFragment.graph();
     }
 

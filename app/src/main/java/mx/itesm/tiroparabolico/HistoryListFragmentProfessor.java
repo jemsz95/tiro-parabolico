@@ -3,6 +3,7 @@ package mx.itesm.tiroparabolico;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -13,6 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
@@ -25,6 +29,7 @@ public class HistoryListFragmentProfessor extends ListFragment {
     TeacherAdapterLaunch adapterLaunch;
     HistoryListFragmentProfessor.OnLaunchSelectedListener launchListener;
     String classId;
+    Set<Integer> selectedPos;
 
     public HistoryListFragmentProfessor() {
 
@@ -39,6 +44,7 @@ public class HistoryListFragmentProfessor extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         Database.getInstance()
                 .getReference("teachers/" + user.getUid() + "/class")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -57,6 +63,8 @@ public class HistoryListFragmentProfessor extends ListFragment {
                         Log.d("OMNOM", "Fallo porque no conecto");
                     }
                 });
+
+        selectedPos = new HashSet<>();
     }
 
     @Override
@@ -74,6 +82,16 @@ public class HistoryListFragmentProfessor extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Launch launch = adapterLaunch.getItem(position);
         launchListener.onLaunchSelected(launch);
+
+        if(selectedPos.contains(position)) {
+            int c = ResourcesCompat.getColor(getResources(), R.color.list_default_color, null);
+            v.setBackgroundColor(c);
+            selectedPos.remove(position);
+        } else {
+            int c = ResourcesCompat.getColor(getResources(), R.color.list_pressed_color, null);
+            v.setBackgroundColor(c);
+            selectedPos.add(position);
+        }
     }
 
     public interface OnLaunchSelectedListener {
