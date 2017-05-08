@@ -20,8 +20,10 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
     private int index = 0;
     private GestureDetectorCompat detector;
     private Instruccion[] instruccion = new Instruccion[] {
-            new Instruccion("Coloca la altura inicial", R.drawable.instrucciones),
-            new Instruccion("Ingresa los valores iniciales", R.drawable.instrucciones2),
+            new Instruccion("Coloca los valores iniciales", R.drawable.instruccioncorr1),
+            new Instruccion("Selecciona las graficas de tu historial que quieres desplegar", R.drawable.instruccioncorr2),
+            new Instruccion("Desliza por las instrucciones, cuando estes listo selecciona simular", R.drawable.instruccionescorr3),
+            new Instruccion("Utiliza tus dedos para poder hacer zoom a la grafica", R.drawable.instruccionescorr4)
     };
 
     @Override
