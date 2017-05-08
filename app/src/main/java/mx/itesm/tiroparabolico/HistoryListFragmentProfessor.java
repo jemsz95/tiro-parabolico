@@ -5,31 +5,24 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
  */
 
-//Clase para desplegar el historial de los estudiantes para
-    //el maestro
+//Clase para desplegar el historial de los estudiantes para el maestro
 
 public class HistoryListFragmentProfessor extends ListFragment {
 
-    TeacherAdapterLaunch adapterLaunch2;
+    TeacherAdapterLaunch adapterLaunch;
     HistoryListFragmentProfessor.OnLaunchSelectedListener launchListener;
     String classId;
 
@@ -47,16 +40,16 @@ public class HistoryListFragmentProfessor extends ListFragment {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Database.getInstance()
-                .getReference("teacher/" + user.getUid() + "/class")
+                .getReference("teachers/" + user.getUid() + "/class")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         classId = (String) dataSnapshot.getValue();
 
-                        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("timestamp");
-                        DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
-                        adapterLaunch2 = new TeacherAdapterLaunch(getActivity(), R.layout.row, classMembersRef, launchesReference);
-                        setListAdapter(adapterLaunch2);
+                        Query launchesReference = Database.getInstance().getReference("/launches");
+                        DatabaseReference classMembersRef = Database.getInstance().getReference("class_launch/" + classId);
+                        adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
+                        setListAdapter(adapterLaunch);
                     }
 
                     @Override
@@ -73,18 +66,31 @@ public class HistoryListFragmentProfessor extends ListFragment {
             launchListener = (HistoryListFragmentProfessor.OnLaunchSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + "must implement HistoryListFragment.OnItemSelectedListener");
+                    + "must implement HistoryListFragmentProfessor.OnItemSelectedListener");
         }
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Launch launch = adapterLaunch2.getItem(position);
+        Launch launch = adapterLaunch.getItem(position);
         launchListener.onLaunchSelected(launch);
     }
 
     public interface OnLaunchSelectedListener {
-        public void onLaunchSelected(Launch l);
+        void onLaunchSelected(Launch l);
+    }
+
+    public void filter(int value){
+        if(value == 1) {
+            Query launchesReference = Database.getInstance().getReference("/launches");
+            DatabaseReference classMembersRef = Database.getInstance().getReference().child("class_member/" + classId);
+            adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
+        }
+        if(value==2){
+            Query launchesReference = Database.getInstance().getReference("/launches");
+            DatabaseReference classMembersRef = Database.getInstance().getReference("class_member/" + classId);
+            adapterLaunch = new TeacherAdapterLaunch(getActivity(), R.layout.row_teacher, classMembersRef, launchesReference);
+        }
     }
 }
 

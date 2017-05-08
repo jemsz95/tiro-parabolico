@@ -5,16 +5,18 @@
     android:layout_height="match_parent"
     android:baselineAligned="false">
 
-    <fragment android:name="mx.itesm.tiroparabolico.HistoryListFragment"
-        android:id="@+id/history_fragment"
+    <fragment
+        android:name="mx.itesm.tiroparabolico.HistoryListFragmentProfessor"
+        android:id="@+id/fragment_history"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent">
 
     </fragment>
 
-    <fragment android:name="mx.itesm.tiroparabolico.GraphFragment"
-        android:id="@+id/graph_fragment"
+    <fragment
+        android:name="mx.itesm.tiroparabolico.GraphFragment"
+        android:id="@+id/fragment_graph"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent">
