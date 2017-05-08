@@ -24,4 +24,13 @@
         android:layout_marginLeft="12dp"
         android:textStyle="normal" />
 
+    <TextView
+        android:id="@+id/text_valuesProf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:hint="Date"
+        android:textSize="8sp"
+        android:textStyle="normal" />
+
 </LinearLayout>
