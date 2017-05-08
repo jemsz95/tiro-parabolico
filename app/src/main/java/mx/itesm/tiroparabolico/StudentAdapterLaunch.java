@@ -11,6 +11,8 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
  */
@@ -30,11 +32,12 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
     protected void populateView(View v, final Launch l, final int position ){
         TextView tvStudent = (TextView) v.findViewById(R.id.text_author);
         TextView tvDate = (TextView) v.findViewById(R.id.text_date);
+        TextView tvData = (TextView) v.findViewById(R.id.text_values);
         ImageView ibFavorite = (ImageView) v.findViewById(R.id.button_favorite);
 
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
-
+        tvData.setText(l.getV0() + " m/s   " + l.getTheta() + "°   " + l.getY0() + " m");
         ibFavorite.setImageResource(l.isFavorite() ? R.drawable.ic_star_gold_24dp : R.drawable.ic_star_grey_24dp);
 
         ibFavorite.setOnClickListener(new View.OnClickListener() {
