@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="apptheme_color">#DA4A38</color>
+    <color name="list_pressed_color">#999999</color>
+    <color name="list_default_color">#ffffff</color>
 </resources>

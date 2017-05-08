@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseIndexListAdapter;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 
 /**
@@ -19,7 +20,12 @@ public class TeacherAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
         super(actual, Launch.class, modelLayout, keyRef, dataRef );
     }
 
-
+    @Override
+    protected Launch parseSnapshot(DataSnapshot snapshot) {
+        Launch l = super.parseSnapshot(snapshot);
+        l.setId(snapshot.getKey());
+        return l;
+    }
 
     @Override
     protected void populateView(View v, Launch l, int position ) {
