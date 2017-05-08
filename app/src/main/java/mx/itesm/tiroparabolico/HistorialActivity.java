@@ -40,31 +40,6 @@ public class HistorialActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_filtro, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.FiltroAlumnos_action) {
-            historyListFragment.filter(2);
-        }
-        if (id == R.id.filtroFecha_action){
-            historyListFragment.filter(1);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
@@ -80,6 +55,8 @@ public class HistorialActivity extends AppCompatActivity
             //starting login activity
             startActivity(new Intent(this, LoginActivity.class));
         }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //getting current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
