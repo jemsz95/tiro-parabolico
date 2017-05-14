@@ -17,12 +17,9 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
     private ImageView ivInstruct;
     private int index = 0;
     private GestureDetectorCompat detector;
-    private Instruccion[] instruccion = new Instruccion[] {
-            new Instruccion("Desliza tu dedo hacia la izquierda o derecha para navegar por las instrucciones.", R.drawable.instruccionescorr3),
-            new Instruccion("Ingresa los valores iniciales de velocidad, angulo y altura para la simulación.", R.drawable.instruccioncorr1),
-            new Instruccion("Selecciona las gráficas de tus simulaciones anteriores que deseas mostrar en la gráfica.", R.drawable.instruccioncorr2),
-            new Instruccion("Pellizca con dos dedos hacia afuera para poder enfocar la gráfica o hacia adentro para desenfocarla.", R.drawable.instruccionescorr4)
-    };
+
+    // Note: This order is important. Instruction 3 talks about navigating instructions
+    private Instruccion[] instruccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +29,13 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
         tvTitulo = (TextView) findViewById(R.id.text_title_instructions);
         tvTextInstruct = (TextView) findViewById(R.id.text_TextInstruct);
         ivInstruct = (ImageView) findViewById(R.id.imageView_foto);
+
+        instruccion = new Instruccion[] {
+                new Instruccion(getResources().getString(R.string.instruction_3), R.drawable.instruccionescorr3),
+                new Instruccion(getResources().getString(R.string.instruction_1), R.drawable.instruccioncorr1),
+                new Instruccion(getResources().getString(R.string.instruction_2), R.drawable.instruccioncorr2),
+                new Instruccion(getResources().getString(R.string.instruction_4), R.drawable.instruccionescorr4)
+        };
 
         tvTextInstruct.setText(instruccion[index].getTexto());
         ivInstruct.setImageResource(instruccion[index].getFotoRes());

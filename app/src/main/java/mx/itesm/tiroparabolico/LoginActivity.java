@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +14,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String DEBUG_TAG = "LoginActivity";
 
     private Button btnLogin;
     private Button btnRegistro;
@@ -49,16 +52,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Porfavor ingresa tu correo.",Toast.LENGTH_LONG).show();
+            etUsuario.setError(getResources().getString(R.string.email_empty_error));
+            etUsuario.requestFocus();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ingresa tu contraseña.",Toast.LENGTH_LONG).show();
+            etPassword.setError(getResources().getString(R.string.pass_empty_error));
+            etPassword.requestFocus();
             return;
         }
 
-        progressDialog.setMessage("Iniciar sesión....");
+        progressDialog.setMessage(getResources().getString(R.string.logging_in));
         progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -78,17 +83,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
                                 Toast.makeText(LoginActivity.this,
-                                        "El usuario y/o contraseña son incorrectos",
-                                        Toast.LENGTH_SHORT);
+                                        getResources().getString(R.string.email_password_incorrect),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
                             } catch (FirebaseAuthInvalidUserException e) {
                                 Toast.makeText(LoginActivity.this,
-                                        "El usuario y/o contraseña son incorrectos",
-                                        Toast.LENGTH_SHORT);
-                            } catch (Exception e) {
+                                        getResources().getString(R.string.email_password_incorrect),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (FirebaseNetworkException e) {
                                 Toast.makeText(LoginActivity.this,
-                                        "No se pudo conectar con el servidor. Por favor revise su" +
-                                                " conexión a internet y vuelva a intentar.",
-                                        Toast.LENGTH_SHORT);
+                                        getResources().getString(R.string.connection_error),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (Exception e) {
+                                Log.d(DEBUG_TAG, e.toString());
                             }
                         }
                     }

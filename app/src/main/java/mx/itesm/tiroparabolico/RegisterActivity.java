@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -112,11 +113,15 @@ public class RegisterActivity extends AppCompatActivity
         Clase klass = new Clase(user.getUid(), clase);
 
         if (radioBtnAlumno.isChecked()) {
-            databaseReference.child("students").child(user.getUid()).setValue(userInformation);
-            databaseReference.child("class_member/" + clase + "/" + user.getUid()).setValue(new Boolean(true));
+            databaseReference.child("students/" + user.getUid())
+                    .setValue(userInformation);
+            databaseReference.child("class_member/" + clase + "/" + user.getUid())
+                    .setValue(true);
         } else if (radioBtnMaestro.isChecked()) {
-            databaseReference.child("teachers").child(user.getUid()).setValue(userInformation);
-            databaseReference.child("classes").child(userInformation.classId).setValue(klass);
+            databaseReference.child("teachers/" + user.getUid())
+                    .setValue(userInformation);
+            databaseReference.child("classes/" + clase)
+                    .setValue(klass);
         }
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -142,36 +147,36 @@ public class RegisterActivity extends AppCompatActivity
         etCodigo.setError(null);
 
         if (TextUtils.isEmpty(firstName)) {
-            etName.setError("Ingrese su nombre");
+            etName.setError(getResources().getString(R.string.name_empty_error));
             etName.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(secondName)) {
-            etSecondName.setError("Ingrese su apellido");
+            etSecondName.setError(getResources().getString(R.string.last_name_empty_error));
             etSecondName.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            etMail.setError("Ingrese su correo electrónico");
+            etMail.setError(getResources().getString(R.string.email_empty_error));
             etMail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Ingrese su contraseña");
+            etPassword.setError(getResources().getString(R.string.pass_empty_error));
             etPassword.requestFocus();
             return;
         }
 
         if(password.length() < 6) {
-            etPassword.setError("La contraseña debe de ser mínimo de 6 caracteres");
+            etPassword.setError(getResources().getString(R.string.pass_length_error));
             etPassword.requestFocus();
             return;
         }
 
         if(TextUtils.isEmpty(classCode)) {
-            etCodigo.setError("Ingrese un código de clase");
+            etCodigo.setError(getResources().getString(R.string.class_empty_error));
             etCodigo.requestFocus();
             return;
         }
@@ -181,21 +186,21 @@ public class RegisterActivity extends AppCompatActivity
 
             if (checkedRadioBtn == R.id.radioBtn_maestro) {
                 if (classExists) {
-                    etCodigo.setError("Este salón ya existe, elige otro código");
+                    etCodigo.setError(getResources().getString(R.string.class_overlap_error));
                     return;
                 } else {
                     etCodigo.setError(null);
                 }
             } else if (checkedRadioBtn == R.id.radioBtn_alumno) {
                 if (!classExists) {
-                    etCodigo.setError("Este salón no existe");
+                    etCodigo.setError(getResources().getString(R.string.class_missing_error));
                     return;
                 } else {
                     etCodigo.setError(null);
                 }
             }
         } else {
-            progressDialog.setMessage("Revisando clases disponibles...");
+            progressDialog.setMessage(getResources().getString(R.string.class_checking_message));
             progressDialog.show();
         }
 
@@ -207,18 +212,26 @@ public class RegisterActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             //display some message here
                             userLogin();
-                            Toast.makeText(RegisterActivity.this, "El usuario fue registrado correctamente.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,
+                                    getResources().getString(R.string.user_register_complete),
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         } else {
                             progressDialog.hide();
 
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
-                                etMail.setError("Correo incorrecto");
+                                etMail.setError(getResources().getString(R.string.email_malformed_error));
                                 etMail.requestFocus();
                             } catch (FirebaseAuthUserCollisionException e) {
-                                etMail.setError("Usuario ya registrado");
+                                etMail.setError(getResources().getString(R.string.email_overlap_error));
                                 etMail.requestFocus();
+                            } catch (FirebaseNetworkException e) {
+                                Toast.makeText(RegisterActivity.this,
+                                        getResources().getString(R.string.connection_error),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
                             } catch (Exception e) {
                                 Log.d(DEBUG_TAG, e.toString());
                             }
@@ -226,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity
                     }
                 });
 
-        progressDialog.setMessage("Registrando Usuario...");
+        progressDialog.setMessage(getResources().getString(R.string.user_registering_message));
         progressDialog.show();
     }
 
@@ -239,7 +252,7 @@ public class RegisterActivity extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-                        //if the task is successfull
+                        //if the task is successful
                         if (task.isSuccessful()) {
                             saveUserInformation();
 

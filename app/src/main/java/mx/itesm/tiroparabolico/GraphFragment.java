@@ -1,6 +1,5 @@
 package mx.itesm.tiroparabolico;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -63,6 +62,11 @@ public class GraphFragment extends Fragment {
         chart.setNoDataText("No hay datos disponibles.");
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        MetresAxisValueFormatter metresAxisValueFormatter = new MetresAxisValueFormatter();
+
+        xAxis.setValueFormatter(metresAxisValueFormatter);
+        yAxis.setValueFormatter(metresAxisValueFormatter);
 
         chart.setDescription(null);
         chart.getLegend().setEnabled(false);

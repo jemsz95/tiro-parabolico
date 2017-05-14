@@ -7,25 +7,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
- * Created by jorgeemiliorubiobarboza on 03/05/17.
+ * Created by javier on 5/14/17.
  */
-/*
-*   clase que apoya para adquirir todos los launch's de un usuario de firebase
-*   mediante firebase
-*   */
 
-
-public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
+public class FavoriteAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
     private ItemSelector selector;
 
-    public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
-        super(activity, Launch.class, modelLayout, ref);
+    public FavoriteAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query keysRef, Query valuesRef){
+        super(activity, Launch.class, modelLayout, keysRef, valuesRef);
     }
 
     public void setItemSelector(ItemSelector selector) {
@@ -69,7 +64,6 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
 
         StarClickListener(Launch l, int position) {
             this.position = position;
-            this.l = l;
         }
 
         @Override
@@ -107,4 +101,3 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         }
     }
 }
-

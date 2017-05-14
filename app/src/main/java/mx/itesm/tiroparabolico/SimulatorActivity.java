@@ -1,6 +1,7 @@
 package mx.itesm.tiroparabolico;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,15 +64,19 @@ public class SimulatorActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-            switch (userRole) {
-                case STUDENT:
-                    getMenuInflater().inflate(R.menu.menu_alumno, menu);
-                    break;
+        switch (userRole) {
+            case STUDENT:
+                getMenuInflater().inflate(R.menu.menu_alumno, menu);
+                break;
 
-                case TEACHER:
-                    getMenuInflater().inflate(R.menu.menu_maestro, menu);
-                    break;
-            }
+            case TEACHER:
+                getMenuInflater().inflate(R.menu.menu_maestro, menu);
+                break;
+        }
+
+        if(!landscape) {
+            menu.removeItem(R.id.filter_favorites);
+        }
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -84,27 +89,45 @@ public class SimulatorActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.creditos_action) {
-            Intent i = new Intent(this, CreditosActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(i);
-        }
-        if (id == R.id.historal_action) {
-            Intent i = new Intent(this, HistorialActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(i);
-        }
-        if (id == R.id.instrucciones_action){
-            Intent i = new Intent(this, InstruccionesActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(i);
-        }
-        if(id == R.id.logout_action){
-            firebaseAuth.signOut();
-            Intent i = new Intent(this, LoginActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+        switch(id) {
+            //noinspection SimplifiableIfStatement
+            case R.id.creditos_action: {
+                Intent i = new Intent(this, CreditosActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(i);
+                break;
+            }
+
+            case R.id.historal_action: {
+                Intent i = new Intent(this, HistorialActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(i);
+                break;
+            }
+
+            case R.id.instrucciones_action: {
+                Intent i = new Intent(this, InstruccionesActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(i);
+                break;
+            }
+
+            case R.id.logout_action: {
+                firebaseAuth.signOut();
+                Intent i = new Intent(this, LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+                break;
+            }
+
+            case R.id.filter_favorites: {
+                historyListFragment.toggleFilterFavorites();
+                if(historyListFragment.isFilteringFavorites()) {
+                    item.setIcon(R.drawable.ic_star_gold);
+                } else {
+                    item.setIcon(R.drawable.ic_star_unpressed_menu);
+                }
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,7 +157,7 @@ public class SimulatorActivity extends AppCompatActivity
         datosFragment = (DatosFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_data);
 
-        landscape = datosFragment == null;
+        landscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
         if(landscape) {
             historyListFragment = (HistoryListFragment) getSupportFragmentManager()

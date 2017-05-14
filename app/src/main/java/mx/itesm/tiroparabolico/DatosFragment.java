@@ -47,7 +47,7 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         } else {
             throw new RuntimeException("Parent class "
                     + getActivity().toString()
-                    + "should implement OnGraphDataChangeListener"
+                    + "should implement DatosFragment.OnGraphDataChangeListener"
             );
         }
 
@@ -128,27 +128,19 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
                             Double.parseDouble(etAltura.getText().toString()) >= 0) {
                         onSimulateClick();
                     } else {
-                        Toast.makeText(getActivity(), "Los datos son inválidos.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),
+                                getResources().getString(R.string.launch_params_invalid),
+                                Toast.LENGTH_SHORT)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "No se han llenado todos los campos.",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),
+                            getResources().getString(R.string.launch_params_missing),
+                            Toast.LENGTH_SHORT)
+                            .show();
                 }
                 break;
         }
-    }
-
-    public void setReach(double reach) {
-        tvAlcance.setText(Double.toString(reach) + "m");
-    }
-
-    public void setTime(double seconds) {
-        tvTiempo.setText(Double.toString(seconds) + "s");
-    }
-
-    public void setHeight(double height) {
-        tvAltura.setText(Double.toString(height) + "m");
     }
 
     protected void onSimulateClick() {
@@ -163,16 +155,19 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         l.setY0(height);
         l.calculate();
 
-        listener.onGraphDataChange(l);
-
         tvAlcance.setText(String.format("%1$.2f", l.getDistance()) + " m");
+
         if(height == 0){
-            tvAltura.setText(height + " m");
+            tvAltura.setText("0 m");
         }
+
         else{
             tvAltura.setText("-" + height + "m");
         }
+
         tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()) + " s");
+
+        listener.onGraphDataChange(l);
     }
 
     public interface OnGraphDataChangeListener {

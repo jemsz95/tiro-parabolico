@@ -12,8 +12,14 @@
         android:orderInCategory="2"
         app:showAsAction="never" />
 
+    <item android:id="@+id/filter_favorites"
+        android:title="Filtrar Favoritos"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_star_unpressed_menu"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/logout_action"
         android:title="Cerrar Sesión"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="never" />
 </menu>
