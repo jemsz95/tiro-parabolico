@@ -12,7 +12,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
-import org.w3c.dom.Text;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jorgeemiliorubiobarboza on 03/05/17.
@@ -24,6 +25,8 @@ import org.w3c.dom.Text;
 
 
 public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
+
+    public Set<String> selected = new HashSet<>();
 
     public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
         super(activity, Launch.class, modelLayout, ref);
@@ -42,11 +45,13 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         TextView tvDate = (TextView) v.findViewById(R.id.text_date);
         TextView tvData = (TextView) v.findViewById(R.id.text_values);
         ImageView ibFavorite = (ImageView) v.findViewById(R.id.button_favorite);
+        ImageView ibVisible = (ImageView) v.findViewById(R.id.image_Visibility);
 
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
         tvData.setText(l.getV0() + " m/s   " + l.getTheta() + "°   " + l.getY0() + " m");
         ibFavorite.setImageResource(l.isFavorite() ? R.drawable.ic_star_gold_24dp : R.drawable.ic_star_grey_24dp);
+        ibVisible.setVisibility(selected.contains(getRef(position).getKey()) ? View.VISIBLE : View.INVISIBLE);
 
         ibFavorite.setOnClickListener(new View.OnClickListener() {
             @Override

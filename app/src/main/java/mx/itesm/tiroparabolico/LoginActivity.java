@@ -49,12 +49,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Porfavor ingresa tu email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ingresa tu correo.",Toast.LENGTH_LONG).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ingresa tu password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ingresa tu contraseña.",Toast.LENGTH_LONG).show();
             return;
         }
 

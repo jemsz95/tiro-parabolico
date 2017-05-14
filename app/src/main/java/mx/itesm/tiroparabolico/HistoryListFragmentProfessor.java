@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,7 +56,7 @@ public class HistoryListFragmentProfessor extends ListFragment {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.d("OMNOM", "Fallo porque no conecto");
+                        Log.d("TAG_CANCEL", "Falló porque no conectó.");
                     }
                 });
     }
@@ -73,7 +74,17 @@ public class HistoryListFragmentProfessor extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        ImageView ibVisible = (ImageView) v.findViewById(R.id.image_Visibility);
         Launch launch = adapterLaunch.getItem(position);
+        boolean selected = adapterLaunch.selected.contains(adapterLaunch.getRef(position).getKey());
+
+        if(selected) {
+            adapterLaunch.selected.remove(adapterLaunch.getRef(position).getKey());
+        } else {
+            adapterLaunch.selected.add(adapterLaunch.getRef(position).getKey());
+        }
+
+        ibVisible.setVisibility(!selected ? View.VISIBLE : View.INVISIBLE);
         launchListener.onLaunchSelected(launch);
     }
 

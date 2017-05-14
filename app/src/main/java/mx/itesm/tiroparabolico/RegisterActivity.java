@@ -3,7 +3,6 @@ package mx.itesm.tiroparabolico;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -19,12 +18,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
@@ -156,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity
         }
 
         if (TextUtils.isEmpty(email)) {
-            etMail.setError("Ingrese su correo electronico");
+            etMail.setError("Ingrese su correo electrónico");
             etMail.requestFocus();
             return;
         }
@@ -210,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             //display some message here
                             userLogin();
-                            Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "El usuario fue registrado correctamente.", Toast.LENGTH_SHORT).show();
                         } else {
                             progressDialog.hide();
 
@@ -229,7 +226,7 @@ public class RegisterActivity extends AppCompatActivity
                     }
                 });
 
-        progressDialog.setMessage("Registrando Usuario....");
+        progressDialog.setMessage("Registrando Usuario...");
         progressDialog.show();
     }
 
@@ -246,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             saveUserInformation();
 
-                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
+                            Intent i = new Intent(RegisterActivity.this, SimulatorActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
                         }

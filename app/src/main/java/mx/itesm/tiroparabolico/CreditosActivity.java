@@ -11,7 +11,6 @@ import android.widget.TextView;
 public class CreditosActivity extends AppCompatActivity  {
 
     private ImageView ivLogo;
-    private TextView tvTitulo;
     private TextView tvMail;
     private TextView tvNombre;
     private TextView tvMat;
@@ -19,7 +18,7 @@ public class CreditosActivity extends AppCompatActivity  {
     private int index = 0;
     private GestureDetectorCompat detector;
     private Credito[] creditos = new Credito[] {
-            new Credito("Jesus Guadiana","A00814770", "jisus130@hotmail.com", R.drawable.jesus),
+            new Credito("Jesús Guadiana","A00814770", "jisus130@hotmail.com", R.drawable.jesus),
             new Credito("Jorge Rubio","A00368770", "jorge.rubiobarboza96@gmail.com", R.drawable.jorge),
             new Credito("Juan Ulloa","A00817807", "juan.fernando.ulloa@gmail.com", R.drawable.juan),
             new Credito("Javier Meza","A01244496", "javenmeza@gmail.com", R.drawable.javier)
@@ -29,8 +28,7 @@ public class CreditosActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creditos);
-
-        tvTitulo = (TextView) findViewById(R.id.text_CreditosTitulo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ivLogo = (ImageView) findViewById(R.id.image_LogoPrepaNet);
         tvNombre = (TextView) findViewById(R.id.textView_nombre);
         tvMat = (TextView) findViewById(R.id.textView_matricula);

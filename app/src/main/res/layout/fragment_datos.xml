@@ -85,7 +85,7 @@
             android:id="@+id/edit_velocidad"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Velocidad"
+            android:hint="Velocidad (m/s)"
             android:inputType="numberDecimal" />
 
     </android.support.design.widget.TextInputLayout>
@@ -102,9 +102,10 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_angulo"
+            style="Altura (m)"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Angulo"
+            android:hint="Ángulo (°)"
             android:inputType="numberDecimal|numberSigned" />
 
     </android.support.design.widget.TextInputLayout>
@@ -123,7 +124,7 @@
             android:id="@+id/edit_altura"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Altura"
+            android:hint="Altura (m)"
             android:inputType="numberDecimal" />
 
     </android.support.design.widget.TextInputLayout>

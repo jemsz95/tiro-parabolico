@@ -8,17 +8,17 @@
         app:showAsAction="never" />
 
     <item android:id="@+id/creditos_action"
-        android:title="Creditos"
+        android:title="Créditos"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/historal_action"
-        android:title="Historial de alumnos"
+        android:title="Historial del Salón"
         android:orderInCategory="3"
         app:showAsAction="never" />
 
     <item android:id="@+id/logout_action"
-        android:title="Logout"
+        android:title="Cerrar Sesión"
         android:orderInCategory="4"
         app:showAsAction="never" />
 </menu>

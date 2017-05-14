@@ -114,7 +114,7 @@
         android:layout_alignStart="@+id/text_Password"
         android:layout_below="@+id/text_Password"
         android:hint="Contraseña"
-        android:text="Codigo Salon:"
+        android:text="Código Salón:"
         android:textSize="24sp" />
 
     <TextView
@@ -136,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/text_Password"
         android:layout_toRightOf="@+id/text_Password"
-        android:hint="6 o mas caracteres"
+        android:hint="6 o más caracteres"
         android:inputType="textVisiblePassword" />
 
     <Button
@@ -188,7 +188,7 @@
         android:layout_toEndOf="@+id/text_Class"
         android:layout_toRightOf="@+id/text_Class"
         android:layout_weight="1"
-        android:hint="Codigo"
+        android:hint="Código"
         android:inputType="textVisiblePassword" />
 
 </RelativeLayout>

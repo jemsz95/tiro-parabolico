@@ -60,6 +60,7 @@ public class GraphFragment extends Fragment {
         chart.setXAxisRenderer(xAxisRenderer);
         chart.setRendererLeftYAxis(yAxisRenderer);
         chart.setPinchZoom(true);
+        chart.setNoDataText("No hay datos disponibles.");
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 

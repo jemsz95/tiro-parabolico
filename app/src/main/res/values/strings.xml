@@ -1,38 +1,15 @@
 <resources>
-    <string name="app_name">Tiro Parabolico</string>
+    <string name="app_name">Tiro Parabólico</string>
     <string name="titulo_creditos">Créditos</string>
     <string name="titulo_instrucciones">Instrucciones de uso</string>
-    <string name="cuerpo_creditos">
-        - Aplicación desarrollada por los alumnos
-        de la clase de "Proyectos de desarrollo de apliaciones móviles (Android)",
-        y en coordinación con el Dr. Alfonso Serrano e Ing. Martha Sordia.\n
-        Alumnos:\n
-        - Jorge Rubio A00368770\n
-        - Jesus Guadiana A00814770\n
-        - Juan Fernando Ulloa A00817807\n
-        - Javier Enrique Meza A01244496
-    </string>
-    <string name="cuerpo_instrucciones">
-        - El valor de velocidad inicial pueden ser introducidos manualmente, picandole
-        a la caja de texto, e insertando un numero rel positivo.\n
-        - Pícale al "cañón" y desliza hacia arriba o abajo si deseas cambiar la altura
-        de deisparo inicial.\n
-        - El angulo inicial de disparo, al igual que la velocidad inicial, puede ser
-        modificado en un rango de 90 a - 90 (grados).\n
-        - Pícale al botón de disparo para ver la simulación y depslegar los resutlados
-        del tiro parabólico.\n
-        - Los datos se podrán modificar unicamente en modo "Portrait" (vertical).\n
-        - La opción de comparar sólo está disponible de forma "landscape" (horizontal).
-    </string>
-    <string name="text_login">Simulador Tiro Parabolico</string>
+    <string name="text_login">Simulador Tiro Parabólico</string>
     <string name="buttonText_login">Registrar</string>
     <string name="buttonText_simulador">Simulador</string>
     <string name="buttonText_instruciones">Instrucciones</string>
-    <string name="buttonText_creditos">Creditos</string>
-    <string name="buttonText_logout">Logout</string>
+    <string name="buttonText_creditos">Créditos</string>
+    <string name="buttonText_logout">Cerrar Sesión</string>
     <string name="trajectory">Trayectoria</string>
     <string name="text_Register">Registro</string>
     <string name="simulate">Simular</string>
-    <string name="action_settings">Settings</string>
 
 </resources>

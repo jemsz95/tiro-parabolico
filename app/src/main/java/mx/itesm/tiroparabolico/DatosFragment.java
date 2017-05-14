@@ -74,6 +74,9 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+        etVelocidad.setText(null);
+        etAltura.setText(null);
+        etAngulo.setText(null);
         Log.d(DEBUG_TAG, "onStart() has been called.");
     }
 
@@ -117,17 +120,19 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button_Simular:
-                if (etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0) {
+                if (etAngulo.getText().toString().trim().length() > 0 && etVelocidad.getText().toString().trim().length() > 0
+                        && etAltura.getText().toString().trim().length() > 0) {
                     if (Double.parseDouble(etAngulo.getText().toString()) >= -90 &&
                             Double.parseDouble(etAngulo.getText().toString()) <= 90 &&
-                            Double.parseDouble(etVelocidad.getText().toString()) >= 0) {
+                            Double.parseDouble(etVelocidad.getText().toString()) >= 0 &&
+                            Double.parseDouble(etAltura.getText().toString()) >= 0) {
                         onSimulateClick();
                     } else {
-                        Toast.makeText(getActivity(), "Los datos son invalidos",
+                        Toast.makeText(getActivity(), "Los datos son inválidos.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "No se han llenado los datos completos",
+                    Toast.makeText(getActivity(), "No se han llenado todos los campos.",
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -160,9 +165,14 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
 
         listener.onGraphDataChange(l);
 
-        tvAlcance.setText(String.format("%1$.2f", l.getDistance()) + "m");
-        tvAltura.setText("-" + height + "m");
-        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()) + "s");
+        tvAlcance.setText(String.format("%1$.2f", l.getDistance()) + " m");
+        if(height == 0){
+            tvAltura.setText(height + " m");
+        }
+        else{
+            tvAltura.setText("-" + height + "m");
+        }
+        tvTiempo.setText(String.format("%1$.2f", l.getFlightTime()) + " s");
     }
 
     public interface OnGraphDataChangeListener {
