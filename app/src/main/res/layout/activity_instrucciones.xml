@@ -20,44 +20,27 @@
         android:hint="Instrucciones"
         android:textSize="36sp"
         android:textStyle="normal|bold"
-        android:layout_below="@+id/button_skip"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/text_TextInstruct"
-        android:textSize="24sp"
-        android:layout_marginTop="22dp"
-        android:textStyle="normal"
-        android:layout_below="@+id/text_title_instructions"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/imageView_foto"
+        android:layout_alignStart="@+id/imageView_foto"
         android:layout_marginRight="47dp"
-        android:layout_marginEnd="47dp" />
-
-    <Button
-        android:id="@+id/button_skip"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/text_title_instructions"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/text_title_instructions"
-        android:background="@color/colorPrimary"
-        android:text="Simulador"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:visibility="visible" />
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="normal" />
 
     <ImageView
-        app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/imageView_foto"
         android:layout_width="300dp"
-        android:layout_below="@+id/text_TextInstruct"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="280dp" />
+        android:layout_height="280dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
 </RelativeLayout>

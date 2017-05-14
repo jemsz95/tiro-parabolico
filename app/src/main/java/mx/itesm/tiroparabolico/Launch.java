@@ -31,6 +31,7 @@ public class Launch implements Serializable {
     private Double v0 = 0d;
     private Boolean favorite = false;
     private String userName;
+    private boolean visible = false;
 
     //Setted
     private int resolution = 100;
@@ -114,6 +115,10 @@ public class Launch implements Serializable {
     public String getId() {
         return id;
     }
+    @Exclude
+    public boolean isVisible(){return visible;}
+    @Exclude
+    public void setVisible(boolean v){visible = v;}
 
     @PropertyName("author")
     public String getUserId() {

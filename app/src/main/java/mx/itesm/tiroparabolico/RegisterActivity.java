@@ -129,21 +129,21 @@ public class RegisterActivity extends AppCompatActivity
         String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(firstName)) {
-            Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese su nombre.", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(secondName)) {
-            Toast.makeText(this, "Ingrese su apellido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese su apellido.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Ingrese su correo electronico ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese su correo electrónico. ", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Ingrese su contraseña ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese su contraseña. ", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -158,10 +158,10 @@ public class RegisterActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             //display some message here
                             userLogin();
-                            Toast.makeText(RegisterActivity.this, "Usted fue registrado correctamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "El usuario fue registrado correctamente.", Toast.LENGTH_SHORT).show();
                         } else {
                             //display some message here
-                            Toast.makeText(RegisterActivity.this, "No se pudo registrar intente denuevo porfavor", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "No se pudo registrar el usuario, intente nuevamente.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -180,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             saveUserInformation();
 
-                            Intent i = new Intent(RegisterActivity.this, InstruccionesActivity.class);
+                            Intent i = new Intent(RegisterActivity.this, SimulatorActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
                         }
@@ -196,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity
                 if (classValid) {
                     registerUser();
                 } else {
-                    Toast.makeText(this, "Error de codigo de clase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error de código de clase.", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -209,7 +209,7 @@ public class RegisterActivity extends AppCompatActivity
 
             if (checkedRadioBtn == R.id.radioBtn_maestro) {
                 if (classExists) {
-                    etCodigo.setError("Este salón ya existe, elige otro código");
+                    etCodigo.setError("Este salón ya existe, elige otro código.");
                     classValid = false;
                 } else {
                     etCodigo.setError(null);

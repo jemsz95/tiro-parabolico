@@ -14,10 +14,12 @@
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".CreditosActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SimulatorActivity"/>
 
         <activity android:name=".InstruccionesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SimulatorActivity"/>
 
         <activity android:name=".SimulatorActivity">
             <intent-filter>

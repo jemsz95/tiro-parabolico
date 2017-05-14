@@ -16,30 +16,26 @@ public class InstruccionesActivity extends AppCompatActivity implements View.OnC
     private TextView tvTitulo;
     private TextView tvTextInstruct;
     private ImageView ivInstruct;
-    private Button btnSkip;
     private int index = 0;
     private GestureDetectorCompat detector;
     private Instruccion[] instruccion = new Instruccion[] {
-            new Instruccion("Coloca los valores iniciales", R.drawable.instruccioncorr1),
-            new Instruccion("Selecciona las graficas de tu historial que quieres desplegar", R.drawable.instruccioncorr2),
-            new Instruccion("Desliza por las instrucciones, cuando estes listo selecciona simular", R.drawable.instruccionescorr3),
-            new Instruccion("Utiliza tus dedos para poder hacer zoom a la grafica", R.drawable.instruccionescorr4)
+            new Instruccion("Desliza tu dedo hacia la izquierda o derecha para navegar por las instrucciones.", R.drawable.instruccionescorr3),
+            new Instruccion("Ingresa los valores iniciales de velocidad, angulo y altura para la simulación.", R.drawable.instruccioncorr1),
+            new Instruccion("Selecciona las gráficas de tus simulaciones anteriores que deseas mostrar en la gráfica.", R.drawable.instruccioncorr2),
+            new Instruccion("Pellizca con dos dedos hacia afuera para poder enfocar la gráfica o hacia adentro para desenfocarla.", R.drawable.instruccionescorr4)
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrucciones);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvTitulo = (TextView) findViewById(R.id.text_title_instructions);
         tvTextInstruct = (TextView) findViewById(R.id.text_TextInstruct);
         ivInstruct = (ImageView) findViewById(R.id.imageView_foto);
-        btnSkip = (Button) findViewById(R.id.button_skip);
 
         tvTextInstruct.setText(instruccion[index].getTexto());
         ivInstruct.setImageResource(instruccion[index].getFotoRes());
-
-        btnSkip.setOnClickListener(this);
 
         GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
             @Override
