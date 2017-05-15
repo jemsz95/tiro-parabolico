@@ -5,7 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,20 +61,18 @@ public class HistoryListFragment extends ListFragment implements ItemSelector {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ImageView ibVisible = (ImageView) v.findViewById(R.id.image_Visibility);
-        Launch launch = adapterLaunch.getItem(position);
+        BaseAdapter currentAdapter = isFilteringFavorites() ? favoriteAdapterLaunch : adapterLaunch;
+        Launch launch = (Launch) currentAdapter.getItem(position);
         boolean selected;
-
-        selected = selectedItems.contains(adapterLaunch.getRef(position).getKey());
+        selected = selectedItems.contains(launch.getId());
 
         if(selected) {
-            selectedItems.remove(adapterLaunch.getRef(position).getKey());
+            selectedItems.remove(launch.getId());
         } else {
-            selectedItems.add(adapterLaunch.getRef(position).getKey());
+            selectedItems.add(launch.getId());
         }
 
-        ibVisible.setVisibility(selected ? View.INVISIBLE : View.VISIBLE);
-
+        currentAdapter.notifyDataSetChanged();
         launchListener.onLaunchSelected(launch);
     }
 

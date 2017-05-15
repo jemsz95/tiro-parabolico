@@ -129,8 +129,6 @@ public class RegisterActivity extends AppCompatActivity
                 .build();
 
         user.updateProfile(profileUpdates);
-
-        Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
     }
 
     private void registerUser() {

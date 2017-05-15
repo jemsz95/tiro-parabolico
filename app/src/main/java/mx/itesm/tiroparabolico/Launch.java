@@ -263,7 +263,7 @@ public class Launch implements Serializable {
     public boolean equals(Object obj) {
         if(obj instanceof Launch) {
             Launch l = (Launch) obj;
-            return l.getId() == id;
+            return l.getId().equals(id);
         }
 
         return false;
