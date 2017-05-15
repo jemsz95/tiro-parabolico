@@ -2,11 +2,13 @@ package mx.itesm.tiroparabolico;
 
 import android.support.annotation.DrawableRes;
 
+import java.io.Serializable;
+
 /**
  * Created by jisus on 06/04/2017.
  */
 
-public class Credito {
+public class Credito implements Serializable {
     private String nombre;
     private String matricula;
     private String mail;
