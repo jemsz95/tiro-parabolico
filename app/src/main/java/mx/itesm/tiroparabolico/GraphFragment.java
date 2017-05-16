@@ -1,6 +1,5 @@
 package mx.itesm.tiroparabolico;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,6 +21,12 @@ import java.util.List;
 import mx.itesm.tiroparabolico.AxisRendererSync.SyncXAxisRenderer;
 import mx.itesm.tiroparabolico.AxisRendererSync.SyncYAxisRenderer;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Fragmento dedicado a graficar simulaciones
+ */
 public class GraphFragment extends Fragment {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
@@ -60,8 +65,14 @@ public class GraphFragment extends Fragment {
         chart.setXAxisRenderer(xAxisRenderer);
         chart.setRendererLeftYAxis(yAxisRenderer);
         chart.setPinchZoom(true);
+        chart.setNoDataText("No hay datos disponibles.");
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        MetresAxisValueFormatter metresAxisValueFormatter = new MetresAxisValueFormatter();
+
+        xAxis.setValueFormatter(metresAxisValueFormatter);
+        yAxis.setValueFormatter(metresAxisValueFormatter);
 
         chart.setDescription(null);
         chart.getLegend().setEnabled(false);

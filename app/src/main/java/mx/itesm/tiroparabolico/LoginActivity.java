@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +14,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Captura datos de inicio de sesión y autentifica con el servidor
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String DEBUG_TAG = "LoginActivity";
 
     private Button btnLogin;
     private Button btnRegistro;
@@ -43,20 +54,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
-        String email=etUsuario.getText().toString().trim();
-        String password=etPassword.getText().toString().trim();
+        String email = etUsuario.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Porfavor ingresa tu email",Toast.LENGTH_LONG).show();
+            etUsuario.setError(getResources().getString(R.string.email_empty_error));
+            etUsuario.requestFocus();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ingresa tu password",Toast.LENGTH_LONG).show();
+            etPassword.setError(getResources().getString(R.string.pass_empty_error));
+            etPassword.requestFocus();
             return;
         }
 
-        progressDialog.setMessage("Iniciar sesión....");
+        progressDialog.setMessage(getResources().getString(R.string.logging_in));
         progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -67,14 +80,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         //if the task is successfull
                         if(task.isSuccessful()){
-
                             Intent i = new Intent(LoginActivity.this, SimulatorActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
                         }
                         else {
-                            Toast.makeText(getApplicationContext(),"El usuario o contraseña es incorrecto", Toast.LENGTH_SHORT)
-                                    .show();
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                Toast.makeText(LoginActivity.this,
+                                        getResources().getString(R.string.email_password_incorrect),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (FirebaseAuthInvalidUserException e) {
+                                Toast.makeText(LoginActivity.this,
+                                        getResources().getString(R.string.email_password_incorrect),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (FirebaseNetworkException e) {
+                                Toast.makeText(LoginActivity.this,
+                                        getResources().getString(R.string.connection_error),
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (Exception e) {
+                                Log.d(DEBUG_TAG, e.toString());
+                            }
                         }
                     }
                 });

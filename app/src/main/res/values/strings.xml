@@ -1,38 +1,51 @@
 <resources>
-    <string name="app_name">Tiro Parabolico</string>
+    <string name="app_name">Tiro Parabólico</string>
     <string name="titulo_creditos">Créditos</string>
     <string name="titulo_instrucciones">Instrucciones de uso</string>
-    <string name="cuerpo_creditos">
-        - Aplicación desarrollada por los alumnos
-        de la clase de "Proyectos de desarrollo de apliaciones móviles (Android)",
-        y en coordinación con el Dr. Alfonso Serrano e Ing. Martha Sordia.\n
-        Alumnos:\n
-        - Jorge Rubio A00368770\n
-        - Jesus Guadiana A00814770\n
-        - Juan Fernando Ulloa A00817807\n
-        - Javier Enrique Meza A01244496
-    </string>
-    <string name="cuerpo_instrucciones">
-        - El valor de velocidad inicial pueden ser introducidos manualmente, picandole
-        a la caja de texto, e insertando un numero rel positivo.\n
-        - Pícale al "cañón" y desliza hacia arriba o abajo si deseas cambiar la altura
-        de deisparo inicial.\n
-        - El angulo inicial de disparo, al igual que la velocidad inicial, puede ser
-        modificado en un rango de 90 a - 90 (grados).\n
-        - Pícale al botón de disparo para ver la simulación y depslegar los resutlados
-        del tiro parabólico.\n
-        - Los datos se podrán modificar unicamente en modo "Portrait" (vertical).\n
-        - La opción de comparar sólo está disponible de forma "landscape" (horizontal).
-    </string>
-    <string name="text_login">Simulador Tiro Parabolico</string>
+    <string name="text_login">Simulador Tiro Parabólico</string>
     <string name="buttonText_login">Registrar</string>
     <string name="buttonText_simulador">Simulador</string>
     <string name="buttonText_instruciones">Instrucciones</string>
-    <string name="buttonText_creditos">Creditos</string>
-    <string name="buttonText_logout">Logout</string>
+    <string name="buttonText_creditos">Créditos</string>
+    <string name="buttonText_logout">Cerrar Sesión</string>
     <string name="trajectory">Trayectoria</string>
     <string name="text_Register">Registro</string>
     <string name="simulate">Simular</string>
-    <string name="action_settings">Settings</string>
+    <string name="name_empty_error">Ingrese su nombre</string>
+    <string name="last_name_empty_error">Ingrese su apellido</string>
+    <string name="email_empty_error">Ingrese su correo electrónico</string>
+    <string name="email_malformed_error">Correo incorrecto</string>
+    <string name="email_overlap_error">Usuario ya registrado</string>
+    <string name="pass_empty_error">Ingrese su contraseña</string>
+    <string name="pass_length_error">La contraseña debe de ser mínimo de 6 caracteres</string>
+    <string name="class_empty_error">Ingrese un código de clase</string>
+    <string name="class_overlap_error">Este salón ya existe, elige otro código</string>
+    <string name="class_missing_error">Este salón no existe</string>
+    <string name="class_checking_message">Revisando clases disponibles...</string>
+    <string name="user_register_complete">El usuario fue registrado correctamente</string>
+    <string name="user_registering_message">Registrando Usuario...</string>
+    <string name="logging_in">Iniciando sesión...</string>
+    <string name="email_password_incorrect">El usuario y/o contraseña son incorrectos</string>
+    <string name="connection_error">
+        No se pudo conectar con el servidor. Por favor revise su conexión a internet y vuelva
+        a intentar
+    </string>
+    <string name="instruction_1">
+        Ingresa los valores iniciales de velocidad, angulo y altura para la simulación
+    </string>
+    <string name="instruction_2">
+        Selecciona las gráficas de tus simulaciones anteriores que deseas mostrar en la gráfica.
+    </string>
+    <string name="instruction_3">
+        Desliza tu dedo hacia la izquierda o derecha para navegar por las instrucciones
+    </string>
+    <string name="instruction_4">
+        Pellizca con dos dedos hacia afuera para poder enfocar la gráfica o hacia adentro para
+        desenfocarla.
+    </string>
+    <string name="launch_params_invalid">Los datos son inválidos</string>
+    <string name="launch_params_missing">No se han llenado todos los campos</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

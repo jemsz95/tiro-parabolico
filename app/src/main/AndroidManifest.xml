@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-sdk android:minSdkVersion="19"
+        android:targetSdkVersion="25"
+        android:maxSdkVersion="25" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,10 +18,12 @@
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".CreditosActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SimulatorActivity" />
 
         <activity android:name=".InstruccionesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SimulatorActivity" />
 
         <activity android:name=".SimulatorActivity">
             <intent-filter>
@@ -26,7 +32,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"/>
 
         <activity android:name=".HistorialActivity"
             android:screenOrientation="landscape"

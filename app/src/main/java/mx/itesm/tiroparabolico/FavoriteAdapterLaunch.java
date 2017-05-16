@@ -7,22 +7,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseIndexListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
  * Autor: Racket
- * Creación: 5 de Mayo 2017
+ * Creación: 14 de Mayo 2017
  * Última modificación: 14 de Mayo 2017
- * Descipción: Adapta los datos del servidor para mostrar en lista
+ * Descipción: Adaptador de Launch que filtra por favoritos
  */
-public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
+public class FavoriteAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
     private ItemSelector selector;
 
-    public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
-        super(activity, Launch.class, modelLayout, ref);
+    public FavoriteAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query keysRef, Query valuesRef){
+        super(activity, Launch.class, modelLayout, keysRef, valuesRef);
     }
 
     public void setItemSelector(ItemSelector selector) {
@@ -66,7 +66,6 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
 
         StarClickListener(Launch l, int position) {
             this.position = position;
-            this.l = l;
         }
 
         @Override
@@ -104,4 +103,3 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
         }
     }
 }
-

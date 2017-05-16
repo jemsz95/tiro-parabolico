@@ -2,11 +2,15 @@ package mx.itesm.tiroparabolico;
 
 import android.support.annotation.DrawableRes;
 
-/**
- * Created by jisus on 06/04/2017.
- */
+import java.io.Serializable;
 
-public class Credito {
+/**
+ * Autor: Racket
+ * Creación: 6 de Abril 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descripción: Contiene las propiedades de un crédito que se mostrará en la página de créditos
+ */
+public class Credito implements Serializable {
     private String nombre;
     private String matricula;
     private String mail;

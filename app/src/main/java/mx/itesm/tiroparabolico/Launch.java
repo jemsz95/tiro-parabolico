@@ -15,6 +15,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * Autor: Racket
+ * Creación: 21 de Abril 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Calcula y almacena los valores de una simulación
+ */
 public class Launch implements Serializable {
     private static final String DEBUG_TAG = "Launch";
 
@@ -31,6 +37,7 @@ public class Launch implements Serializable {
     private Double v0 = 0d;
     private Boolean favorite = false;
     private String userName;
+    private boolean visible = false;
 
     //Setted
     private int resolution = 100;
@@ -114,6 +121,10 @@ public class Launch implements Serializable {
     public String getId() {
         return id;
     }
+    @Exclude
+    public boolean isVisible(){return visible;}
+    @Exclude
+    public void setVisible(boolean v){visible = v;}
 
     @PropertyName("author")
     public String getUserId() {
@@ -258,7 +269,7 @@ public class Launch implements Serializable {
     public boolean equals(Object obj) {
         if(obj instanceof Launch) {
             Launch l = (Launch) obj;
-            return l.getId() == id;
+            return l.getId().equals(id);
         }
 
         return false;

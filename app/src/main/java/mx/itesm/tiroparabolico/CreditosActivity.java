@@ -1,71 +1,43 @@
 package mx.itesm.tiroparabolico;
 
-import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+
+
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Actividad que muestra los creditos de la aplicación.
+ *             Utiliza un ViewPager para paginar entre los creditos
+ *             individuales
+ */
 public class CreditosActivity extends AppCompatActivity  {
 
-    private ImageView ivLogo;
-    private TextView tvTitulo;
-    private TextView tvMail;
-    private TextView tvNombre;
-    private TextView tvMat;
-    private ImageView ivProfile;
-    private int index = 0;
-    private GestureDetectorCompat detector;
-    private Credito[] creditos = new Credito[] {
-            new Credito("Jesus Guadiana","A00814770", "jisus130@hotmail.com", R.drawable.jesus),
-            new Credito("Jorge Rubio","A00368770", "jorge.rubiobarboza96@gmail.com", R.drawable.jorge),
-            new Credito("Juan Ulloa","A00817807", "juan.fernando.ulloa@gmail.com", R.drawable.juan),
-            new Credito("Javier Meza","A01244496", "javenmeza@gmail.com", R.drawable.javier)
-    };
+    private ViewPager pager;
+    private CreditsPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creditos);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tvTitulo = (TextView) findViewById(R.id.text_CreditosTitulo);
-        ivLogo = (ImageView) findViewById(R.id.image_LogoPrepaNet);
-        tvNombre = (TextView) findViewById(R.id.textView_nombre);
-        tvMat = (TextView) findViewById(R.id.textView_matricula);
-        ivProfile = (ImageView)findViewById(R.id.imageView_foto);
-        tvMail = (TextView) findViewById(R.id.textView_Mail);
+        pager = (ViewPager) findViewById(R.id.pager);
 
-        ivLogo.setImageResource(R.drawable.logoprepanetsolo);
-        tvNombre.setText(creditos[index].getNombre());
-        tvMat.setText(creditos[index].getMatricula());
-        tvMail.setText(creditos[index].getMail());
-        ivProfile.setImageResource(creditos[index].getFotoRes());
+        ArrayList<Credito> credits = new ArrayList<>();
 
-        GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                index += (e1.getX() < e2.getX() ? 1 : -1) + creditos.length;
-                index %= creditos.length;
+        credits.add(new Credito("Jesús Guadiana","A00814770", "jisus130@hotmail.com", R.drawable.jesus));
+        credits.add(new Credito("Jorge Rubio","A00368770", "jorge.rubiobarboza96@gmail.com", R.drawable.jorge));
+        credits.add(new Credito("Juan Ulloa","A00817807", "juan.fernando.ulloa@gmail.com", R.drawable.juan));
+        credits.add(new Credito("Javier Meza","A01244496", "javenmeza@gmail.com", R.drawable.javier));
 
-                tvNombre.setText(creditos[index].getNombre());
-                tvMat.setText(creditos[index].getMatricula());
-                tvMail.setText(creditos[index].getMail());
-                ivProfile.setImageResource(creditos[index].getFotoRes());
+        adapter = new CreditsPagerAdapter(getSupportFragmentManager(), credits);
 
-                return true;
-            }
-        };
-
-        detector = new GestureDetectorCompat(this,gestureListener);
-    }
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        this.detector.onTouchEvent(event);
-        return super.onTouchEvent(event);
+        pager.setAdapter(adapter);
     }
 
 }

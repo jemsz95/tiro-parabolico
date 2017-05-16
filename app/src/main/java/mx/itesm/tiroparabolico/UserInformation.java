@@ -3,9 +3,11 @@ package mx.itesm.tiroparabolico;
 import com.google.firebase.database.PropertyName;
 
 /**
- * Created by jisus on 01/05/2017.
+ * Autor: Racket
+ * Creación: 1 de Mayo 2017
+ * Última modificación: 3 de Mayo 2017
+ * Descripción: Contiene las propiedades de un usuario que se almacena en la base de datos
  */
-
 public class UserInformation {
     public String name;
     public String lastname;

@@ -3,16 +3,16 @@ package mx.itesm.tiroparabolico;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- * Created by jorgeemiliorubiobarboza on 06/05/17.
+ * Autor: Racket
+ * Creación: 6 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Contiene el historial de simulaciones y una gráfica para comparar
  */
-
 public class HistorialActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
         HistoryListFragmentProfessor.OnLaunchSelectedListener {
