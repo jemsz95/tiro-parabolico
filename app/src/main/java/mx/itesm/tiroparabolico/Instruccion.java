@@ -3,9 +3,12 @@ package mx.itesm.tiroparabolico;
 import android.support.annotation.DrawableRes;
 
 /**
- * Created by jorgeemiliorubiobarboza on 14/04/17.
+ * Autor: Racket
+ * Creación: 23 de Abril 2017
+ * Última modificación: 23 de Abril 2017
+ * Descipción: Contiene las propiedades de una instruccion que se mostrará en la página de
+ *             intrucciones
  */
-
 public class Instruccion {
     private String texto;
     private int fotoRes;

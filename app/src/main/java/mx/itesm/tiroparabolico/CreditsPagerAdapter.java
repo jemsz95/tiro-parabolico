@@ -7,9 +7,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 /**
- * Created by javier on 5/15/17.
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Adaptador de Crédito a ViewPager utilizando Fragment
  */
-
 public class CreditsPagerAdapter extends FragmentStatePagerAdapter {
 
     List<Credito> credits;

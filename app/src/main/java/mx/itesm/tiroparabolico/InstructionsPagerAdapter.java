@@ -7,9 +7,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 /**
- * Created by javier on 5/15/17.
+ * Autor: Racket
+ * Creación: 15 de Mayo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Adaptador de Instruccion a ViewPager utilizando Fragment
  */
-
 public class InstructionsPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Instruccion> instructions;

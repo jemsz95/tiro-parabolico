@@ -13,9 +13,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
- * Created by javier on 5/14/17.
+ * Autor: Racket
+ * Creación: 14 de Mayo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Adaptador de Launch que filtra por favoritos
  */
-
 public class FavoriteAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
     private ItemSelector selector;
 

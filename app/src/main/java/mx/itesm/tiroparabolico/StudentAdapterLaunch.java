@@ -13,14 +13,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
- * Created by jorgeemiliorubiobarboza on 03/05/17.
+ * Autor: Racket
+ * Creación: 5 de Mayo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Adapta los datos del servidor para mostrar en lista
  */
-/*
-*   clase que apoya para adquirir todos los launch's de un usuario de firebase
-*   mediante firebase
-*   */
-
-
 public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
     private ItemSelector selector;
 

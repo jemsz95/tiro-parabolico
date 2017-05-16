@@ -1,16 +1,20 @@
 package mx.itesm.tiroparabolico;
 
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Actividad que muestra los creditos de la aplicación.
+ *             Utiliza un ViewPager para paginar entre los creditos
+ *             individuales
+ */
 public class CreditosActivity extends AppCompatActivity  {
 
     private ViewPager pager;

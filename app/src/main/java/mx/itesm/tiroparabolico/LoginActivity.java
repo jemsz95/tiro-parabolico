@@ -20,6 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Captura datos de inicio de sesión y autentifica con el servidor
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String DEBUG_TAG = "LoginActivity";
 

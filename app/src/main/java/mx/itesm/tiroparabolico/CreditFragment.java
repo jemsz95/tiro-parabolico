@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Fragmento que muestra una instancia de un credito
+ * Autor: Racket
+ * Creación: 15 de Mayo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descripción: Fragmento que muestra una instancia de un crédito
  */
 public class CreditFragment extends Fragment {
-    // the fragment initialization parameters
     private static final String ARG_CREDIT = "credit";
 
     private Credito credit;
@@ -28,13 +30,9 @@ public class CreditFragment extends Fragment {
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
      * @param credit Credito a ser desplegado
      * @return A new instance of fragment CreditFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static CreditFragment newInstance(Credito credit) {
         CreditFragment fragment = new CreditFragment();
         Bundle args = new Bundle();

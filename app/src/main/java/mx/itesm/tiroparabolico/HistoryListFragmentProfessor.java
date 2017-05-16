@@ -16,11 +16,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by jorgeemiliorubiobarboza on 03/05/17.
+ * Autor: Racket
+ * Creación: 3 de Mayo 2017
+ * Última modificación: 13 de Mayo 2017
+ * Descipción: Busca y despliega el historial de tiros de la base de datos que fueron compartidos
+ *             al maestro por parte de sus estudiantes
  */
-
-//Clase para desplegar el historial de los estudiantes para el maestro
-
 public class HistoryListFragmentProfessor extends ListFragment {
 
     TeacherAdapterLaunch adapterLaunch;

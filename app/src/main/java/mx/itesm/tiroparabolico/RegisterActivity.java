@@ -31,9 +31,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by jorgeemiliorubiobarboza on 23/04/17.
+ * Autor: Racket
+ * Creación: 23 de Abril 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Captura datos de registro y los almacena en el servidor
  */
-
 public class RegisterActivity extends AppCompatActivity
         implements View.OnClickListener, TextWatcher {
 

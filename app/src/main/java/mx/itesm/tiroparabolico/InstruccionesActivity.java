@@ -7,6 +7,13 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Actividad que muestra las instrucciones de la aplicación. Utiliza un ViewPager para
+ *             paginar entre las instrucciones individuales
+ */
 public class InstruccionesActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private InstructionsPagerAdapter adapter;

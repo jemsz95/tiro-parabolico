@@ -5,10 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +15,12 @@ import com.google.firebase.database.Query;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Busca, filtra y despliega el historial de tiros de la base de datos
+ */
 public class HistoryListFragment extends ListFragment implements ItemSelector {
     private Set<String> selectedItems = new HashSet<>();
     private StudentAdapterLaunch adapterLaunch;

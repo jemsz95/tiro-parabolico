@@ -15,6 +15,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Fragmento de edición de datos de una simulación
+ */
 public class DatosFragment extends Fragment implements View.OnClickListener {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
@@ -25,15 +31,11 @@ public class DatosFragment extends Fragment implements View.OnClickListener {
     private EditText etAngulo;
     private EditText etAltura;
     private Button btnSimular;
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
     private OnGraphDataChangeListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth= FirebaseAuth.getInstance();
-        databaseReference = Database.getInstance().getReference();
         Log.d(DEBUG_TAG, "onCreate() has been called");
     }
 

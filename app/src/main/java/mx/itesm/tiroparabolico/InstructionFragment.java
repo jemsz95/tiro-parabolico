@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by javier on 5/15/17.
+ * Autor: Racket
+ * Creación: 15 de Mayo 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Fragmento que muestra una instancia de una instrucción
  */
-
 public class InstructionFragment extends Fragment {
     private TextView tvTextInstruct;
     private ImageView ivInstruct;

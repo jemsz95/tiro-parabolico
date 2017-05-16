@@ -15,9 +15,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by jorgeemiliorubiobarboza on 03/05/17.
+ * Autor: Racket
+ * Creación: 6 de Mayo 2017
+ * Última modificación: 13 de Mayo 2017
+ * Descipción: Adapta los datos del servidor para mostrar en lista de profesor
  */
-
 public class TeacherAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
 
     public Set<String> selected = new HashSet<>();

@@ -15,6 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Autor: Racket
+ * Creación: 7 de Abril 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Conecta fragmentos de grafica, historial y datos para realizar simulaciones
+ */
 public class SimulatorActivity extends AppCompatActivity
         implements DatosFragment.OnGraphDataChangeListener,
         HistoryListFragment.OnLaunchSelectedListener {

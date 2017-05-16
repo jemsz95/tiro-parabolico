@@ -15,6 +15,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * Autor: Racket
+ * Creación: 21 de Abril 2017
+ * Última modificación: 15 de Mayo 2017
+ * Descipción: Calcula y almacena los valores de una simulación
+ */
 public class Launch implements Serializable {
     private static final String DEBUG_TAG = "Launch";
 

@@ -21,6 +21,12 @@ import java.util.List;
 import mx.itesm.tiroparabolico.AxisRendererSync.SyncXAxisRenderer;
 import mx.itesm.tiroparabolico.AxisRendererSync.SyncYAxisRenderer;
 
+/**
+ * Autor: Racket
+ * Creación: 20 de Marzo 2017
+ * Última modificación: 14 de Mayo 2017
+ * Descipción: Fragmento dedicado a graficar simulaciones
+ */
 public class GraphFragment extends Fragment {
     private static final String DEBUG_TAG = "TAG_FRAGMENT_DATOS";
 
