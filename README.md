@@ -1,4 +1,5 @@
 # Aplicación Android para Prepanet Tec de Monterrey de Tiro Parabólico
+La aplicación muestra el concepto de tiro parabólico a través de gráficas.
 
 ## **Datos de la Institución:**
 
