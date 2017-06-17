@@ -54,3 +54,4 @@ Puesto: Profesor-Consultor
 Departamento o Área de Trabajo: Ciencias Computacionales
 Correo Electrónico: msordia@itesm.mx
 Teléfono: 8358-2000 ext. 4536
+.
