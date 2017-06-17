@@ -1,5 +1,4 @@
-# tiro-parabolico
-## Aplicación de Android para Prepanet Tec de Monterrey
+# Aplicación Android para Prepanet Tec de Monterrey de Tiro Parabólico
 
 **Datos de la Institución:**
 
