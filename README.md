@@ -2,13 +2,9 @@
 Aplicación de Android para Prepanet Tec de Monterrey
 
 Datos de la Institución:
-
 Instituto Tecnológico y de Estudios Superiores de Monterrey
-
 Eugenio Graza Sada 2501,  
-
 Monterrey, N.L., México,64849
-
 +52 (81) 8158 2000 
 
 Datos del Cliente:
