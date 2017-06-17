@@ -47,3 +47,10 @@ Teléfono: -
 Celular: (656) 1974570
 Rol Asignado: Líder, Programador
 
+Datos del Profesor:
+
+Nombre: Ing. Martha Sordia Salinas
+Puesto: Profesor-Consultor
+Departamento o Área de Trabajo: Ciencias Computacionales
+Correo Electrónico: msordia@itesm.mx
+Teléfono: 8358-2000 ext. 4536
