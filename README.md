@@ -1,15 +1,15 @@
 # Aplicación Android para Prepanet Tec de Monterrey de Tiro Parabólico
 
-**Datos de la Institución:**
+##**Datos de la Institución:**
 
 Nombre: Instituto Tecnológico y de Estudios Superiores de Monterrey
 
-Dirección: Eugenio Graza Sada 2501  Monterrey, N.L., México,64849
+Dirección: Eugenio Graza Sada 2501  Monterrey, N.L., México, 64849
 
 Teléfono: +52 (81) 8158 2000 
 
 
-**Datos del Cliente:**
+##**Datos del Cliente:**
 
 Nombre: Dr. Alfonso Serrano
 
@@ -22,7 +22,7 @@ Correo Electrónico: serrano@itesm.mx
 Teléfono: +52 (81) 8158 2000 ext. 4630
 
 
-**Equipo Racket**
+##**Equipo Racket**
 
 - Nombre: Jorge Emilio Rubio Barboza
 
@@ -75,13 +75,13 @@ Teléfono: +52 (81) 8158 2000 ext. 4630
   Rol: Líder, Programador
 
 
-**Datos del Profesor:**
+##**Datos del Profesor:**
 
 Nombre: Ing. Martha Sordia Salinas
 
 Puesto: Profesor-Consultor
 
-Departamento o Área de Trabajo: Ciencias Computacionales
+Departamento: Ciencias Computacionales
 
 Correo Electrónico: msordia@itesm.mx
 
