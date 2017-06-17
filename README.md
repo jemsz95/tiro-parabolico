@@ -32,7 +32,7 @@ Teléfono: +52 (81) 8158 2000 ext. 4630
 
   Teléfono: NA
 
-  Celular: (492) 101 1487
+  Celular: +52 1 (492) 101 1487
 
   Rol: Administrador de proyecto, Programador
 
@@ -44,9 +44,9 @@ Teléfono: +52 (81) 8158 2000 ext. 4630
   Correo electrónico: juan.fernando.ulloa@gmail.com
 
   Teléfono: NA
-
-  Celular: (504) 9469 7103 -Whatsapp / (81) 1414 7914 -Teléfono
-
+  
+  Celular: +52 1 (504) 9469 7103 - Whatsapp / +52 1 (81) 1414 7914 - Teléfono
+  
   Rol: Arquitecto de Software, Programador
 
 
@@ -56,9 +56,9 @@ Teléfono: +52 (81) 8158 2000 ext. 4630
 
   Correo electrónico:jisus130@hotmail.com
 
-  Teléfono:+52 (81) 8315 4017
+  Teléfono: +52 (81) 8315 4017
 
-  Celular:(81) 8654 4395
+  Celular: +52 1 (81) 8654 4395
 
   Rol: Tester, Analista de Requerimientos,Programador
 
@@ -70,7 +70,7 @@ Teléfono: +52 (81) 8158 2000 ext. 4630
 
   Teléfono: NA
 
-  Celular: (656) 1974 570 
+  Celular: +52 1 (656) 1974 570 
 
   Rol: Líder, Programador
 
