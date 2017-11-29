@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * Autor: Racket
  * Creación: 20 de Marzo 2017
- * Última modificación: 15 de Mayo 2017
+ * Última modificación: 28 de Noviembre 2017
  * Descipción: Busca, filtra y despliega el historial de tiros de la base de datos
  */
 public class HistoryListFragment extends ListFragment implements ItemSelector {
@@ -27,21 +27,12 @@ public class HistoryListFragment extends ListFragment implements ItemSelector {
     private OnLaunchSelectedListener launchListener;
     private FavoriteAdapterLaunch favoriteAdapterLaunch;
 
-    public HistoryListFragment() {
-
-    }
-
-    public static HistoryListFragment newInstance() {
-        HistoryListFragment historyListFragment = new HistoryListFragment();
-        return historyListFragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query launchesReference = Database.getInstance().getReference("/launches").orderByChild("author").equalTo(user.getUid());
-        Query favoritesRef = Database.getInstance().getReference("/user_favorites/" + user.getUid());
+        DatabaseReference launchesReference = Database.getInstance().getReference("/launches");
+        DatabaseReference favoritesRef = Database.getInstance().getReference("/user_favorites/" + user.getUid());
 
         adapterLaunch = new StudentAdapterLaunch(getActivity(), R.layout.row, launchesReference);
         favoriteAdapterLaunch = new FavoriteAdapterLaunch(getActivity(), R.layout.row, favoritesRef, launchesReference);

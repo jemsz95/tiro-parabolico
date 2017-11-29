@@ -7,46 +7,43 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseIndexListAdapter;
-import com.google.firebase.database.DataSnapshot;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
  * Autor: Racket
  * Creación: 14 de Mayo 2017
- * Última modificación: 14 de Mayo 2017
+ * Última modificación: 28 de Noviembre 2017
  * Descipción: Adaptador de Launch que filtra por favoritos
  */
-public class FavoriteAdapterLaunch extends FirebaseIndexListAdapter<Launch> {
+public class FavoriteAdapterLaunch extends FirebaseListAdapter<Launch> {
     private ItemSelector selector;
+    private Activity mActivity;
 
-    public FavoriteAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query keysRef, Query valuesRef){
-        super(activity, Launch.class, modelLayout, keysRef, valuesRef);
+    public FavoriteAdapterLaunch(Activity activity, @LayoutRes int modelLayout,
+                                 Query keysRef, DatabaseReference valuesRef) {
+        super(new FirebaseListOptions.Builder<Launch>()
+                .setIndexedQuery(keysRef, valuesRef, new LaunchSnapshotParser())
+                .setLayout(modelLayout)
+                .build()
+        );
+
+        mActivity = activity;
     }
 
     public void setItemSelector(ItemSelector selector) {
         this.selector = selector;
     }
 
-    public ItemSelector getItemSelector() {
-        return selector;
-    }
-
-    @Override
-    protected Launch parseSnapshot(DataSnapshot snapshot) {
-        Launch l = super.parseSnapshot(snapshot);
-        l.setId(snapshot.getKey());
-        return l;
-    }
-
     @Override
     protected void populateView(View v, final Launch l, final int position ){
-        TextView tvStudent = (TextView) v.findViewById(R.id.text_author);
-        TextView tvDate = (TextView) v.findViewById(R.id.text_date);
-        TextView tvData = (TextView) v.findViewById(R.id.text_values);
-        ImageView ibFavorite = (ImageView) v.findViewById(R.id.button_favorite);
-        ImageView ibVisible = (ImageView) v.findViewById(R.id.image_Visibility);
+        TextView tvStudent = v.findViewById(R.id.text_author);
+        TextView tvDate = v.findViewById(R.id.text_date);
+        TextView tvData = v.findViewById(R.id.text_values);
+        ImageView ibFavorite = v.findViewById(R.id.button_favorite);
+        ImageView ibVisible = v.findViewById(R.id.image_Visibility);
 
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));

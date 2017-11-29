@@ -8,21 +8,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.database.DataSnapshot;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
  * Autor: Racket
  * Creación: 5 de Mayo 2017
- * Última modificación: 14 de Mayo 2017
+ * Última modificación: 28 de Noviembre 2017
  * Descipción: Adapta los datos del servidor para mostrar en lista
  */
 public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
     private ItemSelector selector;
+    private Activity mActivity;
 
     public StudentAdapterLaunch(Activity activity, @LayoutRes int modelLayout, Query ref){
-        super(activity, Launch.class, modelLayout, ref);
+        //super(activity, Launch.class, modelLayout, ref);
+        super(new FirebaseListOptions.Builder<Launch>()
+                .setLayout(modelLayout)
+                .setQuery(ref, new LaunchSnapshotParser())
+                .build()
+        );
+
+        mActivity = activity;
     }
 
     public void setItemSelector(ItemSelector selector) {
@@ -34,19 +42,12 @@ public class StudentAdapterLaunch extends FirebaseListAdapter<Launch> {
     }
 
     @Override
-    protected Launch parseSnapshot(DataSnapshot snapshot) {
-        Launch l = super.parseSnapshot(snapshot);
-        l.setId(snapshot.getKey());
-        return l;
-    }
-
-    @Override
     protected void populateView(View v, final Launch l, final int position ){
-        TextView tvStudent = (TextView) v.findViewById(R.id.text_author);
-        TextView tvDate = (TextView) v.findViewById(R.id.text_date);
-        TextView tvData = (TextView) v.findViewById(R.id.text_values);
-        ImageView ibFavorite = (ImageView) v.findViewById(R.id.button_favorite);
-        ImageView ibVisible = (ImageView) v.findViewById(R.id.image_Visibility);
+        TextView tvStudent = v.findViewById(R.id.text_author);
+        TextView tvDate = v.findViewById(R.id.text_date);
+        TextView tvData = v.findViewById(R.id.text_values);
+        ImageView ibFavorite = v.findViewById(R.id.button_favorite);
+        ImageView ibVisible = v.findViewById(R.id.image_Visibility);
 
         tvStudent.setText(l.getUserName());
         tvDate.setText(DateUtils.getRelativeDateTimeString(mActivity, l.getTimestamp(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
